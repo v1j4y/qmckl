@@ -1,0 +1,1471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-04-29 Thu 05:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atomic Orbitals</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="TREX CoE" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" title="Standard" href="qmckl.css" type="text/css" />
+
+<script type="text/javascript" src="org-info.js">
+/**
+ *
+ * @source: org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in org-info.js.
+ *
+ * Copyright (C) 2012-2019 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "4");
+org_html_manager.set("LINK_HOME", "index.html");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">Atomic Orbitals</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org83070ca">1. Context</a>
+<ul>
+<li><a href="#orgd19cc41">1.1. Data structure</a></li>
+<li><a href="#org7e12958">1.2. Access functions</a></li>
+<li><a href="#org4b2e84b">1.3. Initialization functions</a></li>
+<li><a href="#org8da39c7">1.4. <span class="todo TODO">TODO</span> Fortran interfaces</a></li>
+</ul>
+</li>
+<li><a href="#org948c90f">2. Polynomial part</a>
+<ul>
+<li><a href="#org92ca961">2.1. Powers of \(x-X_i\)</a>
+<ul>
+<li><a href="#org28a2968">2.1.1. Requirements</a></li>
+<li><a href="#org8e5ac6c">2.1.2. C Header</a></li>
+<li><a href="#org17e53f8">2.1.3. Source</a></li>
+<li><a href="#org434b9d2">2.1.4. C interface</a></li>
+<li><a href="#orgfd9d5ad">2.1.5. Fortran interface</a></li>
+<li><a href="#org3874478">2.1.6. Test</a></li>
+</ul>
+</li>
+<li><a href="#orgc3e207a">2.2. Value, Gradient and Laplacian of a polynomial</a>
+<ul>
+<li><a href="#org2381f4d">2.2.1. Requirements</a></li>
+<li><a href="#orgd294a21">2.2.2. C Header</a></li>
+<li><a href="#org8b4112e">2.2.3. Source</a></li>
+<li><a href="#org9f36f95">2.2.4. C interface</a></li>
+<li><a href="#orgf60a84d">2.2.5. Fortran interface</a></li>
+<li><a href="#org4c27fa3">2.2.6. Test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orge67bc7b">3. Radial part</a>
+<ul>
+<li><a href="#org95cbb95">3.1. Gaussian basis functions</a></li>
+<li><a href="#org35143d0">3.2. <span class="todo TODO">TODO</span> Slater basis functions</a></li>
+<li><a href="#orgb1398cf">3.3. <span class="todo TODO">TODO</span> Radial functions on a grid</a></li>
+</ul>
+</li>
+<li><a href="#orge66f3f7">4. Combining radial and polynomial parts</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org83070ca" class="outline-2">
+<h2 id="org83070ca"><span class="section-number-2">1</span> Context</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The following arrays are stored in the context:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>type</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Gaussian (<code>'G'</code>) or Slater (<code>'S'</code>)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>shell_num</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Number of shells</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>prim_num</code></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Total number of primitives</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>shell_center</code></td>
+<td class="org-left"><code>[shell_num]</code></td>
+<td class="org-left">Id of the nucleus on which each shell is centered</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>shell_ang_mom</code></td>
+<td class="org-left"><code>[shell_num]</code></td>
+<td class="org-left">Angular momentum of each shell</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>shell_prim_num</code></td>
+<td class="org-left"><code>[shell_num]</code></td>
+<td class="org-left">Number of primitives in each shell</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>shell_prim_index</code></td>
+<td class="org-left"><code>[shell_num]</code></td>
+<td class="org-left">Address of the first primitive of each shell in the <code>EXPONENT</code> array</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>shell_factor</code></td>
+<td class="org-left"><code>[shell_num]</code></td>
+<td class="org-left">Normalization factor for each shell</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>exponent</code></td>
+<td class="org-left"><code>[prim_num]</code></td>
+<td class="org-left">Array of exponents</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>coefficient</code></td>
+<td class="org-left"><code>[prim_num]</code></td>
+<td class="org-left">Array of coefficients</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For H<sub>2</sub> with the following basis set,
+</p>
+
+<pre class="example">
+HYDROGEN
+S   5
+1         3.387000E+01           6.068000E-03
+2         5.095000E+00           4.530800E-02
+3         1.159000E+00           2.028220E-01
+4         3.258000E-01           5.039030E-01
+5         1.027000E-01           3.834210E-01
+S   1
+1         3.258000E-01           1.000000E+00
+S   1
+1         1.027000E-01           1.000000E+00
+P   1
+1         1.407000E+00           1.000000E+00
+P   1
+1         3.880000E-01           1.000000E+00
+D   1
+1         1.057000E+00           1.0000000
+</pre>
+
+<p>
+we have:
+</p>
+
+<pre class="example">
+type = 'G'
+shell_num = 12
+prim_num = 20
+shell_center = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
+shell_ang_mom = ['S', 'S', 'S', 'P', 'P', 'D', 'S', 'S', 'S', 'P', 'P', 'D']
+shell_factor  = [ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.]
+shell_prim_num = [5, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1]
+shell_prim_index = [1, 6, 7, 8, 9, 10, 11, 16, 17, 18, 19, 20]
+exponent = [ 33.87, 5.095, 1.159, 0.3258, 0.1027, 0.3258, 0.1027,
+             1.407, 0.388, 1.057, 33.87, 5.095, 1.159, 0.3258, 0.1027,
+             0.3258, 0.1027, 1.407, 0.388, 1.057]
+coefficient = [ 0.006068, 0.045308, 0.202822, 0.503903, 0.383421,
+                1.0, 1.0, 1.0, 1.0, 1.0, 0.006068, 0.045308, 0.202822,
+                0.503903, 0.383421, 1.0, 1.0, 1.0, 1.0, 1.0]
+</pre>
+</div>
+
+<div id="outline-container-orgd19cc41" class="outline-3">
+<h3 id="orgd19cc41"><span class="section-number-3">1.1</span> Data structure</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_ao_basis_struct</span> {
+  <span style="color: #228b22;">int32_t</span>   <span style="color: #a0522d;">uninitialized</span>;
+  <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">shell_num</span>;
+  <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">prim_num</span>;
+  <span style="color: #228b22;">int64_t</span> * <span style="color: #a0522d;">shell_center</span>;
+  <span style="color: #228b22;">char</span>    * <span style="color: #a0522d;">shell_ang_mom</span>;
+  <span style="color: #228b22;">int64_t</span> * <span style="color: #a0522d;">shell_prim_num</span>;
+  <span style="color: #228b22;">int64_t</span> * <span style="color: #a0522d;">shell_prim_index</span>;
+  <span style="color: #228b22;">double</span>  * <span style="color: #a0522d;">shell_factor</span>;
+  <span style="color: #228b22;">double</span>  * <span style="color: #a0522d;">exponent</span>    ;
+  <span style="color: #228b22;">double</span>  * <span style="color: #a0522d;">coefficient</span> ;
+  <span style="color: #228b22;">bool</span>      <span style="color: #a0522d;">provided</span>;
+  <span style="color: #228b22;">char</span>      <span style="color: #a0522d;">type</span>;
+} <span style="color: #228b22;">qmckl_ao_basis_struct</span>;
+</pre>
+</div>
+
+<p>
+The <code>uninitialized</code> integer contains one bit set to one for each
+initialization function which has not bee called. It becomes equal
+to zero after all initialization functions have been called. The
+struct is then initialized and <code>provided == true</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7e12958" class="outline-3">
+<h3 id="org7e12958"><span class="section-number-3">1.2</span> Access functions</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+When all the data for the AOs have been provided, the following
+function returns <code>true</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">bool</span>      <span style="color: #0000ff;">qmckl_ao_basis_provided</span>           (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4b2e84b" class="outline-3">
+<h3 id="org4b2e84b"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+To set the basis set, all the following functions need to be
+called. When
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_type</span>             (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>      <span style="color: #a0522d;">t</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_shell_num</span>        (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">shell_num</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_prim_num</span>         (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">prim_num</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_shell_prim_index</span> (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> * <span style="color: #a0522d;">shell_prim_index</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_shell_center</span>     (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> * <span style="color: #a0522d;">shell_center</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_shell_ang_mom</span>    (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>    * <span style="color: #a0522d;">shell_ang_mom</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_shell_prim_num</span>   (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> * <span style="color: #a0522d;">shell_prim_num</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_shell_factor</span>     (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>  * <span style="color: #a0522d;">shell_factor</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_exponent</span>         (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>  * <span style="color: #a0522d;">exponent</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_ao_basis_coefficient</span>      (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>  * <span style="color: #a0522d;">coefficient</span>);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8da39c7" class="outline-3">
+<h3 id="org8da39c7"><span class="section-number-3">1.4</span> <span class="todo TODO">TODO</span> Fortran interfaces</h3>
+</div>
+</div>
+
+<div id="outline-container-org948c90f" class="outline-2">
+<h2 id="org948c90f"><span class="section-number-2">2</span> Polynomial part</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org92ca961" class="outline-3">
+<h3 id="org92ca961"><span class="section-number-3">2.1</span> Powers of \(x-X_i\)</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The <code>qmckl_ao_power</code> function computes all the powers of the <code>n</code>
+input data up to the given maximum value given in input for each of
+the \(n\) points:
+</p>
+
+<p>
+\[ P_{ik} = X_i^k \]
+</p>
+
+<table id="org75681d4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">qmckl<sub>context</sub></td>
+<td class="org-left">context</td>
+<td class="org-left">in</td>
+<td class="org-left">Global state</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">n</td>
+<td class="org-left">in</td>
+<td class="org-left">Number of values</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">X[n]</td>
+<td class="org-left">in</td>
+<td class="org-left">Array containing the input values</td>
+</tr>
+
+<tr>
+<td class="org-left">int32<sub>t</sub></td>
+<td class="org-left">LMAX[n]</td>
+<td class="org-left">in</td>
+<td class="org-left">Array containing the maximum power for each value</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">P[n][ldp]</td>
+<td class="org-left">out</td>
+<td class="org-left">Array containing all the powers of <code>X</code></td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">ldp</td>
+<td class="org-left">in</td>
+<td class="org-left">Leading dimension of array <code>P</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-org28a2968" class="outline-4">
+<h4 id="org28a2968"><span class="section-number-4">2.1.1</span> Requirements</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<ul class="org-ul">
+<li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
+<li><code>n</code> &gt; 0</li>
+<li><code>X</code> is allocated with at least \(n \times 8\) bytes</li>
+<li><code>LMAX</code> is allocated with at least \(n \times 4\) bytes</li>
+<li><code>P</code> is allocated with at least \(n \times \max_i \text{LMAX}_i \times 8\) bytes</li>
+<li><code>LDP</code> &gt;= \(\max_i\) <code>LMAX[i]</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8e5ac6c" class="outline-4">
+<h4 id="org8e5ac6c"><span class="section-number-4">2.1.2</span> C Header</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_ao_power</span> (
+              <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">n</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">X</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int32_t</span>* <span style="color: #a0522d;">LMAX</span>,
+      <span style="color: #228b22;">double</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">P</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">ldp</span> ); 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org17e53f8" class="outline-4">
+<h4 id="org17e53f8"><span class="section-number-4">2.1.3</span> Source</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_ao_power_f</span><span style="color: #000000; background-color: #ffffff;">(context, n, X, LMAX, P, ldp) result(info)</span>
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> X(n)</span>
+  <span style="color: #228b22;">integer</span>   , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> LMAX(n)</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> P(ldp,n)</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldp</span>
+
+  <span style="color: #228b22;">integer</span>*8  ::<span style="color: #a0522d;"> i,k</span>
+
+  info = QMCKL_SUCCESS
+
+  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_CONTEXT
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (n &lt;= ldp) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_2
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  k = <span style="color: #a020f0;">MAXVAL</span>(LMAX)
+  <span style="color: #a020f0;">if</span> (LDP &lt; k) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_6
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (k &lt;= 0) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_4
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">do</span> i=1,n
+     P(1,i) = X(i)
+     <span style="color: #a020f0;">do</span> k=2,LMAX(i)
+        P(k,i) = P(k-1,i) * X(i) 
+     <span style="color: #a020f0;">end do</span>
+  <span style="color: #a020f0;">end do</span>
+
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_ao_power_f</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org434b9d2" class="outline-4">
+<h4 id="org434b9d2"><span class="section-number-4">2.1.4</span> C interface</h4>
+</div>
+<div id="outline-container-orgfd9d5ad" class="outline-4">
+<h4 id="orgfd9d5ad"><span class="section-number-4">2.1.5</span> Fortran interface</h4>
+</div>
+
+<div id="outline-container-org3874478" class="outline-4">
+<h4 id="org3874478"><span class="section-number-4">2.1.6</span> Test</h4>
+<div class="outline-text-4" id="text-2-1-6">
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int32_t</span>) <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">test_qmckl_ao_power</span>(context) <span style="color: #a020f0;">bind</span>(C)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+
+  <span style="color: #228b22;">integer</span>(qmckl_context), <span style="color: #a020f0;">intent</span>(in), <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
+
+  <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> n, LDP </span>
+  <span style="color: #228b22;">integer</span>, <span style="color: #a020f0;">allocatable</span>          ::<span style="color: #a0522d;"> LMAX(:) </span>
+  <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> X(:), P(:,:)</span>
+  <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> i,j</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> epsilon</span>
+
+  epsilon = qmckl_get_numprec_epsilon(context)
+
+  n = 100;
+  LDP = 10;
+
+  <span style="color: #a020f0;">allocate</span>(X(n), P(LDP,n), LMAX(n))
+
+  <span style="color: #a020f0;">do</span> j=1,n
+     X(j) = -5.d0 + 0.1d0 * <span style="color: #a020f0;">dble</span>(j)
+     LMAX(j) = 1 + <span style="color: #a020f0;">int</span>(<span style="color: #a020f0;">mod</span>(j, 5),4)
+  <span style="color: #a020f0;">end do</span>
+
+  test_qmckl_ao_power = qmckl_ao_power(context, n, X, LMAX, P, LDP) 
+  <span style="color: #a020f0;">if</span> (test_qmckl_ao_power /= QMCKL_SUCCESS) <span style="color: #a020f0;">return</span>
+
+  test_qmckl_ao_power = QMCKL_FAILURE
+
+  <span style="color: #a020f0;">do</span> j=1,n
+     <span style="color: #a020f0;">do</span> i=1,LMAX(j)
+        <span style="color: #a020f0;">if</span> ( X(j)**i == 0.d0 ) <span style="color: #a020f0;">then</span>
+           <span style="color: #a020f0;">if</span> ( P(i,j) /= 0.d0) <span style="color: #a020f0;">return</span>
+        <span style="color: #a020f0;">else</span>
+           <span style="color: #a020f0;">if</span> ( dabs(1.d0 - P(i,j) / (X(j)**i)) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+        <span style="color: #a020f0;">end if</span>
+     <span style="color: #a020f0;">end do</span>
+  <span style="color: #a020f0;">end do</span>
+
+  test_qmckl_ao_power = QMCKL_SUCCESS
+  <span style="color: #a020f0;">deallocate</span>(X,P,LMAX)
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">test_qmckl_ao_power</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc3e207a" class="outline-3">
+<h3 id="orgc3e207a"><span class="section-number-3">2.2</span> Value, Gradient and Laplacian of a polynomial</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+A polynomial is centered on a nucleus \(\mathbf{R}_i\)
+</p>
+
+<p>
+\[
+   P_l(\mathbf{r},\mathbf{R}_i)  =   (x-X_i)^a (y-Y_i)^b (z-Z_i)^c 
+   \]
+</p>
+
+<p>
+The gradients with respect to electron coordinates are
+</p>
+
+\begin{eqnarray*} 
+\frac{\partial }{\partial x} P_l\left(\mathbf{r},\mathbf{R}_i \right) &
+               = & a (x-X_i)^{a-1} (y-Y_i)^b (z-Z_i)^c \\
+\frac{\partial }{\partial y} P_l\left(\mathbf{r},\mathbf{R}_i \right) &
+               = & b (x-X_i)^a (y-Y_i)^{b-1} (z-Z_i)^c \\
+\frac{\partial }{\partial z} P_l\left(\mathbf{r},\mathbf{R}_i \right) &
+               = & c (x-X_i)^a (y-Y_i)^b (z-Z_i)^{c-1} \\
+\end{eqnarray*} 
+
+<p>
+and the Laplacian is
+</p>
+
+\begin{eqnarray*} 
+\left( \frac{\partial }{\partial x^2} + 
+           \frac{\partial }{\partial y^2} + 
+           \frac{\partial }{\partial z^2} \right) P_l
+           \left(\mathbf{r},\mathbf{R}_i \right) &  = &  
+         a(a-1) (x-X_i)^{a-2} (y-Y_i)^b (z-Z_i)^c + \\
+      && b(b-1) (x-X_i)^a (y-Y_i)^{b-1} (z-Z_i)^c + \\
+      && c(c-1) (x-X_i)^a (y-Y_i)^b (z-Z_i)^{c-1}.
+\end{eqnarray*}
+
+<p>
+<code>qmckl_ao_polynomial_vgl</code> computes the values, gradients and
+Laplacians at a given point in space, of all polynomials with an
+angular momentum up to <code>lmax</code>.
+</p>
+
+<table id="orge3109ed" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">qmckl<sub>context</sub></td>
+<td class="org-left">context</td>
+<td class="org-left">in</td>
+<td class="org-left">Global state</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">X[3]</td>
+<td class="org-left">in</td>
+<td class="org-left">Array containing the coordinates of the points</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">R[3]</td>
+<td class="org-left">in</td>
+<td class="org-left">Array containing the x,y,z coordinates of the center</td>
+</tr>
+
+<tr>
+<td class="org-left">int32<sub>t</sub></td>
+<td class="org-left">lmax</td>
+<td class="org-left">in</td>
+<td class="org-left">Maximum angular momentum</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">n</td>
+<td class="org-left">inout</td>
+<td class="org-left">Number of computed polynomials</td>
+</tr>
+
+<tr>
+<td class="org-left">int32<sub>t</sub></td>
+<td class="org-left">L[n][ldl]</td>
+<td class="org-left">out</td>
+<td class="org-left">Contains a,b,c for all <code>n</code> results</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">ldl</td>
+<td class="org-left">in</td>
+<td class="org-left">Leading dimension of <code>L</code></td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">VGL[n][ldv]</td>
+<td class="org-left">out</td>
+<td class="org-left">Value, gradients and Laplacian of the polynomials</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">ldv</td>
+<td class="org-left">in</td>
+<td class="org-left">Leading dimension of array <code>VGL</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-org2381f4d" class="outline-4">
+<h4 id="org2381f4d"><span class="section-number-4">2.2.1</span> Requirements</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ul class="org-ul">
+<li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
+<li><code>n</code> &gt; 0</li>
+<li><code>lmax</code> &gt;= 0</li>
+<li><code>ldl</code> &gt;= 3</li>
+<li><code>ldv</code> &gt;= 5</li>
+<li><code>X</code> is allocated with at least \(3 \times 8\) bytes</li>
+<li><code>R</code> is allocated with at least \(3 \times 8\) bytes</li>
+<li><code>n</code> &gt;= <code>(lmax+1)(lmax+2)(lmax+3)/6</code></li>
+<li><code>L</code> is allocated with at least \(3 \times n \times 4\) bytes</li>
+<li><code>VGL</code> is allocated with at least \(5 \times n \times 8\) bytes</li>
+<li>On output, <code>n</code> should be equal to <code>(lmax+1)(lmax+2)(lmax+3)/6</code></li>
+<li>On output, the powers are given in the following order (l=a+b+c):
+<ul class="org-ul">
+<li>Increasing values of <code>l</code></li>
+<li>Within a given value of <code>l</code>, alphabetical order of the
+string made by a*"x" + b*"y" + c*"z" (in Python notation).
+For example, with a=0, b=2 and c=1 the string is "yyz"</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd294a21" class="outline-4">
+<h4 id="orgd294a21"><span class="section-number-4">2.2.2</span> C Header</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_ao_polynomial_vgl</span> (
+              <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">X</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">R</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int32_t</span> <span style="color: #a0522d;">lmax</span>,
+      <span style="color: #228b22;">int64_t</span>* <span style="color: #a0522d;">n</span>,
+      <span style="color: #228b22;">int32_t</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">L</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">ldl</span>,
+      <span style="color: #228b22;">double</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">VGL</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">ldv</span> ); 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8b4112e" class="outline-4">
+<h4 id="org8b4112e"><span class="section-number-4">2.2.3</span> Source</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_ao_polynomial_vgl_f</span><span style="color: #000000; background-color: #ffffff;">(context, X, R, lmax, n, L, ldl, VGL, ldv) result(info)</span>
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> X(3), R(3)</span>
+  <span style="color: #228b22;">integer</span>   , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> lmax</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">integer</span>   , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> L(ldl,(lmax+1)*(lmax+2)*(lmax+3)/6)</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldl</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> VGL(ldv,(lmax+1)*(lmax+2)*(lmax+3)/6)</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldv</span>
+
+  <span style="color: #228b22;">integer</span>*8         ::<span style="color: #a0522d;"> i,j</span>
+  <span style="color: #228b22;">integer</span>           ::<span style="color: #a0522d;"> a,b,c,d</span>
+  <span style="color: #228b22;">real</span>*8            ::<span style="color: #a0522d;"> Y(3)</span>
+  <span style="color: #228b22;">integer</span>           ::<span style="color: #a0522d;"> lmax_array(3)</span>
+  <span style="color: #228b22;">real</span>*8            ::<span style="color: #a0522d;"> pows(-2:lmax,3)</span>
+  <span style="color: #228b22;">integer</span>, <span style="color: #a020f0;">external</span> ::<span style="color: #a0522d;"> qmckl_ao_power_f</span>
+  <span style="color: #228b22;">double precision</span>  ::<span style="color: #a0522d;"> xy, yz, xz</span>
+  <span style="color: #228b22;">double precision</span>  ::<span style="color: #a0522d;"> da, db, dc, dd</span>
+
+  info = 0
+
+  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_CONTEXT
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (lmax &lt; 0) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_4
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (ldl &lt; 3) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_7
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (ldv &lt; 5) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_9
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+
+  <span style="color: #a020f0;">do</span> i=1,3
+     Y(i) = X(i) - R(i)
+  <span style="color: #a020f0;">end do</span>
+
+  lmax_array(1:3) = lmax
+  <span style="color: #a020f0;">if</span> (lmax == 0) <span style="color: #a020f0;">then</span>
+     VGL(1,1) = 1.d0
+     vgL(2:5,1) = 0.d0
+     l(1:3,1) = 0
+     n=1
+  <span style="color: #a020f0;">else if</span> (lmax &gt; 0) <span style="color: #a020f0;">then</span>
+     pows(-2:0,1:3) = 1.d0
+     <span style="color: #a020f0;">do</span> i=1,lmax
+        pows(i,1) = pows(i-1,1) * Y(1) 
+        pows(i,2) = pows(i-1,2) * Y(2) 
+        pows(i,3) = pows(i-1,3) * Y(3) 
+     <span style="color: #a020f0;">end do</span>
+
+     VGL(1:5,1:4) = 0.d0
+     l  (1:3,1:4) = 0
+
+     VGL(1  ,1  ) = 1.d0
+     vgl(1:5,2:4) = 0.d0
+
+     l  (1,2) = 1
+     vgl(1,2) = pows(1,1)
+     vgL(2,2) = 1.d0
+
+     l  (2,3) = 1
+     vgl(1,3) = pows(1,2)
+     vgL(3,3) = 1.d0
+
+     l  (3,4) = 1
+     vgl(1,4) = pows(1,3)
+     vgL(4,4) = 1.d0
+
+     n=4
+  <span style="color: #a020f0;">endif</span>
+
+  ! <span style="color: #b22222;">l&gt;=2</span>
+  dd = 2.d0
+  <span style="color: #a020f0;">do</span> d=2,lmax
+     da = dd
+     <span style="color: #a020f0;">do</span> a=d,0,-1
+        db = dd-da
+        <span style="color: #a020f0;">do</span> b=d-a,0,-1
+           c  = d  - a  - b
+           dc = dd - da - db
+           n = n+1
+
+           l(1,n) = a
+           l(2,n) = b
+           l(3,n) = c
+
+           xy = pows(a,1) * pows(b,2)
+           yz = pows(b,2) * pows(c,3)
+           xz = pows(a,1) * pows(c,3)
+
+           vgl(1,n) = xy * pows(c,3)
+
+           xy = dc * xy
+           xz = db * xz
+           yz = da * yz
+
+           vgl(2,n) = pows(a-1,1) * yz
+           vgl(3,n) = pows(b-1,2) * xz
+           vgl(4,n) = pows(c-1,3) * xy
+
+           vgl(5,n) = <span style="color: #a020f0;">&amp;</span>
+                (da-1.d0) * pows(a-2,1) * yz + <span style="color: #a020f0;">&amp;</span>
+                (db-1.d0) * pows(b-2,2) * xz + <span style="color: #a020f0;">&amp;</span>
+                (dc-1.d0) * pows(c-2,3) * xy
+
+           db = db - 1.d0
+        <span style="color: #a020f0;">end do</span>
+        da = da - 1.d0
+     <span style="color: #a020f0;">end do</span>
+     dd = dd + 1.d0
+  <span style="color: #a020f0;">end do</span>
+
+  info = QMCKL_SUCCESS
+
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_ao_polynomial_vgl_f</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9f36f95" class="outline-4">
+<h4 id="org9f36f95"><span class="section-number-4">2.2.4</span> C interface</h4>
+</div>
+
+<div id="outline-container-orgf60a84d" class="outline-4">
+<h4 id="orgf60a84d"><span class="section-number-4">2.2.5</span> Fortran interface</h4>
+</div>
+
+<div id="outline-container-org4c27fa3" class="outline-4">
+<h4 id="org4c27fa3"><span class="section-number-4">2.2.6</span> Test</h4>
+<div class="outline-text-4" id="text-2-2-6">
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int32_t</span>) <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">test_qmckl_ao_polynomial_vgl</span>(context) <span style="color: #a020f0;">bind</span>(C)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+
+  <span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int64_t</span>), <span style="color: #a020f0;">intent</span>(in), <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
+
+  <span style="color: #228b22;">integer</span>                       ::<span style="color: #a0522d;"> lmax, d, i</span>
+  <span style="color: #228b22;">integer</span>, <span style="color: #a020f0;">allocatable</span>          ::<span style="color: #a0522d;"> L(:,:)</span>
+  <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> n, ldl, ldv, j</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> X(3), R(3), Y(3)</span>
+  <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> VGL(:,:)</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> w</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> epsilon</span>
+
+  epsilon = qmckl_get_numprec_epsilon(context)
+
+  X = (/ 1.1 , 2.2 ,  3.3 /)
+  R = (/ 0.1 , 1.2 , -2.3 /)
+  Y(:) = X(:) - R(:)
+
+  lmax = 4;
+  ldl = 3;
+  ldv = 100;
+
+  d = (lmax+1)*(lmax+2)*(lmax+3)/6
+
+  <span style="color: #a020f0;">allocate</span> (L(ldl,d), VGL(ldv,d))
+
+  test_qmckl_ao_polynomial_vgl = <span style="color: #a020f0;">&amp;</span>
+       qmckl_ao_polynomial_vgl(context, X, R, lmax, n, L, ldl, VGL, ldv)
+
+  <span style="color: #a020f0;">if</span> (test_qmckl_ao_polynomial_vgl /= QMCKL_SUCCESS) <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">if</span> (n /= d) <span style="color: #a020f0;">return</span>
+
+  <span style="color: #a020f0;">do</span> j=1,n
+     test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
+     <span style="color: #a020f0;">do</span> i=1,3
+        <span style="color: #a020f0;">if</span> (L(i,j) &lt; 0) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">end do</span>
+     test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(1,j) / (<span style="color: #a020f0;">&amp;</span>
+          Y(1)**L(1,j) * Y(2)**L(2,j) * Y(3)**L(3,j)  <span style="color: #a020f0;">&amp;</span>
+          )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+
+     test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
+     <span style="color: #a020f0;">if</span> (L(1,j) &lt; 1) <span style="color: #a020f0;">then</span>
+        <span style="color: #a020f0;">if</span> (VGL(2,j) /= 0.d0) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">else</span>
+        <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(2,j) / (<span style="color: #a020f0;">&amp;</span>
+             L(1,j) * Y(1)**(L(1,j)-1) * Y(2)**L(2,j) * Y(3)**L(3,j) <span style="color: #a020f0;">&amp;</span>
+             )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">end if</span>
+
+     test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
+     <span style="color: #a020f0;">if</span> (L(2,j) &lt; 1) <span style="color: #a020f0;">then</span>
+        <span style="color: #a020f0;">if</span> (VGL(3,j) /= 0.d0) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">else</span>
+        <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(3,j) / (<span style="color: #a020f0;">&amp;</span>
+             L(2,j) * Y(1)**L(1,j) * Y(2)**(L(2,j)-1) * Y(3)**L(3,j) <span style="color: #a020f0;">&amp;</span>
+             )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">end if</span>
+
+     test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
+     <span style="color: #a020f0;">if</span> (L(3,j) &lt; 1) <span style="color: #a020f0;">then</span>
+        <span style="color: #a020f0;">if</span> (VGL(4,j) /= 0.d0) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">else</span>
+        <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(4,j) / (<span style="color: #a020f0;">&amp;</span>
+             L(3,j) * Y(1)**L(1,j) * Y(2)**L(2,j) * Y(3)**(L(3,j)-1) <span style="color: #a020f0;">&amp;</span>
+             )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+     <span style="color: #a020f0;">end if</span>
+
+     test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
+     w = 0.d0
+     <span style="color: #a020f0;">if</span> (L(1,j) &gt; 1) <span style="color: #a020f0;">then</span>
+        w = w + L(1,j) * (L(1,j)-1) * Y(1)**(L(1,j)-2) * Y(2)**L(2,j) * Y(3)**L(3,j) 
+     <span style="color: #a020f0;">end if</span>
+     <span style="color: #a020f0;">if</span> (L(2,j) &gt; 1) <span style="color: #a020f0;">then</span>
+        w = w + L(2,j) * (L(2,j)-1) * Y(1)**L(1,j) * Y(2)**(L(2,j)-2) * Y(3)**L(3,j) 
+     <span style="color: #a020f0;">end if</span>
+     <span style="color: #a020f0;">if</span> (L(3,j) &gt; 1) <span style="color: #a020f0;">then</span>
+        w = w + L(3,j) * (L(3,j)-1) * Y(1)**L(1,j) * Y(2)**L(2,j) * Y(3)**(L(3,j)-2) 
+     <span style="color: #a020f0;">end if</span>
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(5,j) / w) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">end do</span>
+
+  test_qmckl_ao_polynomial_vgl = QMCKL_SUCCESS
+
+  <span style="color: #a020f0;">deallocate</span>(L,VGL)
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">test_qmckl_ao_polynomial_vgl</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">int</span>  <span style="color: #0000ff;">test_qmckl_ao_polynomial_vgl</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
+munit_assert_int(0, ==, test_qmckl_ao_polynomial_vgl(context));
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge67bc7b" class="outline-2">
+<h2 id="orge67bc7b"><span class="section-number-2">3</span> Radial part</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org95cbb95" class="outline-3">
+<h3 id="org95cbb95"><span class="section-number-3">3.1</span> Gaussian basis functions</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<code>qmckl_ao_gaussian_vgl</code> computes the values, gradients and
+Laplacians at a given point of <code>n</code> Gaussian functions centered at
+the same point:
+</p>
+
+<p>
+\[ v_i = \exp(-a_i |X-R|^2) \]
+\[ \nabla_x v_i = -2 a_i (X_x -  R_x) v_i \]
+\[ \nabla_y v_i = -2 a_i (X_y -  R_y) v_i \]
+\[ \nabla_z v_i = -2 a_i (X_z -  R_z) v_i \]
+\[ \Delta v_i = a_i (4 |X-R|^2 a_i - 6) v_i \]
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>context</code></td>
+<td class="org-left">input</td>
+<td class="org-left">Global state</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>X(3)</code></td>
+<td class="org-left">input</td>
+<td class="org-left">Array containing the coordinates of the points</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>R(3)</code></td>
+<td class="org-left">input</td>
+<td class="org-left">Array containing the x,y,z coordinates of the center</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>n</code></td>
+<td class="org-left">input</td>
+<td class="org-left">Number of computed Gaussians</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>A(n)</code></td>
+<td class="org-left">input</td>
+<td class="org-left">Exponents of the Gaussians</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>VGL(ldv,5)</code></td>
+<td class="org-left">output</td>
+<td class="org-left">Value, gradients and Laplacian of the Gaussians</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>ldv</code></td>
+<td class="org-left">input</td>
+<td class="org-left">Leading dimension of array <code>VGL</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Requirements
+</p>
+
+<ul class="org-ul">
+<li><code>context</code> is not 0</li>
+<li><code>n</code> &gt; 0</li>
+<li><code>ldv</code> &gt;= 5</li>
+<li><code>A(i)</code> &gt; 0 for all <code>i</code></li>
+<li><code>X</code> is allocated with at least \(3 \times 8\) bytes</li>
+<li><code>R</code> is allocated with at least \(3 \times 8\) bytes</li>
+<li><code>A</code> is allocated with at least \(n \times 8\) bytes</li>
+<li><code>VGL</code> is allocated with at least \(n \times 5 \times 8\) bytes</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
+<span style="color: #0000ff;">qmckl_ao_gaussian_vgl</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
+                      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> *<span style="color: #a0522d;">X</span>,
+                      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> *<span style="color: #a0522d;">R</span>,
+                      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> *<span style="color: #a0522d;">n</span>,
+                      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> *<span style="color: #a0522d;">A</span>,
+                      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> *<span style="color: #a0522d;">VGL</span>,
+                      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">ldv</span>);
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_ao_gaussian_vgl_f</span><span style="color: #000000; background-color: #ffffff;">(context, X, R, n, A, VGL, ldv) result(info)</span>
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> X(3), R(3)</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> A(n)</span>
+  <span style="color: #228b22;">real</span>*8    , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> VGL(ldv,5)</span>
+  <span style="color: #228b22;">integer</span>*8 , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldv</span>
+
+  <span style="color: #228b22;">integer</span>*8         ::<span style="color: #a0522d;"> i,j</span>
+  <span style="color: #228b22;">real</span>*8            ::<span style="color: #a0522d;"> Y(3), r2, t, u, v</span>
+
+  info = QMCKL_SUCCESS
+
+  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_CONTEXT
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (n &lt;= 0) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_4
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (ldv &lt; n) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_7
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+
+  <span style="color: #a020f0;">do</span> i=1,3
+     Y(i) = X(i) - R(i)
+  <span style="color: #a020f0;">end do</span>
+  r2 = Y(1)*Y(1) + Y(2)*Y(2) + Y(3)*Y(3)
+
+  <span style="color: #a020f0;">do</span> i=1,n
+     VGL(i,1) = dexp(-A(i) * r2)
+  <span style="color: #a020f0;">end do</span>
+
+  <span style="color: #a020f0;">do</span> i=1,n
+     VGL(i,5) = A(i) * VGL(i,1)
+  <span style="color: #a020f0;">end do</span>
+
+  t = -2.d0 * ( X(1) - R(1) )
+  u = -2.d0 * ( X(2) - R(2) )
+  v = -2.d0 * ( X(3) - R(3) )
+
+  <span style="color: #a020f0;">do</span> i=1,n
+     VGL(i,2) = t * VGL(i,5)
+     VGL(i,3) = u * VGL(i,5)
+     VGL(i,4) = v * VGL(i,5)
+  <span style="color: #a020f0;">end do</span>
+
+  t = 4.d0 * r2
+  <span style="color: #a020f0;">do</span> i=1,n
+     VGL(i,5) = (t * A(i) - 6.d0) *  VGL(i,5)
+  <span style="color: #a020f0;">end do</span>
+
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_ao_gaussian_vgl_f</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int32_t</span>) <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">test_qmckl_ao_gaussian_vgl</span>(context) <span style="color: #a020f0;">bind</span>(C)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+
+  <span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int64_t</span>), <span style="color: #a020f0;">intent</span>(in), <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
+
+  <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> n, ldv, j, i</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> X(3), R(3), Y(3), r2</span>
+  <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> VGL(:,:), A(:)</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> epsilon</span>
+
+  epsilon = qmckl_get_numprec_epsilon(context)
+
+  X = (/ 1.1 , 2.2 ,  3.3 /)
+  R = (/ 0.1 , 1.2 , -2.3 /)
+  Y(:) = X(:) - R(:)
+  r2 = Y(1)**2 + Y(2)**2 + Y(3)**2
+
+  n = 10;
+  ldv = 100;
+
+  <span style="color: #a020f0;">allocate</span> (A(n), VGL(ldv,5))
+  <span style="color: #a020f0;">do</span> i=1,n
+     A(i) = 0.0013 * <span style="color: #a020f0;">dble</span>(<span style="color: #a020f0;">ishft</span>(1,i))
+  <span style="color: #a020f0;">end do</span>
+
+
+  test_qmckl_ao_gaussian_vgl = <span style="color: #a020f0;">&amp;</span>
+       qmckl_ao_gaussian_vgl(context, X, R, n, A, VGL, ldv)
+  <span style="color: #a020f0;">if</span> (test_qmckl_ao_gaussian_vgl /= 0) <span style="color: #a020f0;">return</span>
+
+  test_qmckl_ao_gaussian_vgl = -1
+
+  <span style="color: #a020f0;">do</span> i=1,n
+     test_qmckl_ao_gaussian_vgl = -11
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(i,1) / (<span style="color: #a020f0;">&amp;</span>
+          dexp(-A(i) * r2) <span style="color: #a020f0;">&amp;</span>
+          )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+
+     test_qmckl_ao_gaussian_vgl = -12
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(i,2) / (<span style="color: #a020f0;">&amp;</span>
+          -2.d0 * A(i) * Y(1) * dexp(-A(i) * r2) <span style="color: #a020f0;">&amp;</span>
+          )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+
+     test_qmckl_ao_gaussian_vgl = -13
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(i,3) / (<span style="color: #a020f0;">&amp;</span>
+          -2.d0 * A(i) * Y(2) * dexp(-A(i) * r2) <span style="color: #a020f0;">&amp;</span>
+          )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+
+     test_qmckl_ao_gaussian_vgl = -14
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(i,4) / (<span style="color: #a020f0;">&amp;</span>
+          -2.d0 * A(i) * Y(3) * dexp(-A(i) * r2) <span style="color: #a020f0;">&amp;</span>
+          )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+
+     test_qmckl_ao_gaussian_vgl = -15
+     <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(i,5) / (<span style="color: #a020f0;">&amp;</span>
+          A(i) * (4.d0*r2*A(i) - 6.d0) * dexp(-A(i) * r2) <span style="color: #a020f0;">&amp;</span>
+          )) &gt; epsilon ) <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">end do</span>
+
+  test_qmckl_ao_gaussian_vgl = 0
+
+  <span style="color: #a020f0;">deallocate</span>(VGL)
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">test_qmckl_ao_gaussian_vgl</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org35143d0" class="outline-3">
+<h3 id="org35143d0"><span class="section-number-3">3.2</span> <span class="todo TODO">TODO</span> Slater basis functions</h3>
+</div>
+
+<div id="outline-container-orgb1398cf" class="outline-3">
+<h3 id="orgb1398cf"><span class="section-number-3">3.3</span> <span class="todo TODO">TODO</span> Radial functions on a grid</h3>
+</div>
+</div>
+<div id="outline-container-orge66f3f7" class="outline-2">
+<h2 id="orge66f3f7"><span class="section-number-2">4</span> Combining radial and polynomial parts</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: TREX CoE</p>
+<p class="date">Created: 2021-04-29 Thu 05:49</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
