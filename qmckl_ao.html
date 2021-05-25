@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-29 Thu 05:49 -->
+<!-- 2021-05-25 Tue 03:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Atomic Orbitals</title>
@@ -333,52 +333,52 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org83070ca">1. Context</a>
+<li><a href="#org7bc94cc">1. Context</a>
 <ul>
-<li><a href="#orgd19cc41">1.1. Data structure</a></li>
-<li><a href="#org7e12958">1.2. Access functions</a></li>
-<li><a href="#org4b2e84b">1.3. Initialization functions</a></li>
-<li><a href="#org8da39c7">1.4. <span class="todo TODO">TODO</span> Fortran interfaces</a></li>
+<li><a href="#org2125ee2">1.1. Data structure</a></li>
+<li><a href="#org3617df4">1.2. Access functions</a></li>
+<li><a href="#orgdc1a837">1.3. Initialization functions</a></li>
+<li><a href="#org4336ff6">1.4. <span class="todo TODO">TODO</span> Fortran interfaces</a></li>
 </ul>
 </li>
-<li><a href="#org948c90f">2. Polynomial part</a>
+<li><a href="#org918ece0">2. Polynomial part</a>
 <ul>
-<li><a href="#org92ca961">2.1. Powers of \(x-X_i\)</a>
+<li><a href="#org26e463f">2.1. Powers of \(x-X_i\)</a>
 <ul>
-<li><a href="#org28a2968">2.1.1. Requirements</a></li>
-<li><a href="#org8e5ac6c">2.1.2. C Header</a></li>
-<li><a href="#org17e53f8">2.1.3. Source</a></li>
-<li><a href="#org434b9d2">2.1.4. C interface</a></li>
-<li><a href="#orgfd9d5ad">2.1.5. Fortran interface</a></li>
-<li><a href="#org3874478">2.1.6. Test</a></li>
+<li><a href="#orgab5d16e">2.1.1. Requirements</a></li>
+<li><a href="#org9216895">2.1.2. C Header</a></li>
+<li><a href="#orgeb335f8">2.1.3. Source</a></li>
+<li><a href="#org419ce93">2.1.4. C interface</a></li>
+<li><a href="#org80894b6">2.1.5. Fortran interface</a></li>
+<li><a href="#org00f589d">2.1.6. Test</a></li>
 </ul>
 </li>
-<li><a href="#orgc3e207a">2.2. Value, Gradient and Laplacian of a polynomial</a>
+<li><a href="#org16d508b">2.2. Value, Gradient and Laplacian of a polynomial</a>
 <ul>
-<li><a href="#org2381f4d">2.2.1. Requirements</a></li>
-<li><a href="#orgd294a21">2.2.2. C Header</a></li>
-<li><a href="#org8b4112e">2.2.3. Source</a></li>
-<li><a href="#org9f36f95">2.2.4. C interface</a></li>
-<li><a href="#orgf60a84d">2.2.5. Fortran interface</a></li>
-<li><a href="#org4c27fa3">2.2.6. Test</a></li>
+<li><a href="#orgea59a78">2.2.1. Requirements</a></li>
+<li><a href="#orgd79fa8e">2.2.2. C Header</a></li>
+<li><a href="#org6acd7c9">2.2.3. Source</a></li>
+<li><a href="#org9fb93c9">2.2.4. C interface</a></li>
+<li><a href="#org1cce6b8">2.2.5. Fortran interface</a></li>
+<li><a href="#org64cfcea">2.2.6. Test</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orge67bc7b">3. Radial part</a>
+<li><a href="#orgb26738a">3. Radial part</a>
 <ul>
-<li><a href="#org95cbb95">3.1. Gaussian basis functions</a></li>
-<li><a href="#org35143d0">3.2. <span class="todo TODO">TODO</span> Slater basis functions</a></li>
-<li><a href="#orgb1398cf">3.3. <span class="todo TODO">TODO</span> Radial functions on a grid</a></li>
+<li><a href="#org030c6d9">3.1. Gaussian basis functions</a></li>
+<li><a href="#org90b795f">3.2. <span class="todo TODO">TODO</span> Slater basis functions</a></li>
+<li><a href="#org176da53">3.3. <span class="todo TODO">TODO</span> Radial functions on a grid</a></li>
 </ul>
 </li>
-<li><a href="#orge66f3f7">4. Combining radial and polynomial parts</a></li>
+<li><a href="#org7ef421a">4. Combining radial and polynomial parts</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org83070ca" class="outline-2">
-<h2 id="org83070ca"><span class="section-number-2">1</span> Context</h2>
+<div id="outline-container-org7bc94cc" class="outline-2">
+<h2 id="org7bc94cc"><span class="section-number-2">1</span> Context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The following arrays are stored in the context:
@@ -503,8 +503,8 @@ coefficient = [ 0.006068, 0.045308, 0.202822, 0.503903, 0.383421,
 </pre>
 </div>
 
-<div id="outline-container-orgd19cc41" class="outline-3">
-<h3 id="orgd19cc41"><span class="section-number-3">1.1</span> Data structure</h3>
+<div id="outline-container-org2125ee2" class="outline-3">
+<h3 id="org2125ee2"><span class="section-number-3">1.1</span> Data structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_ao_basis_struct</span> {
@@ -533,8 +533,8 @@ struct is then initialized and <code>provided == true</code>.
 </div>
 </div>
 
-<div id="outline-container-org7e12958" class="outline-3">
-<h3 id="org7e12958"><span class="section-number-3">1.2</span> Access functions</h3>
+<div id="outline-container-org3617df4" class="outline-3">
+<h3 id="org3617df4"><span class="section-number-3">1.2</span> Access functions</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 When all the data for the AOs have been provided, the following
@@ -548,8 +548,8 @@ function returns <code>true</code>.
 </div>
 </div>
 
-<div id="outline-container-org4b2e84b" class="outline-3">
-<h3 id="org4b2e84b"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div id="outline-container-orgdc1a837" class="outline-3">
+<h3 id="orgdc1a837"><span class="section-number-3">1.3</span> Initialization functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 To set the basis set, all the following functions need to be
@@ -572,17 +572,17 @@ called. When
 </div>
 </div>
 
-<div id="outline-container-org8da39c7" class="outline-3">
-<h3 id="org8da39c7"><span class="section-number-3">1.4</span> <span class="todo TODO">TODO</span> Fortran interfaces</h3>
+<div id="outline-container-org4336ff6" class="outline-3">
+<h3 id="org4336ff6"><span class="section-number-3">1.4</span> <span class="todo TODO">TODO</span> Fortran interfaces</h3>
 </div>
 </div>
 
-<div id="outline-container-org948c90f" class="outline-2">
-<h2 id="org948c90f"><span class="section-number-2">2</span> Polynomial part</h2>
+<div id="outline-container-org918ece0" class="outline-2">
+<h2 id="org918ece0"><span class="section-number-2">2</span> Polynomial part</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org92ca961" class="outline-3">
-<h3 id="org92ca961"><span class="section-number-3">2.1</span> Powers of \(x-X_i\)</h3>
+<div id="outline-container-org26e463f" class="outline-3">
+<h3 id="org26e463f"><span class="section-number-3">2.1</span> Powers of \(x-X_i\)</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 The <code>qmckl_ao_power</code> function computes all the powers of the <code>n</code>
@@ -594,7 +594,7 @@ the \(n\) points:
 \[ P_{ik} = X_i^k \]
 </p>
 
-<table id="org75681d4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org95f47ac" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -652,8 +652,8 @@ the \(n\) points:
 </table>
 </div>
 
-<div id="outline-container-org28a2968" class="outline-4">
-<h4 id="org28a2968"><span class="section-number-4">2.1.1</span> Requirements</h4>
+<div id="outline-container-orgab5d16e" class="outline-4">
+<h4 id="orgab5d16e"><span class="section-number-4">2.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -666,8 +666,8 @@ the \(n\) points:
 </div>
 </div>
 
-<div id="outline-container-org8e5ac6c" class="outline-4">
-<h4 id="org8e5ac6c"><span class="section-number-4">2.1.2</span> C Header</h4>
+<div id="outline-container-org9216895" class="outline-4">
+<h4 id="org9216895"><span class="section-number-4">2.1.2</span> C Header</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_ao_power</span> (
@@ -682,8 +682,8 @@ the \(n\) points:
 </div>
 </div>
 
-<div id="outline-container-org17e53f8" class="outline-4">
-<h4 id="org17e53f8"><span class="section-number-4">2.1.3</span> Source</h4>
+<div id="outline-container-orgeb335f8" class="outline-4">
+<h4 id="orgeb335f8"><span class="section-number-4">2.1.3</span> Source</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
 <pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_ao_power_f</span><span style="color: #000000; background-color: #ffffff;">(context, n, X, LMAX, P, ldp) result(info)</span>
@@ -724,7 +724,7 @@ the \(n\) points:
   <span style="color: #a020f0;">do</span> i=1,n
      P(1,i) = X(i)
      <span style="color: #a020f0;">do</span> k=2,LMAX(i)
-        P(k,i) = P(k-1,i) * X(i) 
+        P(k,i) = P(k-1,i) * X(i)
      <span style="color: #a020f0;">end do</span>
   <span style="color: #a020f0;">end do</span>
 
@@ -734,15 +734,15 @@ the \(n\) points:
 </div>
 </div>
 
-<div id="outline-container-org434b9d2" class="outline-4">
-<h4 id="org434b9d2"><span class="section-number-4">2.1.4</span> C interface</h4>
+<div id="outline-container-org419ce93" class="outline-4">
+<h4 id="org419ce93"><span class="section-number-4">2.1.4</span> C interface</h4>
 </div>
-<div id="outline-container-orgfd9d5ad" class="outline-4">
-<h4 id="orgfd9d5ad"><span class="section-number-4">2.1.5</span> Fortran interface</h4>
+<div id="outline-container-org80894b6" class="outline-4">
+<h4 id="org80894b6"><span class="section-number-4">2.1.5</span> Fortran interface</h4>
 </div>
 
-<div id="outline-container-org3874478" class="outline-4">
-<h4 id="org3874478"><span class="section-number-4">2.1.6</span> Test</h4>
+<div id="outline-container-org00f589d" class="outline-4">
+<h4 id="org00f589d"><span class="section-number-4">2.1.6</span> Test</h4>
 <div class="outline-text-4" id="text-2-1-6">
 <div class="org-src-container">
 <pre class="src src-f90"><span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int32_t</span>) <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">test_qmckl_ao_power</span>(context) <span style="color: #a020f0;">bind</span>(C)
@@ -751,8 +751,8 @@ the \(n\) points:
 
   <span style="color: #228b22;">integer</span>(qmckl_context), <span style="color: #a020f0;">intent</span>(in), <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
 
-  <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> n, LDP </span>
-  <span style="color: #228b22;">integer</span>, <span style="color: #a020f0;">allocatable</span>          ::<span style="color: #a0522d;"> LMAX(:) </span>
+  <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> n, LDP</span>
+  <span style="color: #228b22;">integer</span>, <span style="color: #a020f0;">allocatable</span>          ::<span style="color: #a0522d;"> LMAX(:)</span>
   <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> X(:), P(:,:)</span>
   <span style="color: #228b22;">integer</span>*8                     ::<span style="color: #a0522d;"> i,j</span>
   <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> epsilon</span>
@@ -769,7 +769,7 @@ the \(n\) points:
      LMAX(j) = 1 + <span style="color: #a020f0;">int</span>(<span style="color: #a020f0;">mod</span>(j, 5),4)
   <span style="color: #a020f0;">end do</span>
 
-  test_qmckl_ao_power = qmckl_ao_power(context, n, X, LMAX, P, LDP) 
+  test_qmckl_ao_power = qmckl_ao_power(context, n, X, LMAX, P, LDP)
   <span style="color: #a020f0;">if</span> (test_qmckl_ao_power /= QMCKL_SUCCESS) <span style="color: #a020f0;">return</span>
 
   test_qmckl_ao_power = QMCKL_FAILURE
@@ -793,8 +793,8 @@ the \(n\) points:
 </div>
 </div>
 
-<div id="outline-container-orgc3e207a" class="outline-3">
-<h3 id="orgc3e207a"><span class="section-number-3">2.2</span> Value, Gradient and Laplacian of a polynomial</h3>
+<div id="outline-container-org16d508b" class="outline-3">
+<h3 id="org16d508b"><span class="section-number-3">2.2</span> Value, Gradient and Laplacian of a polynomial</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 A polynomial is centered on a nucleus \(\mathbf{R}_i\)
@@ -802,7 +802,7 @@ A polynomial is centered on a nucleus \(\mathbf{R}_i\)
 
 <p>
 \[
-   P_l(\mathbf{r},\mathbf{R}_i)  =   (x-X_i)^a (y-Y_i)^b (z-Z_i)^c 
+   P_l(\mathbf{r},\mathbf{R}_i)  =   (x-X_i)^a (y-Y_i)^b (z-Z_i)^c
    \]
 </p>
 
@@ -810,24 +810,24 @@ A polynomial is centered on a nucleus \(\mathbf{R}_i\)
 The gradients with respect to electron coordinates are
 </p>
 
-\begin{eqnarray*} 
+\begin{eqnarray*}
 \frac{\partial }{\partial x} P_l\left(\mathbf{r},\mathbf{R}_i \right) &
                = & a (x-X_i)^{a-1} (y-Y_i)^b (z-Z_i)^c \\
 \frac{\partial }{\partial y} P_l\left(\mathbf{r},\mathbf{R}_i \right) &
                = & b (x-X_i)^a (y-Y_i)^{b-1} (z-Z_i)^c \\
 \frac{\partial }{\partial z} P_l\left(\mathbf{r},\mathbf{R}_i \right) &
                = & c (x-X_i)^a (y-Y_i)^b (z-Z_i)^{c-1} \\
-\end{eqnarray*} 
+\end{eqnarray*}
 
 <p>
 and the Laplacian is
 </p>
 
-\begin{eqnarray*} 
-\left( \frac{\partial }{\partial x^2} + 
-           \frac{\partial }{\partial y^2} + 
+\begin{eqnarray*}
+\left( \frac{\partial }{\partial x^2} +
+           \frac{\partial }{\partial y^2} +
            \frac{\partial }{\partial z^2} \right) P_l
-           \left(\mathbf{r},\mathbf{R}_i \right) &  = &  
+           \left(\mathbf{r},\mathbf{R}_i \right) &  = &
          a(a-1) (x-X_i)^{a-2} (y-Y_i)^b (z-Z_i)^c + \\
       && b(b-1) (x-X_i)^a (y-Y_i)^{b-1} (z-Z_i)^c + \\
       && c(c-1) (x-X_i)^a (y-Y_i)^b (z-Z_i)^{c-1}.
@@ -839,7 +839,7 @@ Laplacians at a given point in space, of all polynomials with an
 angular momentum up to <code>lmax</code>.
 </p>
 
-<table id="orge3109ed" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org4329cd0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -918,8 +918,8 @@ angular momentum up to <code>lmax</code>.
 </table>
 </div>
 
-<div id="outline-container-org2381f4d" class="outline-4">
-<h4 id="org2381f4d"><span class="section-number-4">2.2.1</span> Requirements</h4>
+<div id="outline-container-orgea59a78" class="outline-4">
+<h4 id="orgea59a78"><span class="section-number-4">2.2.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -944,8 +944,8 @@ For example, with a=0, b=2 and c=1 the string is "yyz"</li>
 </div>
 </div>
 
-<div id="outline-container-orgd294a21" class="outline-4">
-<h4 id="orgd294a21"><span class="section-number-4">2.2.2</span> C Header</h4>
+<div id="outline-container-orgd79fa8e" class="outline-4">
+<h4 id="orgd79fa8e"><span class="section-number-4">2.2.2</span> C Header</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_ao_polynomial_vgl</span> (
@@ -963,8 +963,8 @@ For example, with a=0, b=2 and c=1 the string is "yyz"</li>
 </div>
 </div>
 
-<div id="outline-container-org8b4112e" class="outline-4">
-<h4 id="org8b4112e"><span class="section-number-4">2.2.3</span> Source</h4>
+<div id="outline-container-org6acd7c9" class="outline-4">
+<h4 id="org6acd7c9"><span class="section-number-4">2.2.3</span> Source</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <div class="org-src-container">
 <pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_ao_polynomial_vgl_f</span><span style="color: #000000; background-color: #ffffff;">(context, X, R, lmax, n, L, ldl, VGL, ldv) result(info)</span>
@@ -1024,9 +1024,9 @@ For example, with a=0, b=2 and c=1 the string is "yyz"</li>
   <span style="color: #a020f0;">else if</span> (lmax &gt; 0) <span style="color: #a020f0;">then</span>
      pows(-2:0,1:3) = 1.d0
      <span style="color: #a020f0;">do</span> i=1,lmax
-        pows(i,1) = pows(i-1,1) * Y(1) 
-        pows(i,2) = pows(i-1,2) * Y(2) 
-        pows(i,3) = pows(i-1,3) * Y(3) 
+        pows(i,1) = pows(i-1,1) * Y(1)
+        pows(i,2) = pows(i-1,2) * Y(2)
+        pows(i,3) = pows(i-1,3) * Y(3)
      <span style="color: #a020f0;">end do</span>
 
      VGL(1:5,1:4) = 0.d0
@@ -1099,16 +1099,16 @@ For example, with a=0, b=2 and c=1 the string is "yyz"</li>
 </div>
 </div>
 
-<div id="outline-container-org9f36f95" class="outline-4">
-<h4 id="org9f36f95"><span class="section-number-4">2.2.4</span> C interface</h4>
+<div id="outline-container-org9fb93c9" class="outline-4">
+<h4 id="org9fb93c9"><span class="section-number-4">2.2.4</span> C interface</h4>
 </div>
 
-<div id="outline-container-orgf60a84d" class="outline-4">
-<h4 id="orgf60a84d"><span class="section-number-4">2.2.5</span> Fortran interface</h4>
+<div id="outline-container-org1cce6b8" class="outline-4">
+<h4 id="org1cce6b8"><span class="section-number-4">2.2.5</span> Fortran interface</h4>
 </div>
 
-<div id="outline-container-org4c27fa3" class="outline-4">
-<h4 id="org4c27fa3"><span class="section-number-4">2.2.6</span> Test</h4>
+<div id="outline-container-org64cfcea" class="outline-4">
+<h4 id="org64cfcea"><span class="section-number-4">2.2.6</span> Test</h4>
 <div class="outline-text-4" id="text-2-2-6">
 <div class="org-src-container">
 <pre class="src src-f90"><span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int32_t</span>) <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">test_qmckl_ao_polynomial_vgl</span>(context) <span style="color: #a020f0;">bind</span>(C)
@@ -1185,13 +1185,13 @@ For example, with a=0, b=2 and c=1 the string is "yyz"</li>
      test_qmckl_ao_polynomial_vgl = QMCKL_FAILURE
      w = 0.d0
      <span style="color: #a020f0;">if</span> (L(1,j) &gt; 1) <span style="color: #a020f0;">then</span>
-        w = w + L(1,j) * (L(1,j)-1) * Y(1)**(L(1,j)-2) * Y(2)**L(2,j) * Y(3)**L(3,j) 
+        w = w + L(1,j) * (L(1,j)-1) * Y(1)**(L(1,j)-2) * Y(2)**L(2,j) * Y(3)**L(3,j)
      <span style="color: #a020f0;">end if</span>
      <span style="color: #a020f0;">if</span> (L(2,j) &gt; 1) <span style="color: #a020f0;">then</span>
-        w = w + L(2,j) * (L(2,j)-1) * Y(1)**L(1,j) * Y(2)**(L(2,j)-2) * Y(3)**L(3,j) 
+        w = w + L(2,j) * (L(2,j)-1) * Y(1)**L(1,j) * Y(2)**(L(2,j)-2) * Y(3)**L(3,j)
      <span style="color: #a020f0;">end if</span>
      <span style="color: #a020f0;">if</span> (L(3,j) &gt; 1) <span style="color: #a020f0;">then</span>
-        w = w + L(3,j) * (L(3,j)-1) * Y(1)**L(1,j) * Y(2)**L(2,j) * Y(3)**(L(3,j)-2) 
+        w = w + L(3,j) * (L(3,j)-1) * Y(1)**L(1,j) * Y(2)**L(2,j) * Y(3)**(L(3,j)-2)
      <span style="color: #a020f0;">end if</span>
      <span style="color: #a020f0;">if</span> (dabs(1.d0 - VGL(5,j) / w) &gt; epsilon ) <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">end do</span>
@@ -1205,7 +1205,7 @@ For example, with a=0, b=2 and c=1 the string is "yyz"</li>
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">int</span>  <span style="color: #0000ff;">test_qmckl_ao_polynomial_vgl</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
-munit_assert_int(0, ==, test_qmckl_ao_polynomial_vgl(context));
+assert(0 == test_qmckl_ao_polynomial_vgl(context));
 </pre>
 </div>
 </div>
@@ -1213,12 +1213,12 @@ munit_assert_int(0, ==, test_qmckl_ao_polynomial_vgl(context));
 </div>
 </div>
 
-<div id="outline-container-orge67bc7b" class="outline-2">
-<h2 id="orge67bc7b"><span class="section-number-2">3</span> Radial part</h2>
+<div id="outline-container-orgb26738a" class="outline-2">
+<h2 id="orgb26738a"><span class="section-number-2">3</span> Radial part</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org95cbb95" class="outline-3">
-<h3 id="org95cbb95"><span class="section-number-3">3.1</span> Gaussian basis functions</h3>
+<div id="outline-container-org030c6d9" class="outline-3">
+<h3 id="org030c6d9"><span class="section-number-3">3.1</span> Gaussian basis functions</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 <code>qmckl_ao_gaussian_vgl</code> computes the values, gradients and
@@ -1450,21 +1450,21 @@ Requirements
 </div>
 </div>
 
-<div id="outline-container-org35143d0" class="outline-3">
-<h3 id="org35143d0"><span class="section-number-3">3.2</span> <span class="todo TODO">TODO</span> Slater basis functions</h3>
+<div id="outline-container-org90b795f" class="outline-3">
+<h3 id="org90b795f"><span class="section-number-3">3.2</span> <span class="todo TODO">TODO</span> Slater basis functions</h3>
 </div>
 
-<div id="outline-container-orgb1398cf" class="outline-3">
-<h3 id="orgb1398cf"><span class="section-number-3">3.3</span> <span class="todo TODO">TODO</span> Radial functions on a grid</h3>
+<div id="outline-container-org176da53" class="outline-3">
+<h3 id="org176da53"><span class="section-number-3">3.3</span> <span class="todo TODO">TODO</span> Radial functions on a grid</h3>
 </div>
 </div>
-<div id="outline-container-orge66f3f7" class="outline-2">
-<h2 id="orge66f3f7"><span class="section-number-2">4</span> Combining radial and polynomial parts</h2>
+<div id="outline-container-org7ef421a" class="outline-2">
+<h2 id="org7ef421a"><span class="section-number-2">4</span> Combining radial and polynomial parts</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2021-04-29 Thu 05:49</p>
+<p class="date">Created: 2021-05-25 Tue 03:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

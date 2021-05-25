@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-29 Thu 05:49 -->
+<!-- 2021-05-25 Tue 03:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Electrons</title>
@@ -311,21 +311,34 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org00baee8">1. Context</a>
+<li><a href="#orgbe7d559">1. Context</a>
 <ul>
-<li><a href="#orga80ab17">1.1. Data structure</a></li>
-<li><a href="#org54da6a5">1.2. Access functions</a></li>
-<li><a href="#org6aa8af4">1.3. Initialization functions</a></li>
-<li><a href="#org5c50cf6">1.4. Test</a></li>
+<li><a href="#orgf22e129">1.1. Data structure</a></li>
+<li><a href="#orge0de4af">1.2. Access functions</a>
+<ul>
+<li><a href="#org712e9c9">1.2.1. Number of electrons</a></li>
+<li><a href="#orgd62e82f">1.2.2. Number of walkers</a></li>
+<li><a href="#orgdf41ee1">1.2.3. Electron coordinates</a></li>
 </ul>
 </li>
-<li><a href="#orga9ed9f3">2. Computation</a>
+<li><a href="#org393bb65">1.3. Initialization functions</a></li>
+<li><a href="#orge59054b">1.4. Test</a></li>
+</ul>
+</li>
+<li><a href="#orgd89c448">2. Computation</a>
 <ul>
-<li><a href="#org782a9c1">2.1. Electron-electron distances</a>
+<li><a href="#org98a23bc">2.1. Electron-electron distances</a>
 <ul>
-<li><a href="#org0f7e936">2.1.1. Get</a></li>
-<li><a href="#org752fa29">2.1.2. Compute</a></li>
-<li><a href="#orgae216f9">2.1.3. Test</a></li>
+<li><a href="#orgae90141">2.1.1. Get</a></li>
+<li><a href="#org2d8cfbc">2.1.2. Compute</a></li>
+<li><a href="#org9659c56">2.1.3. Test</a></li>
+</ul>
+</li>
+<li><a href="#orgfdf76fe">2.2. Electron-nucleus distances</a>
+<ul>
+<li><a href="#org66043ca">2.2.1. Get</a></li>
+<li><a href="#org78c39ba">2.2.2. Compute</a></li>
+<li><a href="#org7d17719">2.2.3. Test</a></li>
 </ul>
 </li>
 </ul>
@@ -334,8 +347,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org00baee8" class="outline-2">
-<h2 id="org00baee8"><span class="section-number-2">1</span> Context</h2>
+<div id="outline-container-orgbe7d559" class="outline-2">
+<h2 id="orgbe7d559"><span class="section-number-2">1</span> Context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The following data stored in the context:
@@ -417,12 +430,24 @@ The following data stored in the context:
 <td class="org-left">uint64<sub>t</sub></td>
 <td class="org-left">Last modification date of the electron-electron distances</td>
 </tr>
+
+<tr>
+<td class="org-left"><code>en_distance</code></td>
+<td class="org-left">double[walk<sub>num</sub>][nucl<sub>num</sub>][num]</td>
+<td class="org-left">Electron-nucleus distances</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>en_distance_date</code></td>
+<td class="org-left">uint64<sub>t</sub></td>
+<td class="org-left">Last modification date of the electron-electron distances</td>
+</tr>
 </tbody>
 </table>
 </div>
 
-<div id="outline-container-orga80ab17" class="outline-3">
-<h3 id="orga80ab17"><span class="section-number-3">1.1</span> Data structure</h3>
+<div id="outline-container-orgf22e129" class="outline-3">
+<h3 id="orgf22e129"><span class="section-number-3">1.1</span> Data structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_electron_struct</span> {
@@ -432,9 +457,11 @@ The following data stored in the context:
   <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">walk_num</span>;
   <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">coord_new_date</span>;
   <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">ee_distance_date</span>;
+  <span style="color: #228b22;">int64_t</span>   <span style="color: #a0522d;">en_distance_date</span>;
   <span style="color: #228b22;">double</span>*   <span style="color: #a0522d;">coord_new</span>;
   <span style="color: #228b22;">double</span>*   <span style="color: #a0522d;">coord_old</span>;
   <span style="color: #228b22;">double</span>*   <span style="color: #a0522d;">ee_distance</span>;
+  <span style="color: #228b22;">double</span>*   <span style="color: #a0522d;">en_distance</span>;
   <span style="color: #228b22;">int32_t</span>   <span style="color: #a0522d;">uninitialized</span>;
   <span style="color: #228b22;">bool</span>      <span style="color: #a0522d;">provided</span>;
 } <span style="color: #228b22;">qmckl_electron_struct</span>;
@@ -447,37 +474,105 @@ initialization function which has not bee called. It becomes equal
 to zero after all initialization functions have been called. The
 struct is then initialized and <code>provided == true</code>.
 </p>
-</div>
-</div>
 
-<div id="outline-container-org54da6a5" class="outline-3">
-<h3 id="org54da6a5"><span class="section-number-3">1.2</span> Access functions</h3>
-<div class="outline-text-3" id="text-1-2">
 <p>
 When all the data relative to electrons have been set, the
 following function returns <code>true</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">bool</span>      <span style="color: #0000ff;">qmckl_electron_provided</span>       (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
+<pre class="src src-c"><span style="color: #228b22;">bool</span> <span style="color: #0000ff;">qmckl_electron_provided</span> (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6aa8af4" class="outline-3">
-<h3 id="org6aa8af4"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div id="outline-container-orge0de4af" class="outline-3">
+<h3 id="orge0de4af"><span class="section-number-3">1.2</span> Access functions</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Access functions return <code>QMCKL_SUCCESS</code> when the data has been
+successfully retrieved. It returnes <code>QMCKL_INVALID_CONTEXT</code> when
+the context is not a valid context, and <code>QMCKL_NOT_PROVIDED</code> when
+the data has not been provided. If the function returns
+successfully, the variable pointed by the pointer given in argument
+contains the requested data. Otherwise, this variable is untouched.
+</p>
+</div>
+
+<div id="outline-container-org712e9c9" class="outline-4">
+<h4 id="org712e9c9"><span class="section-number-4">1.2.1</span> Number of electrons</h4>
+</div>
+
+<div id="outline-container-orgd62e82f" class="outline-4">
+<h4 id="orgd62e82f"><span class="section-number-4">1.2.2</span> Number of walkers</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+A walker is a set of electron coordinates that are arguments of
+the wave function. <code>walk_num</code> is the number of walkers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdf41ee1" class="outline-4">
+<h4 id="orgdf41ee1"><span class="section-number-4">1.2.3</span> Electron coordinates</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+Returns the current electron coordinates. The pointer is assumed
+to point on a memory block of size <code>3 * elec_num * walk_num</code>. 
+The order of the indices is:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Normal</th>
+<th scope="col" class="org-left">Transposed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left"><code>[walk_num][elec_num][3]</code></td>
+<td class="org-left"><code>[walk_num][3][elec_num]</code></td>
+</tr>
+
+<tr>
+<td class="org-left">Fortran</td>
+<td class="org-left"><code>(3,elec_num,walk_num)</code></td>
+<td class="org-left"><code>(elec_num,3,walk_num)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org393bb65" class="outline-3">
+<h3 id="org393bb65"><span class="section-number-3">1.3</span> Initialization functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 To set the data relative to the electrons in the context, the
 following functions need to be called. When the data structure is
-initialized, the <code>coord_new</code> and <code>coord_old</code> arrays are both allocated.
+initialized, the internal <code>coord_new</code> and <code>coord_old</code> arrays are
+both allocated.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_electron_num</span>        (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">up_num</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">down_num</span>);
 <span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_electron_walk_num</span>   (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">walk_num</span>);
-<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_electron_coord</span>      (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">coord</span>);
+<span style="color: #228b22;">qmckl_exit_code</span>  <span style="color: #0000ff;">qmckl_set_electron_coord</span>      (<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">transp</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">coord</span>);
 </pre>
 </div>
 
@@ -493,48 +588,87 @@ of coordinates are swapped, and the new coordinates are
 overwritten. This can be done only when the data relative to
 electrons have been set.
 </p>
+
+<p>
+Important: changing the electron coordinates increments the date
+in the context.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org5c50cf6" class="outline-3">
-<h3 id="org5c50cf6"><span class="section-number-3">1.4</span> Test</h3>
+<div id="outline-container-orge59054b" class="outline-3">
+<h3 id="orge59054b"><span class="section-number-3">1.4</span> Test</h3>
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 <pre class="src src-c">/* <span style="color: #b22222;">Reference input data </span>*/
+<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">walk_num</span>      = chbrclf_walk_num;
+<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">elec_num</span>      = chbrclf_elec_num;
+<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">elec_up_num</span>   = chbrclf_elec_up_num;
+<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">elec_dn_num</span>   = chbrclf_elec_dn_num;
+<span style="color: #228b22;">double</span>* <span style="color: #a0522d;">elec_coord</span>    = &amp;(chbrclf_elec_coord[0][0][0]);
 
-<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">up_num</span>      ((<span style="color: #228b22;">int64_t</span>) 3)
-<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">down_num</span>    ((<span style="color: #228b22;">int64_t</span>) 2)
-<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">walk_num</span>    ((<span style="color: #228b22;">int64_t</span>) 2)
-<span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">num</span>         (up_num+down_num)
-
-<span style="color: #228b22;">double</span> <span style="color: #a0522d;">coord</span>[walk_num*3*num] =
-  { 7.303633091022677881e+00, 1.375868694453235719e+01, 1.167371490471771217e-01,                   
-    4.547755371567960836e+00, 3.245907105524011182e+00, 2.410764357550297110e-01,
-    5.932816068137344523e+00, 1.491671465549257469e+01, 3.825374039119375236e-01,
-    7.347336142660052083e+00, 1.341946976062362129e+00, 1.648917914228352322e+00,
-    5.735221530102248444e+00, 1.064667491680036271e+01, 4.227201772236627297e-01,
-    8.099550978782254163e+00, 6.861498941099086757e+00, 4.015884841159429036e-02,
-    1.014757367558326173e+01, 5.219335322173662917e+00, 5.037004126899931322e-02,
-    1.484094322159507051e+01, 9.777903829455864226e+00, 5.243007994024882767e-02,
-    9.081723054990456845e+00, 5.499568496038920173e+00, 2.910446438899221347e-02,
-    2.583154239492383653e+00, 1.442282811294904432e+00, 6.387191629878670451e-02 };
+<span style="color: #228b22;">int64_t</span>  <span style="color: #a0522d;">nucl_num</span>      = chbrclf_nucl_num;
+<span style="color: #228b22;">double</span>*  <span style="color: #a0522d;">charge</span>        = chbrclf_charge;
+<span style="color: #228b22;">double</span>*  <span style="color: #a0522d;">nucl_coord</span>    = &amp;(chbrclf_nucl_coord[0][0]);
 
 /* <span style="color: #b22222;">--- </span>*/
 
 <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">rc</span>;
 
-munit_assert(!qmckl_electron_provided(context));
+assert(!qmckl_electron_provided(context));
 
-rc = qmckl_set_electron_num (context, up_num, down_num);
-<span style="color: #0000ff;">munit_assert_int64</span>(rc, ==, QMCKL_SUCCESS);
-munit_assert(!qmckl_electron_provided(context));
+<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">n</span>;
+rc = qmckl_get_electron_num (context, &amp;n);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_NOT_PROVIDED);
+
+rc = qmckl_get_electron_up_num (context, &amp;n);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_NOT_PROVIDED);
+
+rc = qmckl_get_electron_down_num (context, &amp;n);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_NOT_PROVIDED);
+
+
+rc = qmckl_set_electron_num (context, elec_up_num, elec_dn_num);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+assert(!qmckl_electron_provided(context));
+
+rc = qmckl_get_electron_up_num (context, &amp;n);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">assert</span>(n == elec_up_num);
+
+rc = qmckl_get_electron_down_num (context, &amp;n);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">assert</span>(n == elec_dn_num);
+
+rc = qmckl_get_electron_num (context, &amp;n);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">assert</span>(n == elec_num);
+
+
+<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">w</span>;
+rc = qmckl_get_electron_walk_num (context, &amp;w);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_NOT_PROVIDED);
+
 
 rc = qmckl_set_electron_walk_num (context, walk_num);
-<span style="color: #0000ff;">munit_assert_int64</span>(rc, ==, QMCKL_SUCCESS);
-<span style="color: #0000ff;">munit_assert</span>(<span style="color: #228b22;">qmckl_electron_provided</span>(<span style="color: #a0522d;">context</span>));
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
 
-rc = qmckl_set_electron_coord (context, coord);
-<span style="color: #0000ff;">munit_assert_int64</span>(rc, ==, QMCKL_SUCCESS);
+rc = qmckl_get_electron_walk_num (context, &amp;w);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">assert</span>(w == walk_num);
+
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">qmckl_electron_provided</span>(<span style="color: #a0522d;">context</span>));
+
+rc = qmckl_set_electron_coord (context, <span style="color: #8b2252;">'N'</span>, elec_coord);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+
+<span style="color: #228b22;">double</span> <span style="color: #a0522d;">elec_coord2</span>[walk_num*3*elec_num];
+
+rc = qmckl_get_electron_coord (context, <span style="color: #8b2252;">'N'</span>, elec_coord2);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;3*elec_num ; ++i) {
+  assert( elec_coord[i] == elec_coord2[i] );
+ }
 
 </pre>
 </div>
@@ -542,8 +676,8 @@ rc = qmckl_set_electron_coord (context, coord);
 </div>
 </div>
 
-<div id="outline-container-orga9ed9f3" class="outline-2">
-<h2 id="orga9ed9f3"><span class="section-number-2">2</span> Computation</h2>
+<div id="outline-container-orgd89c448" class="outline-2">
+<h2 id="orgd89c448"><span class="section-number-2">2</span> Computation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The computed data is stored in the context so that it can be reused
@@ -556,24 +690,24 @@ current date is stored.
 </p>
 </div>
 
-<div id="outline-container-org782a9c1" class="outline-3">
-<h3 id="org782a9c1"><span class="section-number-3">2.1</span> Electron-electron distances</h3>
+<div id="outline-container-org98a23bc" class="outline-3">
+<h3 id="org98a23bc"><span class="section-number-3">2.1</span> Electron-electron distances</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org0f7e936" class="outline-4">
-<h4 id="org0f7e936"><span class="section-number-4">2.1.1</span> Get</h4>
+<div id="outline-container-orgae90141" class="outline-4">
+<h4 id="orgae90141"><span class="section-number-4">2.1.1</span> Get</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_get_electron_ee_distance</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">distance</span>);
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_get_electron_ee_distance</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">double</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">distance</span>);
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org752fa29" class="outline-4">
-<h4 id="org752fa29"><span class="section-number-4">2.1.2</span> Compute</h4>
+<div id="outline-container-org2d8cfbc" class="outline-4">
+<h4 id="org2d8cfbc"><span class="section-number-4">2.1.2</span> Compute</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<table id="orgf1d3486" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org5b08afd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -638,31 +772,30 @@ current date is stored.
 
   info = QMCKL_SUCCESS
 
-  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>                                                    
-     info = QMCKL_INVALID_CONTEXT                                                            
-     <span style="color: #a020f0;">return</span>                                                                                  
+  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_CONTEXT
+     <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (elec_num &lt;= 0) <span style="color: #a020f0;">then</span>                                                    
+  <span style="color: #a020f0;">if</span> (elec_num &lt;= 0) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_2
-     <span style="color: #a020f0;">return</span>                                                                                  
+     <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (walk_num &lt;= 0) <span style="color: #a020f0;">then</span>                                                    
+  <span style="color: #a020f0;">if</span> (walk_num &lt;= 0) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_3
-     <span style="color: #a020f0;">return</span>                                                                                  
+     <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  !<span style="color: #b22222;">$OMP PARALLEL DO DEFAULT(NONE) &amp;</span>
-  !<span style="color: #b22222;">$OMP SHARED(elec_num, walk_num, coord, ee_distance)</span>
-  !<span style="color: #b22222;">$OMP PRIVATE(k)</span>
   <span style="color: #a020f0;">do</span> k=1,walk_num
      info = qmckl_distance(context, <span style="color: #8b2252;">'T'</span>, <span style="color: #8b2252;">'T'</span>, elec_num, elec_num, <span style="color: #a020f0;">&amp;</span>
           coord(1,1,k), elec_num, <span style="color: #a020f0;">&amp;</span>
           coord(1,1,k), elec_num, <span style="color: #a020f0;">&amp;</span>
           ee_distance(1,1,k), elec_num)
+     <span style="color: #a020f0;">if</span> (info /= QMCKL_SUCCESS) <span style="color: #a020f0;">then</span>
+        <span style="color: #a020f0;">exit</span>
+     <span style="color: #a020f0;">endif</span>
   <span style="color: #a020f0;">end do</span>
-  !<span style="color: #b22222;">$OMP END PARALLEL DO</span>
 
 <span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_compute_ee_distance_f</span>
 </pre>
@@ -670,20 +803,217 @@ current date is stored.
 </div>
 </div>
 
-<div id="outline-container-orgae216f9" class="outline-4">
-<h4 id="orgae216f9"><span class="section-number-4">2.1.3</span> Test</h4>
+<div id="outline-container-org9659c56" class="outline-4">
+<h4 id="org9659c56"><span class="section-number-4">2.1.3</span> Test</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
-<pre class="src src-c">/* <span style="color: #b22222;">Reference input data </span>*/
+<pre class="src src-c"><span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">qmckl_electron_provided</span>(<span style="color: #a0522d;">context</span>));
 
-<span style="color: #0000ff;">munit_assert</span>(<span style="color: #228b22;">qmckl_electron_provided</span>(<span style="color: #a0522d;">context</span>));
 
-<span style="color: #228b22;">double</span> <span style="color: #a0522d;">distance</span>[walk_num*num*num];
-rc = qmckl_get_electron_ee_distance(context, distance);
-rc = qmckl_get_electron_ee_distance(context, distance);
-<span style="color: #0000ff;">munit_assert_double</span>(<span style="color: #228b22;">distance</span>[0], ==, 0.);
-<span style="color: #0000ff;">munit_assert_double</span>(<span style="color: #228b22;">distance</span>[1], ==, <span style="color: #228b22;">distance</span>[num]);
-<span style="color: #0000ff;">munit_assert_double_equal</span>(<span style="color: #228b22;">distance</span>[1], 8.6114953086801, 12);
+<span style="color: #228b22;">double</span> <span style="color: #a0522d;">ee_distance</span>[walk_num * elec_num * elec_num];
+rc = qmckl_get_electron_ee_distance(context, ee_distance);
+
+// <span style="color: #b22222;">(e1,e2,w)</span>
+// <span style="color: #b22222;">(0,0,0) == 0.</span>
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">ee_distance</span>[0] == 0.);
+
+// <span style="color: #b22222;">(1,0,0) == (0,1,0)</span>
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">ee_distance</span>[1] == ee_distance[elec_num]);
+
+// <span style="color: #b22222;">value of (1,0,0)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">ee_distance</span>[1]-7.152322512964209) &lt; 1.e-12);
+
+// <span style="color: #b22222;">(0,0,1) == 0.</span>
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">ee_distance</span>[elec_num*elec_num] == 0.);
+
+// <span style="color: #b22222;">(1,0,1) == (0,1,1)</span>
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">ee_distance</span>[elec_num*elec_num+1] == ee_distance[elec_num*elec_num+elec_num]);
+
+// <span style="color: #b22222;">value of (1,0,1)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">ee_distance</span>[elec_num*elec_num+1]-6.5517646321055665) &lt; 1.e-12);
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfdf76fe" class="outline-3">
+<h3 id="orgfdf76fe"><span class="section-number-3">2.2</span> Electron-nucleus distances</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org66043ca" class="outline-4">
+<h4 id="org66043ca"><span class="section-number-4">2.2.1</span> Get</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_get_electron_en_distance</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">distance</span>);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org78c39ba" class="outline-4">
+<h4 id="org78c39ba"><span class="section-number-4">2.2.2</span> Compute</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<table id="org3485805" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">qmckl<sub>context</sub></td>
+<td class="org-left">context</td>
+<td class="org-left">in</td>
+<td class="org-left">Global state</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">elec<sub>num</sub></td>
+<td class="org-left">in</td>
+<td class="org-left">Number of electrons</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">nucl<sub>num</sub></td>
+<td class="org-left">in</td>
+<td class="org-left">Number of nuclei</td>
+</tr>
+
+<tr>
+<td class="org-left">int64<sub>t</sub></td>
+<td class="org-left">walk<sub>num</sub></td>
+<td class="org-left">in</td>
+<td class="org-left">Number of walkers</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">elec<sub>coord</sub>[walk<sub>num</sub>][3][elec<sub>num</sub>]</td>
+<td class="org-left">in</td>
+<td class="org-left">Electron coordinates</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">nucl<sub>coord</sub>[3][elec<sub>num</sub>]</td>
+<td class="org-left">in</td>
+<td class="org-left">Nuclear coordinates</td>
+</tr>
+
+<tr>
+<td class="org-left">double</td>
+<td class="org-left">en<sub>distance</sub>[walk<sub>num</sub>][nucl<sub>num</sub>][elec<sub>num</sub>]</td>
+<td class="org-left">out</td>
+<td class="org-left">Electron-nucleus distances</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_compute_en_distance_f</span><span style="color: #000000; background-color: #ffffff;">(context, elec_num, nucl_num, walk_num, elec_coord, nucl_coord, en_distance)</span><span style="color: #a0522d;"> </span><span style="color: #a020f0;">&amp;</span>
+     <span style="color: #a020f0;">result</span>(info)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+  <span style="color: #228b22;">integer</span>(qmckl_context), <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">integer</span>*8             , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> elec_num</span>
+  <span style="color: #228b22;">integer</span>*8             , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> nucl_num</span>
+  <span style="color: #228b22;">integer</span>*8             , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> walk_num</span>
+  <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> elec_coord(elec_num,3,walk_num)</span>
+  <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> nucl_coord(nucl_num,3)</span>
+  <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> en_distance(elec_num,nucl_num,walk_num)</span>
+
+  <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> k</span>
+
+  info = QMCKL_SUCCESS
+
+  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_CONTEXT
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (elec_num &lt;= 0) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_2
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (nucl_num &lt;= 0) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_3
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">if</span> (walk_num &lt;= 0) <span style="color: #a020f0;">then</span>
+     info = QMCKL_INVALID_ARG_4
+     <span style="color: #a020f0;">return</span>
+  <span style="color: #a020f0;">endif</span>
+
+  <span style="color: #a020f0;">do</span> k=1,walk_num
+     info = qmckl_distance(context, <span style="color: #8b2252;">'T'</span>, <span style="color: #8b2252;">'T'</span>, elec_num, nucl_num, <span style="color: #a020f0;">&amp;</span>
+          elec_coord(1,1,k), elec_num, <span style="color: #a020f0;">&amp;</span>
+          nucl_coord, nucl_num, <span style="color: #a020f0;">&amp;</span>
+          en_distance(1,1,k), elec_num)
+     <span style="color: #a020f0;">if</span> (info /= QMCKL_SUCCESS) <span style="color: #a020f0;">then</span>
+        <span style="color: #a020f0;">exit</span>
+     <span style="color: #a020f0;">endif</span>
+  <span style="color: #a020f0;">end do</span>
+
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_compute_en_distance_f</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7d17719" class="outline-4">
+<h4 id="org7d17719"><span class="section-number-4">2.2.3</span> Test</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<div class="org-src-container">
+<pre class="src src-c">
+assert(!qmckl_nucleus_provided(context));
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">qmckl_electron_provided</span>(<span style="color: #a0522d;">context</span>));
+
+rc = qmckl_set_nucleus_num (context, nucl_num);
+<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+
+rc = qmckl_set_nucleus_charge (context, charge);
+<span style="color: #0000ff;">assert</span> (rc == QMCKL_SUCCESS);
+
+rc = qmckl_set_nucleus_coord (context, <span style="color: #8b2252;">'T'</span>, nucl_coord);
+<span style="color: #0000ff;">assert</span> (rc == QMCKL_SUCCESS);
+
+<span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">qmckl_nucleus_provided</span>(<span style="color: #a0522d;">context</span>));
+
+<span style="color: #228b22;">double</span> <span style="color: #a0522d;">en_distance</span>[walk_num][nucl_num][elec_num];
+
+rc = qmckl_get_electron_en_distance(context, &amp;(en_distance[0][0][0]));
+<span style="color: #0000ff;">assert</span> (rc == QMCKL_SUCCESS);
+
+// <span style="color: #b22222;">(e,n,w) in Fortran notation</span>
+// <span style="color: #b22222;">(1,1,1)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">en_distance</span>[0][0][0] - 7.546738741619978) &lt; 1.e-12);
+
+// <span style="color: #b22222;">(1,2,1)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">en_distance</span>[0][1][0] - 8.77102435246984) &lt; 1.e-12);
+
+// <span style="color: #b22222;">(2,1,1)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">en_distance</span>[0][0][1] - 3.698922010513608) &lt; 1.e-12);
+
+// <span style="color: #b22222;">(1,1,2)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">en_distance</span>[1][0][0] - 5.824059436060509) &lt; 1.e-12);
+
+// <span style="color: #b22222;">(1,2,2)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">en_distance</span>[1][1][0] - 7.080482110317645) &lt; 1.e-12);
+
+// <span style="color: #b22222;">(2,1,2)</span>
+<span style="color: #0000ff;">assert</span>(fabs(<span style="color: #228b22;">en_distance</span>[1][0][1] - 3.1804527583077356) &lt; 1.e-12);
 
 </pre>
 </div>
@@ -694,7 +1024,7 @@ rc = qmckl_get_electron_ee_distance(context, distance);
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2021-04-29 Thu 05:49</p>
+<p class="date">Created: 2021-05-25 Tue 03:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
