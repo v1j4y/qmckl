@@ -98,11 +98,11 @@ AC_CHECK_LIB([pthread], [pthread_create])
 #   CFLAGS="${CFLAGS} ${OPENMP_CFLAGS}"
 #fi
 
-## BLAS
-#AX_BLAS([], [AC_MSG_ERROR([BLAS was not found.])])
+# BLAS
+AX_BLAS([], [AC_MSG_ERROR([BLAS was not found.])])
 
-## LAPACK
-#AX_LAPACK([], [AC_MSG_ERROR([LAPACK was not found.])])
+# LAPACK
+AX_LAPACK([], [AC_MSG_ERROR([LAPACK was not found.])])
 
 # Options.
 
