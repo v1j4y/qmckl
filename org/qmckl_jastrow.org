@@ -72,28 +72,28 @@ int main() {
   The following data stored in the context:
 
    #+NAME: qmckl_jastrow_args
-  |------------+--------------------------------------------+-----+-------------------------------------------------------------------|
-  | ~int32_t~  | ~uninitialized~                            | in  | Keeps bit set for uninitialized data                              |
-  | ~int64_t~  | ~aord_num~                                 | in  | The number of a coeffecients                                      |
-  | ~int64_t~  | ~bord_num~                                 | in  | The number of b coeffecients                                      |
-  | ~int64_t~  | ~cord_num~                                 | in  | The number of c coeffecients                                      |
-  | ~int64_t~  | ~type_nucl_num~                            | in  | Number of Nucleii types                                           |
-  | ~int64_t~  | ~type_nucl_vector[nucl_num]~               | in  | IDs of types of Nucleii                                           |
-  | ~double~   | ~aord_vector[aord_num + 1][type_nucl_num]~ | in  | Order of a polynomial coefficients                                |
-  | ~double~   | ~bord_vector[bord_num + 1]~                | in  | Order of b polynomial coefficients                                |
-  | ~double~   | ~cord_vector[cord_num][type_nucl_num]~     | in  | Order of c polynomial coefficients                                |
-  | ~double~   | ~factor_ee[walk_num]~                      | out | Jastrow factor: electron-electron part                            |
-  | ~uint64_t~ | ~factor_ee_date~                           | out | Jastrow factor: electron-electron part                            |
-  | ~double~   | ~factor_en[walk_num]~                      | out | Jastrow factor: electron-nucleus  part                            |
-  | ~uint64_t~ | ~factor_en_date~                           | out | Jastrow factor: electron-nucleus  part                            |
-  | ~double~   | ~factor_een[walk_num]~                     | out | Jastrow factor: electron-electron-nucleus  part                   |
-  | ~uint64_t~ | ~factor_een_date~                          | out | Jastrow factor: electron-electron-nucleus  part                   |
-  | ~double~   | ~factor_ee_deriv_e[4][nelec][walk_num]~    | out | Derivative of the Jastrow factor: electron-electron-nucleus  part |
-  | ~uint64_t~ | ~factor_ee_deriv_e_date~                   | out | Keep track of the date for the derivative                         |
-  | ~double~   | ~factor_en_deriv_e[4][nelec][walk_num]~    | out | Derivative of the Jastrow factor: electron-electron-nucleus  part |
-  | ~uint64_t~ | ~factor_en_deriv_e_date~                   | out | Keep track of the date for the en derivative                      |
-  | ~double~   | ~factor_een_deriv_e[4][nelec][walk_num]~   | out | Derivative of the Jastrow factor: electron-electron-nucleus  part |
-  | ~uint64_t~ | ~factor_een_deriv_e_date~                  | out | Keep track of the date for the een derivative                     |
+  |------------+---------------------------------------------+-----+-------------------------------------------------------------------|
+  | ~int32_t~  | ~uninitialized~                             | in  | Keeps bit set for uninitialized data                              |
+  | ~int64_t~  | ~aord_num~                                  | in  | The number of a coeffecients                                      |
+  | ~int64_t~  | ~bord_num~                                  | in  | The number of b coeffecients                                      |
+  | ~int64_t~  | ~cord_num~                                  | in  | The number of c coeffecients                                      |
+  | ~int64_t~  | ~type_nucl_num~                             | in  | Number of Nucleii types                                           |
+  | ~int64_t~  | ~type_nucl_vector[nucl_num]~                | in  | IDs of types of Nucleii                                           |
+  | ~double~   | ~aord_vector[aord_num + 1][type_nucl_num]~  | in  | Order of a polynomial coefficients                                |
+  | ~double~   | ~bord_vector[bord_num + 1]~                 | in  | Order of b polynomial coefficients                                |
+  | ~double~   | ~cord_vector[dim_cord_vect][type_nucl_num]~ | in  | Order of c polynomial coefficients                                |
+  | ~double~   | ~factor_ee[walk_num]~                       | out | Jastrow factor: electron-electron part                            |
+  | ~uint64_t~ | ~factor_ee_date~                            | out | Jastrow factor: electron-electron part                            |
+  | ~double~   | ~factor_en[walk_num]~                       | out | Jastrow factor: electron-nucleus  part                            |
+  | ~uint64_t~ | ~factor_en_date~                            | out | Jastrow factor: electron-nucleus  part                            |
+  | ~double~   | ~factor_een[walk_num]~                      | out | Jastrow factor: electron-electron-nucleus  part                   |
+  | ~uint64_t~ | ~factor_een_date~                           | out | Jastrow factor: electron-electron-nucleus  part                   |
+  | ~double~   | ~factor_ee_deriv_e[4][nelec][walk_num]~     | out | Derivative of the Jastrow factor: electron-electron-nucleus  part |
+  | ~uint64_t~ | ~factor_ee_deriv_e_date~                    | out | Keep track of the date for the derivative                         |
+  | ~double~   | ~factor_en_deriv_e[4][nelec][walk_num]~     | out | Derivative of the Jastrow factor: electron-electron-nucleus  part |
+  | ~uint64_t~ | ~factor_en_deriv_e_date~                    | out | Keep track of the date for the en derivative                      |
+  | ~double~   | ~factor_een_deriv_e[4][nelec][walk_num]~    | out | Derivative of the Jastrow factor: electron-electron-nucleus  part |
+  | ~uint64_t~ | ~factor_een_deriv_e_date~                   | out | Keep track of the date for the een derivative                     |
 
   computed data:
 
@@ -204,7 +204,7 @@ for i in range(elec_num):
 type_nucl_num = 1
 aord_num     = 5
 bord_num     = 5
-cord_num     = 5
+cord_num     = 23
 dim_cord_vect= 23
 type_nucl_vector = [ 1, 1]
 aord_vector = [ 
@@ -1561,7 +1561,7 @@ integer function qmckl_compute_factor_ee_f(context, walk_num, elec_num, up_num, 
   integer(qmckl_context), intent(in)  :: context
   integer*8             , intent(in)  :: walk_num, elec_num, bord_num, up_num
   double precision      , intent(in)  :: bord_vector(bord_num + 1)
-  double precision      , intent(in)  :: ee_distance_rescaled(walk_num, elec_num, elec_num)
+  double precision      , intent(in)  :: ee_distance_rescaled(elec_num,elec_num,walk_num)
   double precision      , intent(in)  :: asymp_jasb(2)
   double precision      , intent(out) :: factor_ee(walk_num)
 
@@ -1595,13 +1595,13 @@ integer function qmckl_compute_factor_ee_f(context, walk_num, elec_num, up_num, 
   do nw =1, walk_num
   do j = 1, elec_num
      do i = 1, j - 1
-        x = ee_distance_rescaled(nw,i,j)
+        x = ee_distance_rescaled(i,j,nw)
         power_ser = 0.0d0
         spin_fact = 1.0d0
         ipar = 1
 
         do p = 2, bord_num
-          x = x * ee_distance_rescaled(nw,i,j)
+          x = x * ee_distance_rescaled(i,j,nw)
           power_ser = power_ser + bord_vector(p + 1) * x
         end do
 
@@ -1611,9 +1611,9 @@ integer function qmckl_compute_factor_ee_f(context, walk_num, elec_num, up_num, 
         endif
         
         factor_ee(nw) = factor_ee(nw) + spin_fact * bord_vector(1)  * &
-                                ee_distance_rescaled(nw,i,j) / &
+                                ee_distance_rescaled(i,j,nw) / &
                                 (1.0d0 + bord_vector(2) *   &
-                                ee_distance_rescaled(nw,i,j))  &
+                                ee_distance_rescaled(i,j,nw))  &
                                -asymp_jasb(ipar) + power_ser
 
      end do
@@ -1853,9 +1853,9 @@ qmckl_exit_code qmckl_provide_factor_ee_deriv_e(qmckl_context context)
    | int64_t       | bord_num                                                      | in  | Number of coefficients      |
    | double        | bord_vector[bord_num + 1]                                     | in  | List of coefficients        |
    | double        | ee_distance_rescaled[walk_num][elec_num][elec_num]            | in  | Electron-electron distances |
-   | double        | ee_distance_rescaled_deriv_e[walk_num][4][elec_num][elec_num] | in  | Electron-electron distances |
+   | double        | ee_distance_rescaled_deriv_e[walk_num][elec_num][elec_num][4] | in  | Electron-electron distances |
    | double        | asymp_jasb[2]                                                 | in  | Electron-electron distances |
-   | double        | factor_ee_deriv_e[walk_num][4][elec_num]                      | out | Electron-electron distances |
+   | double        | factor_ee_deriv_e[walk_num][elec_num][4]                      | out | Electron-electron distances |
 
     #+begin_src f90 :comments org :tangle (eval f) :noweb yes
 integer function qmckl_compute_factor_ee_deriv_e_f(context, walk_num, elec_num, up_num, bord_num,            &
@@ -1867,10 +1867,10 @@ integer function qmckl_compute_factor_ee_deriv_e_f(context, walk_num, elec_num, 
   integer(qmckl_context), intent(in)  :: context
   integer*8             , intent(in)  :: walk_num, elec_num, bord_num, up_num
   double precision      , intent(in)  :: bord_vector(bord_num + 1)
-  double precision      , intent(in)  :: ee_distance_rescaled(walk_num, elec_num, elec_num)
-  double precision      , intent(in)  :: ee_distance_rescaled_deriv_e(walk_num, 4, elec_num, elec_num)
+  double precision      , intent(in)  :: ee_distance_rescaled(elec_num, elec_num, walk_num)
+  double precision      , intent(in)  :: ee_distance_rescaled_deriv_e(4, elec_num, elec_num, walk_num)
   double precision      , intent(in)  :: asymp_jasb(2)
-  double precision      , intent(out) :: factor_ee_deriv_e(elec_num,4,walk_num)
+  double precision      , intent(out) :: factor_ee_deriv_e(4,elec_num,walk_num)
 
   integer*8 :: i, j, p, ipar, nw, ii
   double precision   :: x, spin_fact, y
@@ -1919,7 +1919,7 @@ integer function qmckl_compute_factor_ee_deriv_e_f(context, walk_num, elec_num, 
         ipar        = 1
 
         do ii = 1, 4
-          dx(ii) = ee_distance_rescaled_deriv_e(nw, ii, i, j)
+          dx(ii) = ee_distance_rescaled_deriv_e(ii, i, j, nw)
         end do
 
         if((i .LE. up_num .AND. j .LE. up_num ) .OR.  &
@@ -1931,19 +1931,19 @@ integer function qmckl_compute_factor_ee_deriv_e_f(context, walk_num, elec_num, 
         lap2 = 0.0d0
         lap3 = 0.0d0
         do ii = 1, 3
-          x = ee_distance_rescaled(nw, i, j)
+          x = ee_distance_rescaled(i, j, nw)
           if(abs(x) < 1.0d-18) cycle
           do p = 2, bord_num
             y = p * bord_vector(p + 1) * x
             pow_ser_g(ii) = pow_ser_g(ii) + y * dx(ii)
             lap1 = lap1 + (p - 1) * y * xinv * dx(ii) * dx(ii)
             lap2 = lap2 + y
-            x = x * ee_distance_rescaled(nw, i, j)
+            x = x * ee_distance_rescaled(i, j, nw)
           end do
           
           lap3 = lap3 - 2.0d0 * bord_vector(2) * dx(ii) * dx(ii)
 
-          factor_ee_deriv_e( j, ii, nw) = factor_ee_deriv_e( j, ii, nw) + spin_fact * bord_vector(1)  * &
+          factor_ee_deriv_e( ii, j, nw) = factor_ee_deriv_e( ii, j, nw) + spin_fact * bord_vector(1)  * &
                                 dx(ii) * invden2 + pow_ser_g(ii)
         end do
 
@@ -1951,7 +1951,7 @@ integer function qmckl_compute_factor_ee_deriv_e_f(context, walk_num, elec_num, 
         lap2 = lap2 * dx(ii) * third
         lap3 = lap3 + den * dx(ii)
         lap3 = lap3 * (spin_fact * bord_vector(1) * invden3)
-        factor_ee_deriv_e( j, ii, nw) = factor_ee_deriv_e( j, ii, nw) + lap1 + lap2 + lap3
+        factor_ee_deriv_e( ii, j, nw) = factor_ee_deriv_e( ii, j, nw) + lap1 + lap2 + lap3
 
      end do
   end do
@@ -2005,9 +2005,9 @@ end function qmckl_compute_factor_ee_deriv_e_f
       integer (c_int64_t) , intent(in)  , value :: bord_num
       real    (c_double ) , intent(in)          :: bord_vector(bord_num + 1)
       real    (c_double ) , intent(in)          :: ee_distance_rescaled(elec_num,elec_num,walk_num)
-      real    (c_double ) , intent(in)          :: ee_distance_rescaled_deriv_e(elec_num,elec_num,4,walk_num)
+      real    (c_double ) , intent(in)          :: ee_distance_rescaled_deriv_e(4,elec_num,elec_num,walk_num)
       real    (c_double ) , intent(in)          :: asymp_jasb(2)
-      real    (c_double ) , intent(out)         :: factor_ee_deriv_e(elec_num,4,walk_num)
+      real    (c_double ) , intent(out)         :: factor_ee_deriv_e(4,elec_num,walk_num)
 
       integer(c_int32_t), external :: qmckl_compute_factor_ee_deriv_e_f
       info = qmckl_compute_factor_ee_deriv_e_f &
@@ -2146,14 +2146,14 @@ print(factor_ee_deriv_e)
 assert(qmckl_jastrow_provided(context));
 
 // calculate factor_ee_deriv_e
-double factor_ee_deriv_e[walk_num][4][elec_num];
+double factor_ee_deriv_e[walk_num][elec_num][4];
 rc = qmckl_get_jastrow_factor_ee_deriv_e(context, &(factor_ee_deriv_e[0][0][0]));
 
 // check factor_ee_deriv_e
 assert(fabs(factor_ee_deriv_e[0][0][0]-0.16364894652107934) < 1.e-12);
-assert(fabs(factor_ee_deriv_e[0][1][0]+0.6927548119830084 ) < 1.e-12);
-assert(fabs(factor_ee_deriv_e[0][2][0]-0.073267755223968  ) < 1.e-12);
-assert(fabs(factor_ee_deriv_e[0][3][0]-1.5111672803213185 ) < 1.e-12);
+assert(fabs(factor_ee_deriv_e[0][0][1]+0.6927548119830084 ) < 1.e-12);
+assert(fabs(factor_ee_deriv_e[0][0][2]-0.073267755223968  ) < 1.e-12);
+assert(fabs(factor_ee_deriv_e[0][0][3]-1.5111672803213185 ) < 1.e-12);
 
      #+end_src
 
@@ -2286,7 +2286,7 @@ integer function qmckl_compute_factor_en_f(context, walk_num, elec_num, nucl_num
   integer*8             , intent(in)  :: walk_num, elec_num, aord_num, nucl_num, type_nucl_num
   integer*8             , intent(in)  :: type_nucl_vector(nucl_num)
   double precision      , intent(in)  :: aord_vector(aord_num + 1, type_nucl_num)
-  double precision      , intent(in)  :: en_distance_rescaled(walk_num, nucl_num, elec_num)
+  double precision      , intent(in)  :: en_distance_rescaled(elec_num, nucl_num, walk_num)
   double precision      , intent(out) :: factor_en(walk_num)
 
   integer*8 :: i, a, p, ipar, nw
@@ -2324,18 +2324,18 @@ integer function qmckl_compute_factor_en_f(context, walk_num, elec_num, nucl_num
   do nw =1, walk_num
   do a = 1, nucl_num
      do i = 1, elec_num
-        x = en_distance_rescaled(nw, a, i)
+        x = en_distance_rescaled(i, a, nw)
         power_ser = 0.0d0
 
         do p = 2, aord_num
-          x = x * en_distance_rescaled(nw, a, i)
+          x = x * en_distance_rescaled(i, a, nw)
           power_ser = power_ser + aord_vector(p + 1, type_nucl_vector(a)) * x
         end do
 
         factor_en(nw) = factor_en(nw) + aord_vector(1, type_nucl_vector(a)) *  &
-                                en_distance_rescaled(nw, a, i) /               &
+                                en_distance_rescaled(i, a, nw) /               &
                                 (1.0d0 + aord_vector(2, type_nucl_vector(a)) * &
-                                en_distance_rescaled(nw, a, i))                &
+                                en_distance_rescaled(i, a, nw))                &
                                 + power_ser
 
      end do
@@ -2391,7 +2391,7 @@ end function qmckl_compute_factor_en_f
       integer (c_int64_t) , intent(in)          :: type_nucl_vector(nucl_num)
       integer (c_int64_t) , intent(in)  , value :: aord_num
       real    (c_double ) , intent(in)          :: aord_vector(aord_num + 1, type_nucl_num)
-      real    (c_double ) , intent(in)          :: en_distance_rescaled(walk_num, nucl_num, elec_num)
+      real    (c_double ) , intent(in)          :: en_distance_rescaled(elec_num, nucl_num, walk_num)
       real    (c_double ) , intent(out)         :: factor_en(walk_num)
 
       integer(c_int32_t), external :: qmckl_compute_factor_en_f
@@ -3424,6 +3424,7 @@ end function qmckl_compute_factor_een_rescaled_e_deriv_e_f
 
 *** Test
 
+    #+name: een_rescaled_e_code
     #+begin_src python :results output :exports none :noweb yes
 import numpy as np
 
@@ -3473,6 +3474,10 @@ for l in range(1,cord_num+1):
       een_rescaled_e[j, i, l] = x
       k = k + 1
 
+for l in range(0,cord_num+1):
+  for j in range(elec_num):
+    een_rescaled_e[j,j,l] = 0.0
+
 een_rescaled_e_deriv_e = np.zeros(shape=(elec_num, 4, elec_num, cord_num + 1), dtype=float)
 for l in range(cord_num + 1):
   kappa_l = -1.0 * l * kappa
@@ -3497,7 +3502,7 @@ print(" een_rescaled_e_deriv_e[1, 0, 4, 2] = ",een_rescaled_e_deriv_e[1, 0, 4, 2
 print(" een_rescaled_e_deriv_e[1, 0, 5, 2] = ",een_rescaled_e_deriv_e[1, 0, 5, 2])
     #+end_src
 
-    #+RESULTS:
+    #+RESULTS: een_rescaled_e_code
     :  een_rescaled_e_deriv_e[0, 0, 2, 1] =  0.05991352796887283
     :  een_rescaled_e_deriv_e[0, 0, 3, 1] =  0.011714035071545248
     :  een_rescaled_e_deriv_e[0, 0, 4, 1] =  0.004413988757584675
@@ -4107,6 +4112,7 @@ end function qmckl_compute_factor_een_rescaled_n_deriv_e_f
 
 *** Test
 
+    #+name: een_rescaled_n_code
     #+begin_src python :results output :exports none :noweb yes
 import numpy as np
 
@@ -4131,17 +4137,17 @@ for a in range(nucl_num):
 
 kappa = 1.0
 
-een_rescaled_n = np.zeros(shape=(nucl_num, elec_num, cord_num + 1), dtype=float)
+een_rescaled_n = np.zeros(shape=(elec_num, nucl_num, cord_num + 1), dtype=float)
 een_rescaled_n[:,:,0] = 1.0
 
 for a in range(nucl_num):
   for i in range(elec_num):
-    een_rescaled_n[a, i, 1] = np.exp(-kappa * elnuc_dist[i, a])
+    een_rescaled_n[i, a, 1] = np.exp(-kappa * elnuc_dist[i, a])
 
 for l in range(2,cord_num+1):
   for a in range(nucl_num):
     for i in range(elec_num):
-      een_rescaled_n[a, i, l] = een_rescaled_n[a, i, l - 1] * een_rescaled_n[a, i, 1]
+      een_rescaled_n[i, a, l] = een_rescaled_n[i, a, l - 1] * een_rescaled_n[i, a, 1]
 
 een_rescaled_n_deriv_e = np.zeros(shape=(elec_num, 4, nucl_num, cord_num + 1), dtype=float)
 for l in range(cord_num + 1):
@@ -4156,7 +4162,7 @@ for l in range(cord_num + 1):
              + een_rescaled_n_deriv_e[i, 2, a, l] * een_rescaled_n_deriv_e[i, 2, a, l]
       for ii in range(4):
         een_rescaled_n_deriv_e[i, ii, a, l] = een_rescaled_n_deriv_e[i, ii, a, l] * \
-                                               een_rescaled_n[a, i, l]
+                                               een_rescaled_n[i, a, l]
 
 print(" een_rescaled_n_deriv_e[0, 2, 1] = ",een_rescaled_n_deriv_e[2, 0, 0, 1])
 print(" een_rescaled_n_deriv_e[0, 3, 1] = ",een_rescaled_n_deriv_e[3, 0, 0, 1])
@@ -4166,7 +4172,7 @@ print(" een_rescaled_n_deriv_e[1, 4, 2] = ",een_rescaled_n_deriv_e[4, 0, 1, 2])
 print(" een_rescaled_n_deriv_e[1, 5, 2] = ",een_rescaled_n_deriv_e[5, 0, 1, 2])
     #+end_src
 
-    #+RESULTS:
+    #+RESULTS: een_rescaled_n_code
     :  een_rescaled_n_deriv_e[0, 2, 1] =  -0.07633444246999128
     :  een_rescaled_n_deriv_e[0, 3, 1] =  0.00033282346259738276
     :  een_rescaled_n_deriv_e[0, 4, 1] =  -0.004775370547333061
@@ -4260,9 +4266,6 @@ qmckl_exit_code qmckl_get_jastrow_lkpm_combined_index(qmckl_context context, int
   rc = qmckl_provide_dim_cord_vect(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
-  rc = qmckl_provide_cord_vect_full(context);
-  if (rc != QMCKL_SUCCESS) return rc;
-
   rc = qmckl_provide_lkpm_combined_index(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
@@ -4286,16 +4289,13 @@ qmckl_exit_code qmckl_get_jastrow_tmp_c(qmckl_context context, double* const tmp
   rc = qmckl_provide_dim_cord_vect(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
-  rc = qmckl_provide_cord_vect_full(context);
-  if (rc != QMCKL_SUCCESS) return rc;
-
-  rc = qmckl_provide_lkpm_combined_index(context);
-  if (rc != QMCKL_SUCCESS) return rc;
-
   rc = qmckl_provide_een_rescaled_e(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
   rc = qmckl_provide_een_rescaled_n(context);
+  if (rc != QMCKL_SUCCESS) return rc;
+
+  rc = qmckl_provide_tmp_c(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
   qmckl_context_struct* const ctx = (qmckl_context_struct* const) context;
@@ -4319,9 +4319,6 @@ qmckl_exit_code qmckl_get_jastrow_dtmp_c(qmckl_context context, double* const dt
   rc = qmckl_provide_dim_cord_vect(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
-  rc = qmckl_provide_cord_vect_full(context);
-  if (rc != QMCKL_SUCCESS) return rc;
-
   rc = qmckl_provide_lkpm_combined_index(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
@@ -4329,6 +4326,9 @@ qmckl_exit_code qmckl_get_jastrow_dtmp_c(qmckl_context context, double* const dt
   if (rc != QMCKL_SUCCESS) return rc;
 
   rc = qmckl_provide_een_rescaled_n(context);
+  if (rc != QMCKL_SUCCESS) return rc;
+
+  rc = qmckl_provide_dtmp_c(context);
   if (rc != QMCKL_SUCCESS) return rc;
 
   qmckl_context_struct* const ctx = (qmckl_context_struct* const) context;
@@ -4343,7 +4343,6 @@ qmckl_exit_code qmckl_get_jastrow_dtmp_c(qmckl_context context, double* const dt
     #+end_src
     
 *** Provide                                                        :noexport:
-
     #+begin_src c :comments org :tangle (eval h_private_func) :noweb yes :exports none
 qmckl_exit_code qmckl_provide_dim_cord_vect(qmckl_context context);
 qmckl_exit_code qmckl_provide_cord_vect_full(qmckl_context context);
@@ -4511,8 +4510,8 @@ qmckl_exit_code qmckl_provide_tmp_c(qmckl_context context)
     if (ctx->jastrow.tmp_c == NULL) {
 
       qmckl_memory_info_struct mem_info = qmckl_memory_info_struct_zero;
-      mem_info.size = ctx->jastrow.cord_num * (ctx->jastrow.cord_num + 1) 
-                      ,* ctx->electron.num * ctx->nucleus.num * ctx->electron.walk_num;
+      mem_info.size = ctx->jastrow.cord_num * (ctx->jastrow.cord_num + 1) *
+                      ctx->electron.num * ctx->nucleus.num * ctx->electron.walk_num;
       double* tmp_c = (double*) qmckl_malloc(context, mem_info);
 
       if (tmp_c == NULL) {
@@ -4536,6 +4535,13 @@ qmckl_exit_code qmckl_provide_tmp_c(qmckl_context context)
     if (rc != QMCKL_SUCCESS) {
       return rc;
     }
+for(int i=0;i<10;++i) {
+  for(int a=0;a<2;++a) {
+    for(int l=0;l<5+1;++l) {
+      printf("(%d)(%d)(%d) %10.15f \n",i,a,l,ctx->jastrow.tmp_c[0,i,a,0,l]);
+    }
+  }
+}
 
     ctx->jastrow.tmp_c_date = ctx->date;
   }
@@ -4753,7 +4759,7 @@ integer function qmckl_compute_cord_vect_full_f(context, nucl_num, cord_num, dim
 
 
   do a = 1, nucl_num
-    cord_vect_full(1:dim_cord_vect,a) = cord_vector(1:dim_cord_vect,type_nucl_vector(a))
+    cord_vect_full(a,1:dim_cord_vect) = cord_vector(1:dim_cord_vect,type_nucl_vector(a))
   end do
 
 end function qmckl_compute_cord_vect_full_f
@@ -4799,7 +4805,7 @@ end function qmckl_compute_cord_vect_full_f
       integer (c_int64_t) , intent(in)  , value :: dim_cord_vect
       integer (c_int64_t) , intent(in)  , value :: type_nucl_num
       integer (c_int64_t) , intent(in)          :: type_nucl_vector(nucl_num)
-      real    (c_double ) , intent(in)          :: cord_vector(type_nucl_num,cord_num)
+      real    (c_double ) , intent(in)          :: cord_vector(cord_num,type_nucl_num)
       real    (c_double ) , intent(out)         :: cord_vect_full(nucl_num,dim_cord_vect)
 
       integer(c_int32_t), external :: qmckl_compute_cord_vect_full_f
@@ -4922,7 +4928,7 @@ end function qmckl_compute_lkpm_combined_index_f
 
     #+NAME: qmckl_factor_tmp_c_args
    | qmckl_context | context                                                     | in  | Global state                                                                  |
-   | int64_t       | walk_num                                                    | in  | number of walkers                                                     |
+   | int64_t       | walk_num                                                    | in  | number of walkers                                                             |
    | int64_t       | elec_num                                                    | in  | number of electrons                                                           |
    | int64_t       | nucl_num                                                    | in  | number of nucleii                                                             |
    | int64_t       | cord_num                                                    | in  | number of nucleii                                                             |
@@ -4942,9 +4948,8 @@ integer function qmckl_compute_tmp_c_f(context, walk_num, elec_num, nucl_num, co
   integer*8             , intent(in)  :: nucl_num
   integer*8             , intent(in)  :: cord_num
   double precision      , intent(in)  :: een_rescaled_e(walk_num,elec_num,elec_num,0:cord_num)
-  double precision      , intent(in)  :: een_rescaled_n(walk_num,elec_num,elec_num,0:cord_num)
+  double precision      , intent(in)  :: een_rescaled_n(walk_num,elec_num,nucl_num,0:cord_num)
   double precision      , intent(out) :: tmp_c(walk_num,elec_num,nucl_num,0:cord_num,0:cord_num-1)
-  double precision                    :: x
   integer*8                           :: i, a, k, l, kk, p, lmax, m, nw
 
   info = QMCKL_SUCCESS
@@ -4969,13 +4974,17 @@ integer function qmckl_compute_tmp_c_f(context, walk_num, elec_num, nucl_num, co
      return
   endif
 
-
+  tmp_c = 0.0d0
   do nw = 1, walk_num
   do k = 0, cord_num - 1
+    print *,k, een_rescaled_e(nw,1,:,k)
+    print *,k, een_rescaled_n(nw,1,1,:)
     call dgemm('N','N',elec_num,nucl_num*(cord_num + 1), elec_num, 1.0d0, &
                een_rescaled_e(nw,1,1,k), size(een_rescaled_e, 2),            &
                een_rescaled_n(nw,1,1,0), size(een_rescaled_n, 2), 0.0d0,     &
-               tmp_c(nw,1,1,0,k), size(tmp_c, 1))
+               tmp_c(nw,1,1,0,k), size(tmp_c, 2))
+    print *,"tmp_c = "
+    print *,k, tmp_c(nw,1,1,:,k)
   end do
   end do
 
@@ -5016,7 +5025,7 @@ end function qmckl_compute_tmp_c_f
       integer (c_int64_t) , intent(in)  , value :: cord_num
       real    (c_double ) , intent(in)          :: een_rescaled_e(0:cord_num,elec_num,elec_num,walk_num)
       real    (c_double ) , intent(in)          :: een_rescaled_n(0:cord_num,nucl_num,elec_num,walk_num)
-      real    (c_double ) , intent(out)         :: tmp_c(walk_num,elec_num,nucl_num,cord_num + 1,cord_num)
+      real    (c_double ) , intent(out)         :: tmp_c(walk_num,elec_num,nucl_num,0:cord_num,0:cord_num-1)
 
       integer(c_int32_t), external :: qmckl_compute_tmp_c_f
       info = qmckl_compute_tmp_c_f &
@@ -5040,7 +5049,7 @@ end function qmckl_compute_tmp_c_f
    | int64_t       | cord_num                                                            | in  | number of nucleii                                                                         |
    | double        | een_rescaled_e_deriv_e[walk_num][elec_num][4][elec_num][0:cord_num] | in  | The electron-electron rescaled distances derivatives raised to the powers defined by cord |
    | double        | een_rescaled_n[walk_num][elec_num][nucl_num][0:cord_num]            | in  | The electron-nuclear rescaled distances raised to the powers defined by cord              |
-   | double        | dtmp_c[cord_num][cord_num + 1][nucl_num][4][elec_num][walk_num] | out | Full list of combined indices                                                             |
+   | double        | dtmp_c[cord_num][cord_num + 1][nucl_num][4][elec_num][walk_num]     | out | Full list of combined indices                                                             |
 
     #+begin_src f90 :comments org :tangle (eval f) :noweb yes
 integer function qmckl_compute_dtmp_c_f(context, walk_num, elec_num, nucl_num, cord_num, &
@@ -5054,7 +5063,7 @@ integer function qmckl_compute_dtmp_c_f(context, walk_num, elec_num, nucl_num, c
   integer*8             , intent(in)  :: nucl_num
   integer*8             , intent(in)  :: cord_num
   double precision      , intent(in)  :: een_rescaled_e_deriv_e(walk_num,elec_num,4,elec_num,0:cord_num)
-  double precision      , intent(in)  :: een_rescaled_n(walk_num,elec_num,elec_num,0:cord_num)
+  double precision      , intent(in)  :: een_rescaled_n(walk_num,elec_num,nucl_num,0:cord_num)
   double precision      , intent(out) :: dtmp_c(walk_num,elec_num,4,nucl_num,0:cord_num,0:cord_num-1)
   double precision                    :: x
   integer*8                           :: i, a, k, l, kk, p, lmax, m, nw
@@ -5082,12 +5091,13 @@ integer function qmckl_compute_dtmp_c_f(context, walk_num, elec_num, nucl_num, c
   endif
 
 
+  dtmp_c = 0.0d0
   do nw = 1, walk_num
   do k = 0, cord_num - 1
     call dgemm('N','N',4*elec_num,nucl_num*(cord_num + 1), elec_num, 1.0d0,       &
                een_rescaled_e_deriv_e(nw,1,1,1,k), 4*size(een_rescaled_e_deriv_e, 2),&
                een_rescaled_n(nw,1,1,0), size(een_rescaled_n, 2), 0.0d0,             &
-               dtmp_c(nw,1,1,1,0,k), 4*size(dtmp_c, 1))
+               dtmp_c(nw,1,1,1,0,k), 4*size(dtmp_c, 2))
   end do
   end do
 
@@ -5145,6 +5155,9 @@ import numpy as np
 
 <<jastrow_data>>
 
+<<een_rescaled_e_code>>
+<<een_rescaled_n_code>>
+
 dim_cord_vect = 0
 for p in range(2,cord_num+1):
   for k in range(p - 1,-1,-1):
@@ -5179,19 +5192,58 @@ for p in range(2, cord_num):
       lkpm_combined_index[kk, 3] = m
       kk = kk + 1
 
+# Calculate tmp_c and dtmp_c
+
+tmp_c = np.zeros(shape=(elec_num, nucl_num, cord_num+1, cord_num), dtype=float)
+tmp_c_int = np.zeros(shape=(elec_num, nucl_num * (cord_num+1), cord_num), dtype=float)
+dtmp_c = np.zeros(shape=(elec_num, 4, nucl_num, cord_num+1, cord_num), dtype=float)
+dtmp_c_int = np.zeros(shape=(elec_num * 4, nucl_num * (cord_num+1), cord_num), dtype=float)
+
+for k in range(cord_num):
+  tmp_c_int[:,:,k] = (tmp_c[:,:,:,k]).reshape(elec_num, nucl_num * (cord_num + 1))
+  tmp_c_int[:,:,k] = np.einsum('ik,kj->ij',een_rescaled_e[:,:,k], een_rescaled_n.reshape(elec_num,nucl_num*(cord_num + 1)))
+  tmp_c[:,:,:,k] = tmp_c_int[:,:,k].reshape(elec_num,nucl_num,cord_num + 1)
+
+for k in range(cord_num):
+  dtmp_c_int[:,:,k] = (dtmp_c[:,:,:,:,k]).reshape(elec_num * 4, nucl_num * (cord_num + 1))
+  dtmp_c_int[:,:,k] = np.einsum('ik,kj->ij',een_rescaled_e_deriv_e[:,:,:,k].reshape(elec_num*4,elec_num), een_rescaled_n.reshape(elec_num,nucl_num*(cord_num + 1)))
+  dtmp_c[:,:,:,:,k] = dtmp_c_int[:,:,k].reshape(elec_num,4,nucl_num,cord_num + 1)
+
 print(" dim_cord_vect       = ",dim_cord_vect)
 print(" lkpm_combined_index = ",lkpm_combined_index[1,0])
 print(" lkpm_combined_index = ",lkpm_combined_index[2,1])
 print(" lkpm_combined_index = ",lkpm_combined_index[3,2])
 print(" lkpm_combined_index = ",lkpm_combined_index[4,3])
+print(" tmp_c[1,1,0,0]      = ",tmp_c[0,0,0,0])
+print(" tmp_c[2,2,0,1]      = ",tmp_c[1,1,0,1])
+print(" tmp_c[3,1,0,2]      = ",tmp_c[2,0,0,2])
+print(" tmp_c[4,2,0,3]      = ",tmp_c[3,1,0,3])
     #+end_src
 
     #+RESULTS:
-    :  dim_cord_vect       =  23
-    :  lkpm_combined_index =  0
-    :  lkpm_combined_index =  2
-    :  lkpm_combined_index =  3
-    :  lkpm_combined_index =  1
+    #+begin_example
+     een_rescaled_e_deriv_e[0, 0, 2, 1] =  0.05991352796887283
+     een_rescaled_e_deriv_e[0, 0, 3, 1] =  0.011714035071545248
+     een_rescaled_e_deriv_e[0, 0, 4, 1] =  0.004413988757584675
+     een_rescaled_e_deriv_e[1, 0, 3, 2] =  0.013553180060167595
+     een_rescaled_e_deriv_e[1, 0, 4, 2] =  0.00041342909359870457
+     een_rescaled_e_deriv_e[1, 0, 5, 2] =  0.5880599146214673
+     een_rescaled_n_deriv_e[0, 2, 1] =  -0.07633444246999128
+     een_rescaled_n_deriv_e[0, 3, 1] =  0.00033282346259738276
+     een_rescaled_n_deriv_e[0, 4, 1] =  -0.004775370547333061
+     een_rescaled_n_deriv_e[1, 3, 2] =  0.1362654644223866
+     een_rescaled_n_deriv_e[1, 4, 2] =  -0.0231253431662794
+     een_rescaled_n_deriv_e[1, 5, 2] =  0.001593334817691633
+     dim_cord_vect       =  23
+     lkpm_combined_index =  0
+     lkpm_combined_index =  2
+     lkpm_combined_index =  3
+     lkpm_combined_index =  1
+     tmp_c[1,1,0,0]      =  9.0
+     tmp_c[2,2,0,1]      =  2.113976274155974
+     tmp_c[3,1,0,2]      =  0.07532734510561147
+     tmp_c[4,2,0,3]      =  0.565427601000417
+    #+end_example
 
      #+begin_src c :tangle (eval c_test)
 assert(qmckl_electron_provided(context));
@@ -5202,11 +5254,18 @@ rc = qmckl_get_jastrow_dim_cord_vect(context, &dim_cord_vect);
 int64_t lkpm_combined_index[4][dim_cord_vect];
 rc = qmckl_get_jastrow_lkpm_combined_index(context, &(lkpm_combined_index[0][0]));
 
+double tmp_c[cord_num][cord_num + 1][nucl_num][elec_num][walk_num];
+rc = qmckl_get_jastrow_tmp_c(context, &(tmp_c[0][0][0][0][0]));
+
 assert(fabs(dim_cord_vect - 23) == 0);
 assert(lkpm_combined_index[0][1] == 0);
 assert(lkpm_combined_index[1][2] == 2);
 assert(lkpm_combined_index[2][3] == 3);
 assert(lkpm_combined_index[3][4] == 1);
+printf(" %10.15f \n", tmp_c[0,0,0,0,0]);
+printf(" %10.15f \n", tmp_c[0,1,1,0,1]);
+printf(" %10.15f \n", tmp_c[0,2,0,0,2]);
+printf(" %10.15f \n", tmp_c[0,3,1,0,3]);
      #+end_src
 
 ** Electron-electron-nucleus Jastrow \(f_{een}\)
