@@ -2247,7 +2247,7 @@ qmckl_exit_code qmckl_provide_en_distance_rescaled_deriv_e(qmckl_context context
    | int64_t       | walk_num                                                           | in  | Number of walkers                     |
    | double        | elec_coord[walk_num][3][elec_num]                                  | in  | Electron coordinates                  |
    | double        | nucl_coord[3][elec_num]                                            | in  | Nuclear coordinates                   |
-   | double        | en_distance_rescaled_deriv_e_date[walk_num][4][nucl_num][elec_num] | out | Electron-nucleus distance derivatives |
+   | double        | en_distance_rescaled_deriv_e_date[walk_num][nucl_num][elec_num][4] | out | Electron-nucleus distance derivatives |
 
     #+begin_src f90 :comments org :tangle (eval f) :noweb yes
 integer function qmckl_compute_en_distance_rescaled_deriv_e_f(context, elec_num, nucl_num, &
@@ -2263,7 +2263,7 @@ integer function qmckl_compute_en_distance_rescaled_deriv_e_f(context, elec_num,
   integer*8             , intent(in)  :: walk_num
   double precision      , intent(in)  :: elec_coord(elec_num,3,walk_num)
   double precision      , intent(in)  :: nucl_coord(nucl_num,3)
-  double precision      , intent(out) :: en_distance_rescaled_deriv_e(elec_num,nucl_num,walk_num)
+  double precision      , intent(out) :: en_distance_rescaled_deriv_e(4,elec_num,nucl_num,walk_num)
 
   integer*8 :: k
 
@@ -2299,7 +2299,7 @@ integer function qmckl_compute_en_distance_rescaled_deriv_e_f(context, elec_num,
      info = qmckl_distance_rescaled_deriv_e(context, 'T', 'T', elec_num, nucl_num, &
           elec_coord(1,1,k), elec_num, &
           nucl_coord, nucl_num, &
-          en_distance_rescaled_deriv_e(1,1,k), elec_num, rescale_factor_kappa_en)
+          en_distance_rescaled_deriv_e(1,1,1,k), elec_num, rescale_factor_kappa_en)
      if (info /= QMCKL_SUCCESS) then
         exit
      endif
@@ -2338,7 +2338,7 @@ qmckl_exit_code qmckl_compute_en_distance_rescaled_deriv_e (
       integer (c_int64_t) , intent(in)  , value :: walk_num
       real    (c_double ) , intent(in)          :: elec_coord(elec_num,3,walk_num)
       real    (c_double ) , intent(in)          :: nucl_coord(elec_num,3)
-      real    (c_double ) , intent(out)         :: en_distance_rescaled_deriv_e(elec_num,nucl_num,walk_num)
+      real    (c_double ) , intent(out)         :: en_distance_rescaled_deriv_e(4,elec_num,nucl_num,walk_num)
 
       integer(c_int32_t), external :: qmckl_compute_en_distance_rescaled_deriv_e_f
       info = qmckl_compute_en_distance_rescaled_deriv_e_f &
@@ -2374,7 +2374,7 @@ assert (rc == QMCKL_SUCCESS);
 
 assert(qmckl_nucleus_provided(context));
 
-double en_distance_rescaled_deriv_e[walk_num][4][nucl_num][elec_num];
+double en_distance_rescaled_deriv_e[walk_num][nucl_num][elec_num][4];
 
 rc = qmckl_get_electron_en_distance_rescaled_deriv_e(context, &(en_distance_rescaled_deriv_e[0][0][0][0]));
 

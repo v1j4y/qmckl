@@ -2569,7 +2569,7 @@ qmckl_exit_code qmckl_provide_factor_en_deriv_e(qmckl_context context)
    | double        | aord_vector[aord_num + 1][type_nucl_num]                      | in  | List of coefficients                  |
    | double        | en_distance_rescaled[walk_num][nucl_num][elec_num]            | in  | Electron-nucleus distances            |
    | double        | en_distance_rescaled_deriv_e[walk_num][4][nucl_num][elec_num] | in  | Electron-nucleus distance derivatives |
-   | double        | factor_en_deriv_e[walk_num][4][elec_num]                      | out | Electron-nucleus jastrow              |
+   | double        | factor_en_deriv_e[walk_num][elec_num][4]                      | out | Electron-nucleus jastrow              |
 
     #+begin_src f90 :comments org :tangle (eval f) :noweb yes
 integer function qmckl_compute_factor_en_deriv_e_f(context, walk_num, elec_num, nucl_num, type_nucl_num,            &
