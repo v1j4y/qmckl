@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-01-04 Tue 20:45 -->
+<!-- 2022-01-11 Tue 14:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Molecular Orbitals</title>
@@ -311,21 +311,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org452dcbc">1. Context</a>
+<li><a href="#org031cd56">1. Context</a>
 <ul>
-<li><a href="#org4fa9088">1.1. Data structure</a></li>
-<li><a href="#org859bfb0">1.2. Access functions</a></li>
-<li><a href="#org67c8fb0">1.3. Initialization functions</a></li>
+<li><a href="#orgd3c044c">1.1. Data structure</a></li>
+<li><a href="#orgd598182">1.2. Access functions</a></li>
+<li><a href="#orgdf1254e">1.3. Initialization functions</a></li>
 </ul>
 </li>
-<li><a href="#org9f7011e">2. Computation</a>
+<li><a href="#org44ed4e4">2. Computation</a>
 <ul>
-<li><a href="#org712816e">2.1. Computation of MOs</a>
+<li><a href="#org0dabf84">2.1. Computation of MOs</a>
 <ul>
-<li><a href="#orgc900869">2.1.1. Get</a></li>
-<li><a href="#org1ae966b">2.1.2. Provide</a></li>
-<li><a href="#orgad8c8e3">2.1.3. Compute</a></li>
-<li><a href="#org9eba45a">2.1.4. Test</a></li>
+<li><a href="#orgf8a82cc">2.1.1. Get</a></li>
+<li><a href="#org75a6aec">2.1.2. Provide</a></li>
+<li><a href="#org794e0fd">2.1.3. Compute</a></li>
+<li><a href="#org6bdb5d6">2.1.4. Test</a></li>
 </ul>
 </li>
 </ul>
@@ -334,8 +334,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org452dcbc" class="outline-2">
-<h2 id="org452dcbc"><span class="section-number-2">1</span> Context</h2>
+<div id="outline-container-org031cd56" class="outline-2">
+<h2 id="org031cd56"><span class="section-number-2">1</span> Context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The following arrays are stored in the context:
@@ -397,8 +397,8 @@ Computed data:
 </table>
 </div>
 
-<div id="outline-container-org4fa9088" class="outline-3">
-<h3 id="org4fa9088"><span class="section-number-3">1.1</span> Data structure</h3>
+<div id="outline-container-orgd3c044c" class="outline-3">
+<h3 id="orgd3c044c"><span class="section-number-3">1.1</span> Data structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_mo_basis_struct</span> {
@@ -447,8 +447,8 @@ this mechanism.
 </div>
 </div>
 
-<div id="outline-container-org859bfb0" class="outline-3">
-<h3 id="org859bfb0"><span class="section-number-3">1.2</span> Access functions</h3>
+<div id="outline-container-orgd598182" class="outline-3">
+<h3 id="orgd598182"><span class="section-number-3">1.2</span> Access functions</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 When all the data for the AOs have been provided, the following
@@ -462,8 +462,8 @@ function returns <code>true</code>.
 </div>
 </div>
 
-<div id="outline-container-org67c8fb0" class="outline-3">
-<h3 id="org67c8fb0"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div id="outline-container-orgdf1254e" class="outline-3">
+<h3 id="orgdf1254e"><span class="section-number-3">1.3</span> Initialization functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 To set the basis set, all the following functions need to be
@@ -484,16 +484,16 @@ computed to accelerate the calculations.
 </div>
 </div>
 
-<div id="outline-container-org9f7011e" class="outline-2">
-<h2 id="org9f7011e"><span class="section-number-2">2</span> Computation</h2>
+<div id="outline-container-org44ed4e4" class="outline-2">
+<h2 id="org44ed4e4"><span class="section-number-2">2</span> Computation</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org712816e" class="outline-3">
-<h3 id="org712816e"><span class="section-number-3">2.1</span> Computation of MOs</h3>
+<div id="outline-container-org0dabf84" class="outline-3">
+<h3 id="org0dabf84"><span class="section-number-3">2.1</span> Computation of MOs</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-orgc900869" class="outline-4">
-<h4 id="orgc900869"><span class="section-number-4">2.1.1</span> Get</h4>
+<div id="outline-container-orgf8a82cc" class="outline-4">
+<h4 id="orgf8a82cc"><span class="section-number-4">2.1.1</span> Get</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_get_mo_basis_vgl</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">double</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">mo_vgl</span>);
@@ -502,14 +502,14 @@ computed to accelerate the calculations.
 </div>
 </div>
 
-<div id="outline-container-org1ae966b" class="outline-4">
-<h4 id="org1ae966b"><span class="section-number-4">2.1.2</span> Provide</h4>
+<div id="outline-container-org75a6aec" class="outline-4">
+<h4 id="org75a6aec"><span class="section-number-4">2.1.2</span> Provide</h4>
 </div>
 
-<div id="outline-container-orgad8c8e3" class="outline-4">
-<h4 id="orgad8c8e3"><span class="section-number-4">2.1.3</span> Compute</h4>
+<div id="outline-container-org794e0fd" class="outline-4">
+<h4 id="org794e0fd"><span class="section-number-4">2.1.3</span> Compute</h4>
 <div class="outline-text-4" id="text-2-1-3">
-<table id="org260ff3d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orge854422" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -587,7 +587,7 @@ computed to accelerate the calculations.
   <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ao_vgl(ao_num,elec_num,5)</span>
   <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> coef_normalized(ao_num,mo_num)</span>
   <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> mo_vgl(mo_num,elec_num,5)</span>
-  <span style="color: #228b22;">logical</span>*8                     ::<span style="color: #a0522d;"> TransA, TransB</span>
+  <span style="color: #228b22;">character</span>                     ::<span style="color: #a0522d;"> TransA, TransB</span>
   <span style="color: #228b22;">double precision</span>,<span style="color: #a020f0;">dimension</span>(:,:),<span style="color: #a020f0;">allocatable</span>    ::<span style="color: #a0522d;"> mo_vgl_big</span>
   <span style="color: #228b22;">double precision</span>,<span style="color: #a020f0;">dimension</span>(:,:),<span style="color: #a020f0;">allocatable</span>    ::<span style="color: #a0522d;"> ao_vgl_big</span>
   !<span style="color: #b22222;">double precision,dimension(:,:),allocatable    :: coef_trans</span>
@@ -604,8 +604,8 @@ computed to accelerate the calculations.
   !<span style="color: #b22222;">allocate(coef_all(mo_num*ao_num))</span>
   !<span style="color: #b22222;">allocate(coef_trans(mo_num,ao_num))</span>
 
-  TransA = <span style="color: #a020f0;">.True.</span>
-  TransB = <span style="color: #a020f0;">.False.</span> 
+  TransA = <span style="color: #8b2252;">'T'</span>
+  TransB = <span style="color: #8b2252;">'N'</span>
   alpha = 1.0d0
   beta  = 0.0d0
 
@@ -654,28 +654,28 @@ computed to accelerate the calculations.
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_compute_mo_basis_vgl</span> (
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">ao_num</span>,
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">mo_num</span>,
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">elec_num</span>,
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">coef_normalized</span>,
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">ao_vgl</span>,
-      <span style="color: #228b22;">double</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">mo_vgl</span> ); 
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">context</span> <span style="color: #a0522d;">qmckl_context</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">ao_num</span> <span style="color: #a0522d;">int64_t</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">mo_num</span> <span style="color: #a0522d;">int64_t</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">elec_num</span> <span style="color: #a0522d;">int64_t</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">coef_normalized</span>* <span style="color: #228b22;">double</span>,
+      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">ao_vgl</span>* <span style="color: #228b22;">double</span>,
+      <span style="color: #228b22;">mo_vgl</span>* <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> ); 
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org9eba45a" class="outline-4">
-<h4 id="org9eba45a"><span class="section-number-4">2.1.4</span> Test</h4>
+<div id="outline-container-org6bdb5d6" class="outline-4">
+<h4 id="org6bdb5d6"><span class="section-number-4">2.1.4</span> Test</h4>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-01-04 Tue 20:45</p>
+<p class="date">Created: 2022-01-11 Tue 14:15</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
