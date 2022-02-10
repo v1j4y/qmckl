@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-01-26 Wed 17:36 -->
+<!-- 2022-02-10 Thu 15:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sherman-Morrison-Woodbury</title>
@@ -333,86 +333,86 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org08d1065">1. Headers</a></li>
-<li><a href="#orga8ac93e">2. Naïve Sherman-Morrison</a>
+<li><a href="#orga096eaf">1. Headers</a></li>
+<li><a href="#org5b40d38">2. Naïve Sherman-Morrison</a>
 <ul>
-<li><a href="#org7520f01">2.1. <code>qmckl_sherman_morrison</code></a>
+<li><a href="#org7005240">2.1. <code>qmckl_sherman_morrison</code></a>
 <ul>
-<li><a href="#org0dc98cc">2.1.1. Requirements</a></li>
-<li><a href="#orga38023b">2.1.2. C header</a></li>
-<li><a href="#org7632e7a">2.1.3. C source</a></li>
-<li><a href="#org8129919">2.1.4. Performance</a></li>
+<li><a href="#org551b2c4">2.1.1. Requirements</a></li>
+<li><a href="#org021f766">2.1.2. C header</a></li>
+<li><a href="#orgbb7119d">2.1.3. C source</a></li>
+<li><a href="#org9d19cf6">2.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org9ae27e7">3. Woodbury 2x2</a>
+<li><a href="#orgb591135">3. Woodbury 2x2</a>
 <ul>
-<li><a href="#orgfa41c83">3.1. <code>qmckl_woodbury_2</code></a>
+<li><a href="#org988c8c1">3.1. <code>qmckl_woodbury_2</code></a>
 <ul>
-<li><a href="#orgbe25f6f">3.1.1. Requirements</a></li>
-<li><a href="#orgbb84baf">3.1.2. C header</a></li>
-<li><a href="#org4bcd4fc">3.1.3. C source</a></li>
-<li><a href="#orgbfcddef">3.1.4. Performance</a></li>
+<li><a href="#orgddd5fa0">3.1.1. Requirements</a></li>
+<li><a href="#orgdb79e1b">3.1.2. C header</a></li>
+<li><a href="#orgb8a3493">3.1.3. C source</a></li>
+<li><a href="#org07314c3">3.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgf24000c">4. Woodbury 3x3</a>
+<li><a href="#orgee0dbe6">4. Woodbury 3x3</a>
 <ul>
-<li><a href="#org09aa804">4.1. <code>qmckl_woodbury_3</code></a>
+<li><a href="#org9c43af5">4.1. <code>qmckl_woodbury_3</code></a>
 <ul>
-<li><a href="#org7c70d68">4.1.1. Requirements</a></li>
-<li><a href="#org1e5d71d">4.1.2. C header</a></li>
-<li><a href="#orgd505358">4.1.3. C source</a></li>
-<li><a href="#orgaa446ee">4.1.4. Performance&#x2026;</a></li>
+<li><a href="#org4916776">4.1.1. Requirements</a></li>
+<li><a href="#orgb3c78fd">4.1.2. C header</a></li>
+<li><a href="#org1eb40cf">4.1.3. C source</a></li>
+<li><a href="#orge5a30e2">4.1.4. Performance&#x2026;</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgdae7e69">5. Sherman-Morrison with update splitting</a>
+<li><a href="#orgd263b2f">5. Sherman-Morrison with update splitting</a>
 <ul>
-<li><a href="#org9f068e4">5.1. <code>qmckl_sherman_morrison_splitting</code></a>
+<li><a href="#orgdaa5970">5.1. <code>qmckl_sherman_morrison_splitting</code></a>
 <ul>
-<li><a href="#org9df1f32">5.1.1. Requirements</a></li>
-<li><a href="#orgaa6a9e8">5.1.2. C header</a></li>
-<li><a href="#org4421db8">5.1.3. C source</a></li>
-<li><a href="#org2fe0b52">5.1.4. Performance&#x2026;</a></li>
+<li><a href="#orgb860ec8">5.1.1. Requirements</a></li>
+<li><a href="#org1c5a6e7">5.1.2. C header</a></li>
+<li><a href="#org89f7d5e">5.1.3. C source</a></li>
+<li><a href="#orgb5c858d">5.1.4. Performance&#x2026;</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgff7dd5a">6. Woodbury 3x3 and 2x2 with Sherman-Morrison and update splitting</a>
+<li><a href="#orgb374ec3">6. Woodbury 3x3 and 2x2 with Sherman-Morrison and update splitting</a>
 <ul>
-<li><a href="#org8eeb3c0">6.1. <code>qmckl_sherman_morrison_smw32s</code></a>
+<li><a href="#org772052e">6.1. <code>qmckl_sherman_morrison_smw32s</code></a>
 <ul>
-<li><a href="#org112182d">6.1.1. Requirements</a></li>
-<li><a href="#org1a57fc0">6.1.2. C header</a></li>
-<li><a href="#org2f80505">6.1.3. C source</a></li>
-<li><a href="#org4e59b5a">6.1.4. Performance&#x2026;</a></li>
+<li><a href="#org557e6f6">6.1.1. Requirements</a></li>
+<li><a href="#orgdbb1f32">6.1.2. C header</a></li>
+<li><a href="#org3d832fa">6.1.3. C source</a></li>
+<li><a href="#orge8c6139">6.1.4. Performance&#x2026;</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orga01ff80">7. Helper Functions</a>
+<li><a href="#orgb6f637f">7. Helper Functions</a>
 <ul>
-<li><a href="#org2118399">7.1. <code>qmckl_slagel_splitting</code></a>
+<li><a href="#org60d8575">7.1. <code>qmckl_slagel_splitting</code></a>
 <ul>
-<li><a href="#org29d97cb">7.1.1. Requirements</a></li>
-<li><a href="#orgba30c21">7.1.2. C header</a></li>
-<li><a href="#org663114e">7.1.3. C source</a></li>
-<li><a href="#org87cb6c6">7.1.4. Performance</a></li>
+<li><a href="#orgcfe7c73">7.1.1. Requirements</a></li>
+<li><a href="#orgb44c400">7.1.2. C header</a></li>
+<li><a href="#org0b3da56">7.1.3. C source</a></li>
+<li><a href="#org1b139c2">7.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org383245d">8. End of files</a></li>
+<li><a href="#org9c97d72">8. End of files</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org08d1065" class="outline-2">
-<h2 id="org08d1065"><span class="section-number-2">1</span> Headers</h2>
+<div id="outline-container-orga096eaf" class="outline-2">
+<h2 id="orga096eaf"><span class="section-number-2">1</span> Headers</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"qmckl.h"</span>
@@ -431,12 +431,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orga8ac93e" class="outline-2">
-<h2 id="orga8ac93e"><span class="section-number-2">2</span> Naïve Sherman-Morrison</h2>
+<div id="outline-container-org5b40d38" class="outline-2">
+<h2 id="org5b40d38"><span class="section-number-2">2</span> Naïve Sherman-Morrison</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org7520f01" class="outline-3">
-<h3 id="org7520f01"><span class="section-number-3">2.1</span> <code>qmckl_sherman_morrison</code></h3>
+<div id="outline-container-org7005240" class="outline-3">
+<h3 id="org7005240"><span class="section-number-3">2.1</span> <code>qmckl_sherman_morrison</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 This is the simplest of the available Sherman-Morrison-Woodbury kernels. It applies rank-1 updates one by one in
@@ -478,7 +478,7 @@ If the determinant of the Slater-matrix is passed, it will be updated to the det
 from applying the updates to the original matrix.
 </p>
 
-<table id="org195a367" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgb83283b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -557,8 +557,8 @@ from applying the updates to the original matrix.
 </table>
 </div>
 
-<div id="outline-container-org0dc98cc" class="outline-4">
-<h4 id="org0dc98cc"><span class="section-number-4">2.1.1</span> Requirements</h4>
+<div id="outline-container-org551b2c4" class="outline-4">
+<h4 id="org551b2c4"><span class="section-number-4">2.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -573,8 +573,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orga38023b" class="outline-4">
-<h4 id="orga38023b"><span class="section-number-4">2.1.2</span> C header</h4>
+<div id="outline-container-org021f766" class="outline-4">
+<h4 id="org021f766"><span class="section-number-4">2.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sherman_morrison</span> (
@@ -592,8 +592,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org7632e7a" class="outline-4">
-<h4 id="org7632e7a"><span class="section-number-4">2.1.3</span> C source</h4>
+<div id="outline-container-orgbb7119d" class="outline-4">
+<h4 id="orgbb7119d"><span class="section-number-4">2.1.3</span> C source</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
@@ -663,8 +663,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org8129919" class="outline-4">
-<h4 id="org8129919"><span class="section-number-4">2.1.4</span> Performance</h4>
+<div id="outline-container-org9d19cf6" class="outline-4">
+<h4 id="org9d19cf6"><span class="section-number-4">2.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 This function performs best when there is only 1 rank-1 update in the update cycle. It is not useful to
@@ -676,12 +676,12 @@ where applying the update causes singular behaviour.
 </div>
 </div>
 
-<div id="outline-container-org9ae27e7" class="outline-2">
-<h2 id="org9ae27e7"><span class="section-number-2">3</span> Woodbury 2x2</h2>
+<div id="outline-container-orgb591135" class="outline-2">
+<h2 id="orgb591135"><span class="section-number-2">3</span> Woodbury 2x2</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgfa41c83" class="outline-3">
-<h3 id="orgfa41c83"><span class="section-number-3">3.1</span> <code>qmckl_woodbury_2</code></h3>
+<div id="outline-container-org988c8c1" class="outline-3">
+<h3 id="org988c8c1"><span class="section-number-3">3.1</span> <code>qmckl_woodbury_2</code></h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 The Woodbury 2x2 kernel. It is used to apply two rank-1 updates at once. The formula used in
@@ -705,7 +705,7 @@ from applying the updates to the original matrix.
 
 
 
-<table id="orgcb3bef9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org1589a06" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -777,8 +777,8 @@ from applying the updates to the original matrix.
 </table>
 </div>
 
-<div id="outline-container-orgbe25f6f" class="outline-4">
-<h4 id="orgbe25f6f"><span class="section-number-4">3.1.1</span> Requirements</h4>
+<div id="outline-container-orgddd5fa0" class="outline-4">
+<h4 id="orgddd5fa0"><span class="section-number-4">3.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>qmckl_null_context</code></li>
@@ -792,8 +792,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgbb84baf" class="outline-4">
-<h4 id="orgbb84baf"><span class="section-number-4">3.1.2</span> C header</h4>
+<div id="outline-container-orgdb79e1b" class="outline-4">
+<h4 id="orgdb79e1b"><span class="section-number-4">3.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_woodbury_2</span> (
@@ -810,8 +810,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org4bcd4fc" class="outline-4">
-<h4 id="org4bcd4fc"><span class="section-number-4">3.1.3</span> C source</h4>
+<div id="outline-container-orgb8a3493" class="outline-4">
+<h4 id="orgb8a3493"><span class="section-number-4">3.1.3</span> C source</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
@@ -898,8 +898,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgbfcddef" class="outline-4">
-<h4 id="orgbfcddef"><span class="section-number-4">3.1.4</span> Performance</h4>
+<div id="outline-container-org07314c3" class="outline-4">
+<h4 id="org07314c3"><span class="section-number-4">3.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 This function is most efficient when used in cases where there are only 2 rank-1 updates and
@@ -910,12 +910,12 @@ it is sure they will not result in a singular matrix.
 </div>
 </div>
 
-<div id="outline-container-orgf24000c" class="outline-2">
-<h2 id="orgf24000c"><span class="section-number-2">4</span> Woodbury 3x3</h2>
+<div id="outline-container-orgee0dbe6" class="outline-2">
+<h2 id="orgee0dbe6"><span class="section-number-2">4</span> Woodbury 3x3</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org09aa804" class="outline-3">
-<h3 id="org09aa804"><span class="section-number-3">4.1</span> <code>qmckl_woodbury_3</code></h3>
+<div id="outline-container-org9c43af5" class="outline-3">
+<h3 id="org9c43af5"><span class="section-number-3">4.1</span> <code>qmckl_woodbury_3</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The 3x3 version of the Woodbury 2x2 kernel. It is used to apply three
@@ -936,7 +936,7 @@ from applying the updates to the original matrix.
 
 
 
-<table id="orge574ce0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orga068af6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1008,8 +1008,8 @@ from applying the updates to the original matrix.
 </table>
 </div>
 
-<div id="outline-container-org7c70d68" class="outline-4">
-<h4 id="org7c70d68"><span class="section-number-4">4.1.1</span> Requirements</h4>
+<div id="outline-container-org4916776" class="outline-4">
+<h4 id="org4916776"><span class="section-number-4">4.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>qmckl_null_context</code></li>
@@ -1023,8 +1023,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org1e5d71d" class="outline-4">
-<h4 id="org1e5d71d"><span class="section-number-4">4.1.2</span> C header</h4>
+<div id="outline-container-orgb3c78fd" class="outline-4">
+<h4 id="orgb3c78fd"><span class="section-number-4">4.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_woodbury_3</span> (
@@ -1041,8 +1041,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgd505358" class="outline-4">
-<h4 id="orgd505358"><span class="section-number-4">4.1.3</span> C source</h4>
+<div id="outline-container-org1eb40cf" class="outline-4">
+<h4 id="org1eb40cf"><span class="section-number-4">4.1.3</span> C source</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
@@ -1144,8 +1144,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgaa446ee" class="outline-4">
-<h4 id="orgaa446ee"><span class="section-number-4">4.1.4</span> Performance&#x2026;</h4>
+<div id="outline-container-orge5a30e2" class="outline-4">
+<h4 id="orge5a30e2"><span class="section-number-4">4.1.4</span> Performance&#x2026;</h4>
 <div class="outline-text-4" id="text-4-1-4">
 <p>
 This function is most efficient when used in cases where there are only 3 rank-1 updates and
@@ -1156,12 +1156,12 @@ it is sure they will not result in a singular matrix.
 </div>
 </div>
 
-<div id="outline-container-orgdae7e69" class="outline-2">
-<h2 id="orgdae7e69"><span class="section-number-2">5</span> Sherman-Morrison with update splitting</h2>
+<div id="outline-container-orgd263b2f" class="outline-2">
+<h2 id="orgd263b2f"><span class="section-number-2">5</span> Sherman-Morrison with update splitting</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org9f068e4" class="outline-3">
-<h3 id="org9f068e4"><span class="section-number-3">5.1</span> <code>qmckl_sherman_morrison_splitting</code></h3>
+<div id="outline-container-orgdaa5970" class="outline-3">
+<h3 id="orgdaa5970"><span class="section-number-3">5.1</span> <code>qmckl_sherman_morrison_splitting</code></h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 This is a variation on the 'Naive' Sherman-Morrison kernel. Whenever the denominator \(1+v_j^T S^{-1} u_j\) in
@@ -1183,7 +1183,7 @@ If the determinant of the Slater-matrix is passed, it will be updated to the det
 from applying the updates to the original matrix.
 </p>
 
-<table id="org36598f3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org3302977" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1267,8 +1267,8 @@ from applying the updates to the original matrix.
 </div>
 
 
-<div id="outline-container-org9df1f32" class="outline-4">
-<h4 id="org9df1f32"><span class="section-number-4">5.1.1</span> Requirements</h4>
+<div id="outline-container-orgb860ec8" class="outline-4">
+<h4 id="orgb860ec8"><span class="section-number-4">5.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -1283,8 +1283,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgaa6a9e8" class="outline-4">
-<h4 id="orgaa6a9e8"><span class="section-number-4">5.1.2</span> C header</h4>
+<div id="outline-container-org1c5a6e7" class="outline-4">
+<h4 id="org1c5a6e7"><span class="section-number-4">5.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sherman_morrison_splitting</span> (
@@ -1302,8 +1302,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org4421db8" class="outline-4">
-<h4 id="org4421db8"><span class="section-number-4">5.1.3</span> C source</h4>
+<div id="outline-container-org89f7d5e" class="outline-4">
+<h4 id="org89f7d5e"><span class="section-number-4">5.1.3</span> C source</h4>
 <div class="outline-text-4" id="text-5-1-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
@@ -1343,8 +1343,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org2fe0b52" class="outline-4">
-<h4 id="org2fe0b52"><span class="section-number-4">5.1.4</span> Performance&#x2026;</h4>
+<div id="outline-container-orgb5c858d" class="outline-4">
+<h4 id="orgb5c858d"><span class="section-number-4">5.1.4</span> Performance&#x2026;</h4>
 <div class="outline-text-4" id="text-5-1-4">
 <p>
 This kernel performs best when there are 2 or more rank-1 update cycles and fail-rate is high.
@@ -1354,12 +1354,12 @@ This kernel performs best when there are 2 or more rank-1 update cycles and fail
 </div>
 </div>
 
-<div id="outline-container-orgff7dd5a" class="outline-2">
-<h2 id="orgff7dd5a"><span class="section-number-2">6</span> Woodbury 3x3 and 2x2 with Sherman-Morrison and update splitting</h2>
+<div id="outline-container-orgb374ec3" class="outline-2">
+<h2 id="orgb374ec3"><span class="section-number-2">6</span> Woodbury 3x3 and 2x2 with Sherman-Morrison and update splitting</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org8eeb3c0" class="outline-3">
-<h3 id="org8eeb3c0"><span class="section-number-3">6.1</span> <code>qmckl_sherman_morrison_smw32s</code></h3>
+<div id="outline-container-org772052e" class="outline-3">
+<h3 id="org772052e"><span class="section-number-3">6.1</span> <code>qmckl_sherman_morrison_smw32s</code></h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 The Woodbury 3x3 and 2x2 kernel with Sherman-Morrison and update splitting combines the low-level Woodbury 3x3 kernel,
@@ -1374,7 +1374,7 @@ If the determinant of the Slater-matrix is passed, it will be updated to the det
 from applying the updates to the original matrix.
 </p>
 
-<table id="orgd9717e4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org1e074ba" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1454,8 +1454,8 @@ from applying the updates to the original matrix.
 </div>
 
 
-<div id="outline-container-org112182d" class="outline-4">
-<h4 id="org112182d"><span class="section-number-4">6.1.1</span> Requirements</h4>
+<div id="outline-container-org557e6f6" class="outline-4">
+<h4 id="org557e6f6"><span class="section-number-4">6.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -1470,8 +1470,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org1a57fc0" class="outline-4">
-<h4 id="org1a57fc0"><span class="section-number-4">6.1.2</span> C header</h4>
+<div id="outline-container-orgdbb1f32" class="outline-4">
+<h4 id="orgdbb1f32"><span class="section-number-4">6.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-6-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sherman_morrison_smw32s</span> (
@@ -1489,8 +1489,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org2f80505" class="outline-4">
-<h4 id="org2f80505"><span class="section-number-4">6.1.3</span> C source</h4>
+<div id="outline-container-org3d832fa" class="outline-4">
+<h4 id="org3d832fa"><span class="section-number-4">6.1.3</span> C source</h4>
 <div class="outline-text-4" id="text-6-1-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
@@ -1568,8 +1568,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org4e59b5a" class="outline-4">
-<h4 id="org4e59b5a"><span class="section-number-4">6.1.4</span> Performance&#x2026;</h4>
+<div id="outline-container-orge8c6139" class="outline-4">
+<h4 id="orge8c6139"><span class="section-number-4">6.1.4</span> Performance&#x2026;</h4>
 <div class="outline-text-4" id="text-6-1-4">
 <p>
 This kernel performs best for update cycles with 2 or more rank-1 updates and the fail-rate is low.
@@ -1579,8 +1579,8 @@ This kernel performs best for update cycles with 2 or more rank-1 updates and th
 </div>
 </div>
 
-<div id="outline-container-orga01ff80" class="outline-2">
-<h2 id="orga01ff80"><span class="section-number-2">7</span> Helper Functions</h2>
+<div id="outline-container-orgb6f637f" class="outline-2">
+<h2 id="orgb6f637f"><span class="section-number-2">7</span> Helper Functions</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Private helper-functions that are used by the Sherman-Morrison-Woodbury kernels.
@@ -1588,8 +1588,8 @@ These functions can only be used internally by the kernels in this module.
 </p>
 </div>
 
-<div id="outline-container-org2118399" class="outline-3">
-<h3 id="org2118399"><span class="section-number-3">7.1</span> <code>qmckl_slagel_splitting</code></h3>
+<div id="outline-container-org60d8575" class="outline-3">
+<h3 id="org60d8575"><span class="section-number-3">7.1</span> <code>qmckl_slagel_splitting</code></h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 <code>qmckl_slagel_splitting</code> is the non-recursive, inner part of the 'Sherman-Morrison with update splitting'-kernel.
@@ -1609,7 +1609,7 @@ If the determinant of the Slater-matrix is passed, it will be updated to the det
 from applying the updates to the original matrix.
 </p>
 
-<table id="org91bf251" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org2899dee" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1703,8 +1703,8 @@ from applying the updates to the original matrix.
 </div>
 
 
-<div id="outline-container-org29d97cb" class="outline-4">
-<h4 id="org29d97cb"><span class="section-number-4">7.1.1</span> Requirements</h4>
+<div id="outline-container-orgcfe7c73" class="outline-4">
+<h4 id="orgcfe7c73"><span class="section-number-4">7.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-7-1-1">
 <ul class="org-ul">
 <li><code>LDS &gt;= 2</code></li>
@@ -1721,8 +1721,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgba30c21" class="outline-4">
-<h4 id="orgba30c21"><span class="section-number-4">7.1.2</span> C header</h4>
+<div id="outline-container-orgb44c400" class="outline-4">
+<h4 id="orgb44c400"><span class="section-number-4">7.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-7-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">double</span> <span style="color: #0000ff;">qmckl_slagel_splitting</span> (
@@ -1742,8 +1742,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org663114e" class="outline-4">
-<h4 id="org663114e"><span class="section-number-4">7.1.3</span> C source</h4>
+<div id="outline-container-org0b3da56" class="outline-4">
+<h4 id="org0b3da56"><span class="section-number-4">7.1.3</span> C source</h4>
 <div class="outline-text-4" id="text-7-1-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdbool.h&gt;</span>
@@ -1821,8 +1821,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org87cb6c6" class="outline-4">
-<h4 id="org87cb6c6"><span class="section-number-4">7.1.4</span> Performance</h4>
+<div id="outline-container-org1b139c2" class="outline-4">
+<h4 id="org1b139c2"><span class="section-number-4">7.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-7-1-4">
 <p>
 This function cannot be used by itself and is used in Sherman-Morrison with update splitting and Woodbury 3x3 and 2x2
@@ -1833,8 +1833,8 @@ with Sherman-Morrison and update splitting. Please look at the performance recco
 </div>
 </div>
 
-<div id="outline-container-org383245d" class="outline-2">
-<h2 id="org383245d"><span class="section-number-2">8</span> End of files</h2>
+<div id="outline-container-org9c97d72" class="outline-2">
+<h2 id="org9c97d72"><span class="section-number-2">8</span> End of files</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-c">  <span style="color: #0000ff;">assert</span> (<span style="color: #228b22;">qmckl_context_destroy</span>(<span style="color: #a0522d;">context</span>) == QMCKL_SUCCESS);
@@ -1848,7 +1848,7 @@ with Sherman-Morrison and update splitting. Please look at the performance recco
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-01-26 Wed 17:36</p>
+<p class="date">Created: 2022-02-10 Thu 15:51</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
