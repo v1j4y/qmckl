@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-02-10 Thu 15:51 -->
+<!-- 2022-02-11 Fri 14:47 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction</title>
@@ -333,36 +333,36 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc1c713b">1. Installing QMCkl</a>
+<li><a href="#org6601584">1. Installing QMCkl</a>
 <ul>
-<li><a href="#org267acf0">1.1. Installing from the released tarball (for end users)</a></li>
-<li><a href="#org9f6425f">1.2. Installing from the source repository (for developers)</a></li>
+<li><a href="#orgcefe892">1.1. Installing from the released tarball (for end users)</a></li>
+<li><a href="#orgba81e62">1.2. Installing from the source repository (for developers)</a></li>
 </ul>
 </li>
-<li><a href="#org8dcf3c1">2. Using QMCkl</a></li>
-<li><a href="#org068d8bc">3. Developing in QMCkl</a>
+<li><a href="#orgfa9d285">2. Using QMCkl</a></li>
+<li><a href="#orgf4d9daa">3. Developing in QMCkl</a>
 <ul>
-<li><a href="#org610d19b">3.1. Literate programming</a></li>
-<li><a href="#orgef11039">3.2. Source code editing</a></li>
-<li><a href="#org064129f">3.3. Choice of the programming language</a></li>
-<li><a href="#org59f5a9f">3.4. Coding rules</a></li>
-<li><a href="#org07c235f">3.5. Design of the library</a></li>
-<li><a href="#org6f0d4c8">3.6. Naming conventions</a></li>
-<li><a href="#org85114c8">3.7. Application programming interface</a></li>
-<li><a href="#org897e451">3.8. Global state</a></li>
-<li><a href="#org27c4e21">3.9. Headers</a></li>
-<li><a href="#orgb142680">3.10. Low-level functions</a></li>
-<li><a href="#org8bb228f">3.11. High-level functions</a></li>
-<li><a href="#org63bcd9b">3.12. Numerical precision</a></li>
-<li><a href="#org9173805">3.13. Algorithms</a></li>
+<li><a href="#orge9bde8b">3.1. Literate programming</a></li>
+<li><a href="#orgd4e18f8">3.2. Source code editing</a></li>
+<li><a href="#org81a226a">3.3. Choice of the programming language</a></li>
+<li><a href="#org529e06d">3.4. Coding rules</a></li>
+<li><a href="#org503ac9b">3.5. Design of the library</a></li>
+<li><a href="#org64987ca">3.6. Naming conventions</a></li>
+<li><a href="#org70a09b3">3.7. Application programming interface</a></li>
+<li><a href="#org7e5f905">3.8. Global state</a></li>
+<li><a href="#org073bde5">3.9. Headers</a></li>
+<li><a href="#org11a3465">3.10. Low-level functions</a></li>
+<li><a href="#org0202aae">3.11. High-level functions</a></li>
+<li><a href="#orged4267b">3.12. Numerical precision</a></li>
+<li><a href="#orged44f5b">3.13. Algorithms</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc1c713b" class="outline-2">
-<h2 id="orgc1c713b"><span class="section-number-2">1</span> Installing QMCkl</h2>
+<div id="outline-container-org6601584" class="outline-2">
+<h2 id="org6601584"><span class="section-number-2">1</span> Installing QMCkl</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The latest version fo QMCkl can be downloaded
@@ -371,8 +371,8 @@ The latest version fo QMCkl can be downloaded
 </p>
 </div>
 
-<div id="outline-container-org267acf0" class="outline-3">
-<h3 id="org267acf0"><span class="section-number-3">1.1</span> Installing from the released tarball (for end users)</h3>
+<div id="outline-container-orgcefe892" class="outline-3">
+<h3 id="orgcefe892"><span class="section-number-3">1.1</span> Installing from the released tarball (for end users)</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 QMCkl is built with GNU Autotools, so the usual
@@ -387,8 +387,8 @@ options are defined using <code>CFLAGS</code> and <code>FCFLAGS</code>.
 </div>
 </div>
 
-<div id="outline-container-org9f6425f" class="outline-3">
-<h3 id="org9f6425f"><span class="section-number-3">1.2</span> Installing from the source repository (for developers)</h3>
+<div id="outline-container-orgba81e62" class="outline-3">
+<h3 id="orgba81e62"><span class="section-number-3">1.2</span> Installing from the source repository (for developers)</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 To compile from the source repository, additional dependencies are
@@ -409,8 +409,8 @@ to be executed first.
 </div>
 </div>
 
-<div id="outline-container-org8dcf3c1" class="outline-2">
-<h2 id="org8dcf3c1"><span class="section-number-2">2</span> Using QMCkl</h2>
+<div id="outline-container-orgfa9d285" class="outline-2">
+<h2 id="orgfa9d285"><span class="section-number-2">2</span> Using QMCkl</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The <code>qmckl.h</code> header file installed in the <code>${prefix}/include</code> directory
@@ -439,12 +439,12 @@ Both files are located in the <code>include/</code> directory.
 </div>
 </div>
 
-<div id="outline-container-org068d8bc" class="outline-2">
-<h2 id="org068d8bc"><span class="section-number-2">3</span> Developing in QMCkl</h2>
+<div id="outline-container-orgf4d9daa" class="outline-2">
+<h2 id="orgf4d9daa"><span class="section-number-2">3</span> Developing in QMCkl</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org610d19b" class="outline-3">
-<h3 id="org610d19b"><span class="section-number-3">3.1</span> Literate programming</h3>
+<div id="outline-container-orge9bde8b" class="outline-3">
+<h3 id="orge9bde8b"><span class="section-number-3">3.1</span> Literate programming</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 In a traditional source code, most of the lines of source files of a program
@@ -494,8 +494,8 @@ tarball contains the generated source code.
 </div>
 </div>
 
-<div id="outline-container-orgef11039" class="outline-3">
-<h3 id="orgef11039"><span class="section-number-3">3.2</span> Source code editing</h3>
+<div id="outline-container-orgd4e18f8" class="outline-3">
+<h3 id="orgd4e18f8"><span class="section-number-3">3.2</span> Source code editing</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 For a tutorial on literate programming with org-mode, follow <a href="http://www.howardism.org/Technical/Emacs/literate-programming-tutorial.html">this link</a>.
@@ -526,8 +526,8 @@ org-mode.
 </div>
 </div>
 
-<div id="outline-container-org064129f" class="outline-3">
-<h3 id="org064129f"><span class="section-number-3">3.3</span> Choice of the programming language</h3>
+<div id="outline-container-org81a226a" class="outline-3">
+<h3 id="org81a226a"><span class="section-number-3">3.3</span> Choice of the programming language</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Most of the codes of the <a href="https://trex-coe.eu">TREX CoE</a> are written in Fortran with some
@@ -591,8 +591,8 @@ For more guidelines on using Fortran to generate a C interface, see
 </div>
 </div>
 
-<div id="outline-container-org59f5a9f" class="outline-3">
-<h3 id="org59f5a9f"><span class="section-number-3">3.4</span> Coding rules</h3>
+<div id="outline-container-org529e06d" class="outline-3">
+<h3 id="org529e06d"><span class="section-number-3">3.4</span> Coding rules</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 The authors should follow the recommendations of the C99
@@ -612,8 +612,8 @@ make cppcheck ; cat cppcheck.out
 </div>
 </div>
 
-<div id="outline-container-org07c235f" class="outline-3">
-<h3 id="org07c235f"><span class="section-number-3">3.5</span> Design of the library</h3>
+<div id="outline-container-org503ac9b" class="outline-3">
+<h3 id="org503ac9b"><span class="section-number-3">3.5</span> Design of the library</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 The proposed API should allow the library to: deal with memory transfers
@@ -624,8 +624,8 @@ functions (see below).
 </div>
 </div>
 
-<div id="outline-container-org6f0d4c8" class="outline-3">
-<h3 id="org6f0d4c8"><span class="section-number-3">3.6</span> Naming conventions</h3>
+<div id="outline-container-org64987ca" class="outline-3">
+<h3 id="org64987ca"><span class="section-number-3">3.6</span> Naming conventions</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 To avoid namespace collisions, we use <code>qmckl_</code> as a prefix for all exported
@@ -646,8 +646,8 @@ form is allowed.
 </div>
 </div>
 
-<div id="outline-container-org85114c8" class="outline-3">
-<h3 id="org85114c8"><span class="section-number-3">3.7</span> Application programming interface</h3>
+<div id="outline-container-org70a09b3" class="outline-3">
+<h3 id="org70a09b3"><span class="section-number-3">3.7</span> Application programming interface</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 In the C language, the number of bits used by the integer types can change
@@ -679,15 +679,15 @@ bindings in other languages in other repositories.
 </div>
 </div>
 
-<div id="outline-container-org897e451" class="outline-3">
-<h3 id="org897e451"><span class="section-number-3">3.8</span> Global state</h3>
+<div id="outline-container-org7e5f905" class="outline-3">
+<h3 id="org7e5f905"><span class="section-number-3">3.8</span> Global state</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 Global variables should  be avoided in the library,  because it is
 possible that one  single program needs to  use multiple instances
 of the library. To solve this  problem we propose to use a pointer
 to  a   <a href="./qmckl_context.html"><code>context</code></a> variable,  built   by  the  library   with  the
-<code>qmckl_context_create</code> function. The <a id="orgdce4649">=context=</a> contains the global
+<code>qmckl_context_create</code> function. The <a id="org3b4b28d">=context=</a> contains the global
 state of  the library, and is  used as the first  argument of many
 QMCkl functions.
 </p>
@@ -701,8 +701,8 @@ the  state   is  done   by  setters   and  getters,   prefixed  by
 </div>
 </div>
 
-<div id="outline-container-org27c4e21" class="outline-3">
-<h3 id="org27c4e21"><span class="section-number-3">3.9</span> Headers</h3>
+<div id="outline-container-org073bde5" class="outline-3">
+<h3 id="org073bde5"><span class="section-number-3">3.9</span> Headers</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 A single <code>qmckl.h</code> header to be distributed by the library
@@ -790,8 +790,8 @@ and the types definitions should be written in the <code>*fh_type.f90</code> fil
 </div>
 </div>
 
-<div id="outline-container-orgb142680" class="outline-3">
-<h3 id="orgb142680"><span class="section-number-3">3.10</span> Low-level functions</h3>
+<div id="outline-container-org11a3465" class="outline-3">
+<h3 id="org11a3465"><span class="section-number-3">3.10</span> Low-level functions</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 Low-level functions are very simple  functions which are leaves of
@@ -800,14 +800,14 @@ the function call tree (they don't call any other QMCkl function).
 
 <p>
 These  functions   are   <i>pure</i>,   and  unaware   of   the   QMCkl
-<a href="#orgdce4649"><code>context</code></a>. They are not allowed to allocate/deallocate memory, and
+<a href="#org3b4b28d"><code>context</code></a>. They are not allowed to allocate/deallocate memory, and
 if they need temporary memory it should be provided in input.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8bb228f" class="outline-3">
-<h3 id="org8bb228f"><span class="section-number-3">3.11</span> High-level functions</h3>
+<div id="outline-container-org0202aae" class="outline-3">
+<h3 id="org0202aae"><span class="section-number-3">3.11</span> High-level functions</h3>
 <div class="outline-text-3" id="text-3-11">
 <p>
 High-level functions  are at  the top of  the function  call tree.
@@ -819,8 +819,8 @@ temporary storage, to simplify the use of accelerators.
 </div>
 </div>
 
-<div id="outline-container-org63bcd9b" class="outline-3">
-<h3 id="org63bcd9b"><span class="section-number-3">3.12</span> Numerical precision</h3>
+<div id="outline-container-orged4267b" class="outline-3">
+<h3 id="orged4267b"><span class="section-number-3">3.12</span> Numerical precision</h3>
 <div class="outline-text-3" id="text-3-12">
 <p>
 The minimal number of bits of precision required for a function
@@ -828,7 +828,7 @@ should be given as an input of low-level computational
 functions. This input will be used to define the values of the
 different thresholds that might be used to avoid computing
 unnecessary noise.  High-level functions will use the precision
-specified in the <a href="#orgdce4649"><code>context</code></a> variable.
+specified in the <a href="#org3b4b28d"><code>context</code></a> variable.
 </p>
 
 <p>
@@ -896,8 +896,8 @@ following points :
 </div>
 </div>
 
-<div id="outline-container-org9173805" class="outline-3">
-<h3 id="org9173805"><span class="section-number-3">3.13</span> Algorithms</h3>
+<div id="outline-container-orged44f5b" class="outline-3">
+<h3 id="orged44f5b"><span class="section-number-3">3.13</span> Algorithms</h3>
 <div class="outline-text-3" id="text-3-13">
 <p>
 Reducing the scaling of an  algorithm usually implies also reducing
@@ -913,7 +913,7 @@ implemented adapted to different problem sizes.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-02-10 Thu 15:51</p>
+<p class="date">Created: 2022-02-11 Fri 14:47</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
