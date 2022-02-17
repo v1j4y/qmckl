@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-02-11 Fri 14:47 -->
+<!-- 2022-02-17 Thu 18:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>TREXIO I/O library</title>
@@ -311,53 +311,53 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org63735e4">1. Local functions</a>
+<li><a href="#org5cdf000">1. Local functions</a>
 <ul>
-<li><a href="#org2e24ae2">1.1. Open file</a></li>
-<li><a href="#org7b6739e">1.2. Electron</a></li>
-<li><a href="#org1b6ec3d">1.3. Nucleus</a>
+<li><a href="#orgb0b2820">1.1. Open file</a></li>
+<li><a href="#orgff65999">1.2. Electron</a></li>
+<li><a href="#org3f313a4">1.3. Nucleus</a>
 <ul>
-<li><a href="#org0524324">1.3.1. Number of nuclei</a></li>
-<li><a href="#org0509ac2">1.3.2. Nuclear charges</a></li>
-<li><a href="#org9101ceb">1.3.3. Nuclear coordinates</a></li>
+<li><a href="#org21b1c7b">1.3.1. Number of nuclei</a></li>
+<li><a href="#org3ff3b61">1.3.2. Nuclear charges</a></li>
+<li><a href="#orgd470baa">1.3.3. Nuclear coordinates</a></li>
 </ul>
 </li>
-<li><a href="#org97370a6">1.4. Basis set and AOs</a>
+<li><a href="#org1d85419">1.4. Basis set and AOs</a>
 <ul>
-<li><a href="#orgf75c83c">1.4.1. Basis set type</a></li>
-<li><a href="#org01ab574">1.4.2. Number of shells</a></li>
-<li><a href="#orgd020f08">1.4.3. Number of primitives</a></li>
-<li><a href="#org2632797">1.4.4. Number of atomic orbitals</a></li>
-<li><a href="#orga75d89b">1.4.5. Nucleus<sub>index</sub> array</a></li>
-<li><a href="#orgd5e9762">1.4.6. Number of shells per nucleus</a></li>
-<li><a href="#org4535ae3">1.4.7. Angular momentum</a></li>
-<li><a href="#org0e16b91">1.4.8. Number of primitives per shell</a></li>
-<li><a href="#org8d00684">1.4.9. Indices of the primitives</a></li>
-<li><a href="#org0994434">1.4.10. Normalization of the shells</a></li>
-<li><a href="#org120646f">1.4.11. Exponents</a></li>
-<li><a href="#org8e32ed4">1.4.12. Coefficients</a></li>
-<li><a href="#org6092870">1.4.13. Normalization of the primitivies</a></li>
-<li><a href="#orge4ce28d">1.4.14. AO Normalization</a></li>
+<li><a href="#org014ac5f">1.4.1. Basis set type</a></li>
+<li><a href="#org5a270c5">1.4.2. Number of shells</a></li>
+<li><a href="#org9866f13">1.4.3. Number of primitives</a></li>
+<li><a href="#orgf76d63a">1.4.4. Number of atomic orbitals</a></li>
+<li><a href="#orgf973f57">1.4.5. Nucleus<sub>index</sub> array</a></li>
+<li><a href="#org279c1ff">1.4.6. Number of shells per nucleus</a></li>
+<li><a href="#org076fc17">1.4.7. Angular momentum</a></li>
+<li><a href="#org3ac2fd7">1.4.8. Number of primitives per shell</a></li>
+<li><a href="#org99514b3">1.4.9. Indices of the primitives</a></li>
+<li><a href="#orgb2c0524">1.4.10. Normalization of the shells</a></li>
+<li><a href="#org06bd180">1.4.11. Exponents</a></li>
+<li><a href="#org2f8a610">1.4.12. Coefficients</a></li>
+<li><a href="#orgce25247">1.4.13. Normalization of the primitivies</a></li>
+<li><a href="#orgd293285">1.4.14. AO Normalization</a></li>
 </ul>
 </li>
-<li><a href="#orgff40047">1.5. Molecular orbitals</a>
+<li><a href="#org011bff1">1.5. Molecular orbitals</a>
 <ul>
-<li><a href="#orgb05c0c8">1.5.1. Number of MOs</a></li>
-<li><a href="#orgd62107c">1.5.2. MO coefficients</a></li>
+<li><a href="#orgeb97038">1.5.1. Number of MOs</a></li>
+<li><a href="#org1e1156c">1.5.2. MO coefficients</a></li>
 </ul>
 </li>
-<li><a href="#org8c13518">1.6. <span class="todo TODO">TODO</span> ECP</a></li>
+<li><a href="#org18a02b0">1.6. <span class="todo TODO">TODO</span> ECP</a></li>
 </ul>
 </li>
-<li><a href="#org201c949">2. Read everything</a></li>
-<li><a href="#org612a74a">3. Test</a>
+<li><a href="#org46cb8ff">2. Read everything</a></li>
+<li><a href="#org7280fe9">3. Test</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orgda879d3">3.0.1. Electrons</a></li>
-<li><a href="#org3d451dc">3.0.2. Nuclei</a></li>
-<li><a href="#org8c43e64">3.0.3. Atomic basis</a></li>
-<li><a href="#orge8170d2">3.0.4. MO Basis</a></li>
+<li><a href="#org951238e">3.0.1. Electrons</a></li>
+<li><a href="#org14b06a9">3.0.2. Nuclei</a></li>
+<li><a href="#org5f8d114">3.0.3. Atomic basis</a></li>
+<li><a href="#org80cb347">3.0.4. MO Basis</a></li>
 </ul>
 </li>
 </ul>
@@ -366,8 +366,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org63735e4" class="outline-2">
-<h2 id="org63735e4"><span class="section-number-2">1</span> Local functions</h2>
+<div id="outline-container-org5cdf000" class="outline-2">
+<h2 id="org5cdf000"><span class="section-number-2">1</span> Local functions</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Functions defined in this section are all local: they should not be
@@ -390,8 +390,8 @@ In the functions defined in this section, we use as local variables
 </ul>
 </div>
 
-<div id="outline-container-org2e24ae2" class="outline-3">
-<h3 id="org2e24ae2"><span class="section-number-3">1.1</span> Open file</h3>
+<div id="outline-container-orgb0b2820" class="outline-3">
+<h3 id="orgb0b2820"><span class="section-number-3">1.1</span> Open file</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 We first define a helper function to open a file by first trying to
@@ -423,8 +423,8 @@ groups of data by passing the <code>trexio_t</code> handle.
 </div>
 </div>
 
-<div id="outline-container-org7b6739e" class="outline-3">
-<h3 id="org7b6739e"><span class="section-number-3">1.2</span> Electron</h3>
+<div id="outline-container-orgff65999" class="outline-3">
+<h3 id="orgff65999"><span class="section-number-3">1.2</span> Electron</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 In this section we read all the data into the electron data structure.
@@ -475,8 +475,8 @@ We read the number of up-spin and down-spin electrons.
 </div>
 </div>
 
-<div id="outline-container-org1b6ec3d" class="outline-3">
-<h3 id="org1b6ec3d"><span class="section-number-3">1.3</span> Nucleus</h3>
+<div id="outline-container-org3f313a4" class="outline-3">
+<h3 id="org3f313a4"><span class="section-number-3">1.3</span> Nucleus</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 In this section we read the number of nuclei, the molecular geometry and nuclear charges.
@@ -496,8 +496,8 @@ In this section we read the number of nuclei, the molecular geometry and nuclear
 </div>
 </div>
 
-<div id="outline-container-org0524324" class="outline-4">
-<h4 id="org0524324"><span class="section-number-4">1.3.1</span> Number of nuclei</h4>
+<div id="outline-container-org21b1c7b" class="outline-4">
+<h4 id="org21b1c7b"><span class="section-number-4">1.3.1</span> Number of nuclei</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">nucleus_num</span> = 0L;
@@ -520,8 +520,8 @@ rc = qmckl_set_nucleus_num(context, nucleus_num);
 </div>
 </div>
 
-<div id="outline-container-org0509ac2" class="outline-4">
-<h4 id="org0509ac2"><span class="section-number-4">1.3.2</span> Nuclear charges</h4>
+<div id="outline-container-org3ff3b61" class="outline-4">
+<h4 id="org3ff3b61"><span class="section-number-4">1.3.2</span> Nuclear charges</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -561,8 +561,8 @@ rc = qmckl_set_nucleus_num(context, nucleus_num);
 </div>
 </div>
 
-<div id="outline-container-org9101ceb" class="outline-4">
-<h4 id="org9101ceb"><span class="section-number-4">1.3.3</span> Nuclear coordinates</h4>
+<div id="outline-container-orgd470baa" class="outline-4">
+<h4 id="orgd470baa"><span class="section-number-4">1.3.3</span> Nuclear coordinates</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 Now, we read the molecular geometry. It is stored in normal format
@@ -617,8 +617,8 @@ in the TREXIO file (<code>'N'</code>), so it will be automatically transposed in
 </div>
 </div>
 
-<div id="outline-container-org97370a6" class="outline-3">
-<h3 id="org97370a6"><span class="section-number-3">1.4</span> Basis set and AOs</h3>
+<div id="outline-container-org1d85419" class="outline-3">
+<h3 id="org1d85419"><span class="section-number-3">1.4</span> Basis set and AOs</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 In this section we read the atomic basis set and atomic orbitals.
@@ -644,8 +644,8 @@ In this section we read the atomic basis set and atomic orbitals.
 </div>
 </div>
 
-<div id="outline-container-orgf75c83c" class="outline-4">
-<h4 id="orgf75c83c"><span class="section-number-4">1.4.1</span> Basis set type</h4>
+<div id="outline-container-org014ac5f" class="outline-4">
+<h4 id="org014ac5f"><span class="section-number-4">1.4.1</span> Basis set type</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#define</span> <span style="color: #a0522d;">MAX_STR_LEN</span> 1024
@@ -676,8 +676,8 @@ In this section we read the atomic basis set and atomic orbitals.
 </div>
 </div>
 
-<div id="outline-container-org01ab574" class="outline-4">
-<h4 id="org01ab574"><span class="section-number-4">1.4.2</span> Number of shells</h4>
+<div id="outline-container-org5a270c5" class="outline-4">
+<h4 id="org5a270c5"><span class="section-number-4">1.4.2</span> Number of shells</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">shell_num</span> = 0L;
@@ -701,8 +701,8 @@ rc = qmckl_set_ao_basis_shell_num(context, shell_num);
 </div>
 </div>
 
-<div id="outline-container-orgd020f08" class="outline-4">
-<h4 id="orgd020f08"><span class="section-number-4">1.4.3</span> Number of primitives</h4>
+<div id="outline-container-org9866f13" class="outline-4">
+<h4 id="org9866f13"><span class="section-number-4">1.4.3</span> Number of primitives</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">prim_num</span> = 0L;
@@ -726,8 +726,8 @@ rc = qmckl_set_ao_basis_prim_num(context, prim_num);
 </div>
 </div>
 
-<div id="outline-container-org2632797" class="outline-4">
-<h4 id="org2632797"><span class="section-number-4">1.4.4</span> Number of atomic orbitals</h4>
+<div id="outline-container-orgf76d63a" class="outline-4">
+<h4 id="orgf76d63a"><span class="section-number-4">1.4.4</span> Number of atomic orbitals</h4>
 <div class="outline-text-4" id="text-1-4-4">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">ao_num</span> = 0LL;
@@ -751,8 +751,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-orga75d89b" class="outline-4">
-<h4 id="orga75d89b"><span class="section-number-4">1.4.5</span> Nucleus<sub>index</sub> array</h4>
+<div id="outline-container-orgf973f57" class="outline-4">
+<h4 id="orgf973f57"><span class="section-number-4">1.4.5</span> Nucleus<sub>index</sub> array</h4>
 <div class="outline-text-4" id="text-1-4-5">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -801,6 +801,11 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 
   /* <span style="color: #b22222;">Reformat data </span>*/
   rc = qmckl_set_ao_basis_nucleus_index(context, nucleus_index, nucleus_num);
+  <span style="color: #a020f0;">if</span> (rc != QMCKL_SUCCESS) {
+    qmckl_free(context, nucleus_index);
+    nucleus_index = <span style="color: #008b8b;">NULL</span>;
+    <span style="color: #a020f0;">return</span> rc;
+  }
 
   <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>=shell_num-1 ; i&gt;=0 ; --i) {
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">k</span> = tmp_array[i];
@@ -834,8 +839,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-orgd5e9762" class="outline-4">
-<h4 id="orgd5e9762"><span class="section-number-4">1.4.6</span> Number of shells per nucleus</h4>
+<div id="outline-container-org279c1ff" class="outline-4">
+<h4 id="org279c1ff"><span class="section-number-4">1.4.6</span> Number of shells per nucleus</h4>
 <div class="outline-text-4" id="text-1-4-6">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -920,8 +925,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org4535ae3" class="outline-4">
-<h4 id="org4535ae3"><span class="section-number-4">1.4.7</span> Angular momentum</h4>
+<div id="outline-container-org076fc17" class="outline-4">
+<h4 id="org076fc17"><span class="section-number-4">1.4.7</span> Angular momentum</h4>
 <div class="outline-text-4" id="text-1-4-7">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -966,8 +971,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org0e16b91" class="outline-4">
-<h4 id="org0e16b91"><span class="section-number-4">1.4.8</span> Number of primitives per shell</h4>
+<div id="outline-container-org3ac2fd7" class="outline-4">
+<h4 id="org3ac2fd7"><span class="section-number-4">1.4.8</span> Number of primitives per shell</h4>
 <div class="outline-text-4" id="text-1-4-8">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1051,8 +1056,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org8d00684" class="outline-4">
-<h4 id="org8d00684"><span class="section-number-4">1.4.9</span> Indices of the primitives</h4>
+<div id="outline-container-org99514b3" class="outline-4">
+<h4 id="org99514b3"><span class="section-number-4">1.4.9</span> Indices of the primitives</h4>
 <div class="outline-text-4" id="text-1-4-9">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1132,8 +1137,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org0994434" class="outline-4">
-<h4 id="org0994434"><span class="section-number-4">1.4.10</span> Normalization of the shells</h4>
+<div id="outline-container-orgb2c0524" class="outline-4">
+<h4 id="orgb2c0524"><span class="section-number-4">1.4.10</span> Normalization of the shells</h4>
 <div class="outline-text-4" id="text-1-4-10">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1178,8 +1183,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org120646f" class="outline-4">
-<h4 id="org120646f"><span class="section-number-4">1.4.11</span> Exponents</h4>
+<div id="outline-container-org06bd180" class="outline-4">
+<h4 id="org06bd180"><span class="section-number-4">1.4.11</span> Exponents</h4>
 <div class="outline-text-4" id="text-1-4-11">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1224,8 +1229,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org8e32ed4" class="outline-4">
-<h4 id="org8e32ed4"><span class="section-number-4">1.4.12</span> Coefficients</h4>
+<div id="outline-container-org2f8a610" class="outline-4">
+<h4 id="org2f8a610"><span class="section-number-4">1.4.12</span> Coefficients</h4>
 <div class="outline-text-4" id="text-1-4-12">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1270,8 +1275,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-org6092870" class="outline-4">
-<h4 id="org6092870"><span class="section-number-4">1.4.13</span> Normalization of the primitivies</h4>
+<div id="outline-container-orgce25247" class="outline-4">
+<h4 id="orgce25247"><span class="section-number-4">1.4.13</span> Normalization of the primitivies</h4>
 <div class="outline-text-4" id="text-1-4-13">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1316,8 +1321,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 
-<div id="outline-container-orge4ce28d" class="outline-4">
-<h4 id="orge4ce28d"><span class="section-number-4">1.4.14</span> AO Normalization</h4>
+<div id="outline-container-orgd293285" class="outline-4">
+<h4 id="orgd293285"><span class="section-number-4">1.4.14</span> AO Normalization</h4>
 <div class="outline-text-4" id="text-1-4-14">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1372,8 +1377,8 @@ rc = qmckl_set_ao_basis_ao_num(context, ao_num);
 </div>
 </div>
 </div>
-<div id="outline-container-orgff40047" class="outline-3">
-<h3 id="orgff40047"><span class="section-number-3">1.5</span> Molecular orbitals</h3>
+<div id="outline-container-org011bff1" class="outline-3">
+<h3 id="org011bff1"><span class="section-number-3">1.5</span> Molecular orbitals</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 In this section we read the MO coefficients.
@@ -1399,8 +1404,8 @@ In this section we read the MO coefficients.
 </div>
 </div>
 
-<div id="outline-container-orgb05c0c8" class="outline-4">
-<h4 id="orgb05c0c8"><span class="section-number-4">1.5.1</span> Number of MOs</h4>
+<div id="outline-container-orgeb97038" class="outline-4">
+<h4 id="orgeb97038"><span class="section-number-4">1.5.1</span> Number of MOs</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">mo_num</span> = 0L;
@@ -1423,8 +1428,8 @@ rc = qmckl_set_mo_basis_mo_num(context, mo_num);
 </div>
 </div>
 
-<div id="outline-container-orgd62107c" class="outline-4">
-<h4 id="orgd62107c"><span class="section-number-4">1.5.2</span> MO coefficients</h4>
+<div id="outline-container-org1e1156c" class="outline-4">
+<h4 id="org1e1156c"><span class="section-number-4">1.5.2</span> MO coefficients</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1473,15 +1478,17 @@ rc = qmckl_set_mo_basis_mo_num(context, mo_num);
 </div>
 </div>
 
-<div id="outline-container-org8c13518" class="outline-3">
-<h3 id="org8c13518"><span class="section-number-3">1.6</span> <span class="todo TODO">TODO</span> ECP</h3>
+<div id="outline-container-org18a02b0" class="outline-3">
+<h3 id="org18a02b0"><span class="section-number-3">1.6</span> <span class="todo TODO">TODO</span> ECP</h3>
 </div>
 </div>
-<div id="outline-container-org201c949" class="outline-2">
-<h2 id="org201c949"><span class="section-number-2">2</span> Read everything</h2>
+<div id="outline-container-org46cb8ff" class="outline-2">
+<h2 id="org46cb8ff"><span class="section-number-2">2</span> Read everything</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_trexio_read</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>* <span style="color: #a0522d;">file_name</span>);
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
+<span style="color: #0000ff;">qmckl_trexio_read</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
+                  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>* <span style="color: #a0522d;">file_name</span>);
 </pre>
 </div>
 
@@ -1559,8 +1566,8 @@ rc = qmckl_set_mo_basis_mo_num(context, mo_num);
 </div>
 </div>
 
-<div id="outline-container-org612a74a" class="outline-2">
-<h2 id="org612a74a"><span class="section-number-2">3</span> Test</h2>
+<div id="outline-container-org7280fe9" class="outline-2">
+<h2 id="org7280fe9"><span class="section-number-2">3</span> Test</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#ifdef</span> HAVE_TREXIO
@@ -1594,8 +1601,8 @@ rc = qmckl_trexio_read(context, fname);
 </div>
 </div>
 
-<div id="outline-container-orgda879d3" class="outline-4">
-<h4 id="orgda879d3"><span class="section-number-4">3.0.1</span> Electrons</h4>
+<div id="outline-container-org951238e" class="outline-4">
+<h4 id="org951238e"><span class="section-number-4">3.0.1</span> Electrons</h4>
 <div class="outline-text-4" id="text-3-0-1">
 <div class="org-src-container">
 <pre class="src src-c">printf(<span style="color: #8b2252;">"Electrons\n"</span>);
@@ -1613,8 +1620,8 @@ rc = qmckl_get_electron_down_num(context, &amp;dn_num);
 </div>
 </div>
 
-<div id="outline-container-org3d451dc" class="outline-4">
-<h4 id="org3d451dc"><span class="section-number-4">3.0.2</span> Nuclei</h4>
+<div id="outline-container-org14b06a9" class="outline-4">
+<h4 id="org14b06a9"><span class="section-number-4">3.0.2</span> Nuclei</h4>
 <div class="outline-text-4" id="text-3-0-2">
 <div class="org-src-container">
 <pre class="src src-c">printf(<span style="color: #8b2252;">"Nuclei\n"</span>);
@@ -1654,8 +1661,8 @@ coord = <span style="color: #008b8b;">NULL</span>;
 </div>
 </div>
 
-<div id="outline-container-org8c43e64" class="outline-4">
-<h4 id="org8c43e64"><span class="section-number-4">3.0.3</span> Atomic basis</h4>
+<div id="outline-container-org5f8d114" class="outline-4">
+<h4 id="org5f8d114"><span class="section-number-4">3.0.3</span> Atomic basis</h4>
 <div class="outline-text-4" id="text-3-0-3">
 <div class="org-src-container">
 <pre class="src src-c">printf(<span style="color: #8b2252;">"Atomic basis\n"</span>);
@@ -1763,8 +1770,8 @@ prim_factor = <span style="color: #008b8b;">NULL</span>;
 </div>
 </div>
 
-<div id="outline-container-orge8170d2" class="outline-4">
-<h4 id="orge8170d2"><span class="section-number-4">3.0.4</span> MO Basis</h4>
+<div id="outline-container-org80cb347" class="outline-4">
+<h4 id="org80cb347"><span class="section-number-4">3.0.4</span> MO Basis</h4>
 <div class="outline-text-4" id="text-3-0-4">
 <div class="org-src-container">
 <pre class="src src-c">printf(<span style="color: #8b2252;">"MOs\n"</span>);
@@ -1794,7 +1801,7 @@ charge = <span style="color: #008b8b;">NULL</span>;
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-02-11 Fri 14:47</p>
+<p class="date">Created: 2022-02-17 Thu 18:12</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

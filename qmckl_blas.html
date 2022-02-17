@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-02-11 Fri 14:47 -->
+<!-- 2022-02-17 Thu 18:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>BLAS functions</title>
@@ -333,34 +333,34 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf3d02af">1. Data types</a>
+<li><a href="#org6b219f0">1. Data types</a>
 <ul>
-<li><a href="#org894df39">1.1. Vector</a></li>
-<li><a href="#org6e8df63">1.2. Matrix</a></li>
-<li><a href="#org763199d">1.3. Tensor</a></li>
-<li><a href="#orgd3093d5">1.4. Reshaping</a>
+<li><a href="#orgf292f62">1.1. Vector</a></li>
+<li><a href="#org802f077">1.2. Matrix</a></li>
+<li><a href="#orgf24d338">1.3. Tensor</a></li>
+<li><a href="#org6fcdc20">1.4. Reshaping</a>
 <ul>
-<li><a href="#org303c2ba">1.4.1. Vector -&gt; Matrix</a></li>
-<li><a href="#org209696a">1.4.2. Vector -&gt; Tensor</a></li>
-<li><a href="#org805b954">1.4.3. Matrix -&gt; Vector</a></li>
-<li><a href="#org6bf9430">1.4.4. Matrix -&gt; Tensor</a></li>
-<li><a href="#orga413f56">1.4.5. Tensor -&gt; Vector</a></li>
-<li><a href="#org19b1891">1.4.6. Tensor -&gt; Matrix</a></li>
+<li><a href="#orge0b8007">1.4.1. Vector -&gt; Matrix</a></li>
+<li><a href="#orgaa0c8aa">1.4.2. Vector -&gt; Tensor</a></li>
+<li><a href="#org190062d">1.4.3. Matrix -&gt; Vector</a></li>
+<li><a href="#org7231cd2">1.4.4. Matrix -&gt; Tensor</a></li>
+<li><a href="#org3ecea59">1.4.5. Tensor -&gt; Vector</a></li>
+<li><a href="#orga460a37">1.4.6. Tensor -&gt; Matrix</a></li>
 </ul>
 </li>
-<li><a href="#org47ebaea">1.5. Access macros</a></li>
-<li><a href="#orgc15936e">1.6. Copy to/from to <code>double*</code></a></li>
-<li><a href="#orgb47c7eb">1.7. Tests</a></li>
+<li><a href="#org0745381">1.5. Access macros</a></li>
+<li><a href="#orga84eaf7">1.6. Copy to/from to <code>double*</code></a></li>
+<li><a href="#org6af2371">1.7. Tests</a></li>
 </ul>
 </li>
-<li><a href="#orgb7edafa">2. Matrix operations</a>
+<li><a href="#org2546159">2. Matrix operations</a>
 <ul>
-<li><a href="#org9e2dad7">2.1. <code>qmckl_dgemm</code></a></li>
-<li><a href="#orgb23ccfa">2.2. <code>qmckl_matmul</code></a></li>
-<li><a href="#org0132e0e">2.3. <code>qmckl_adjugate</code></a></li>
-<li><a href="#org9708921">2.4. <code>qmckl_transpose</code></a>
+<li><a href="#orgd57e389">2.1. <code>qmckl_dgemm</code></a></li>
+<li><a href="#org1dc03d6">2.2. <code>qmckl_matmul</code></a></li>
+<li><a href="#org5e429ec">2.3. <code>qmckl_adjugate</code></a></li>
+<li><a href="#orgcc37e86">2.4. <code>qmckl_transpose</code></a>
 <ul>
-<li><a href="#orgdf36843">2.4.1. Test</a></li>
+<li><a href="#org0328bea">2.4.1. Test</a></li>
 </ul>
 </li>
 </ul>
@@ -369,12 +369,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgf3d02af" class="outline-2">
-<h2 id="orgf3d02af"><span class="section-number-2">1</span> Data types</h2>
+<div id="outline-container-org6b219f0" class="outline-2">
+<h2 id="org6b219f0"><span class="section-number-2">1</span> Data types</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org894df39" class="outline-3">
-<h3 id="org894df39"><span class="section-number-3">1.1</span> Vector</h3>
+<div id="outline-container-orgf292f62" class="outline-3">
+<h3 id="orgf292f62"><span class="section-number-3">1.1</span> Vector</h3>
 <div class="outline-text-3" id="text-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -455,27 +455,27 @@ Allocates a new vector. If the allocation failed the size is zero.
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
 <span style="color: #0000ff;">qmckl_vector_free</span>( <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, 
-                   <span style="color: #228b22;">qmckl_vector</span> <span style="color: #a0522d;">vector</span>);
+                   <span style="color: #228b22;">qmckl_vector</span>* <span style="color: #a0522d;">vector</span>);
 </pre>
 </div>
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
 <span style="color: #0000ff;">qmckl_vector_free</span>( <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, 
-                   <span style="color: #228b22;">qmckl_vector</span> <span style="color: #a0522d;">vector</span>)
+                   <span style="color: #228b22;">qmckl_vector</span>* <span style="color: #a0522d;">vector</span>)
 {
   /* <span style="color: #b22222;">Always true </span>*/
-  assert (vector.data != <span style="color: #008b8b;">NULL</span>);
+  assert (vector-&gt;data != <span style="color: #008b8b;">NULL</span>);
 
   <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">rc</span>;
 
-  rc = qmckl_free(context, vector.data);
+  rc = qmckl_free(context, vector-&gt;data);
   <span style="color: #a020f0;">if</span> (rc != QMCKL_SUCCESS) {
     <span style="color: #a020f0;">return</span> rc;
   }
 
-  vector.size = (<span style="color: #228b22;">int64_t</span>) 0;
-  vector.data = <span style="color: #008b8b;">NULL</span>;
+  vector-&gt;size = (<span style="color: #228b22;">int64_t</span>) 0;
+  vector-&gt;data = <span style="color: #008b8b;">NULL</span>;
   <span style="color: #a020f0;">return</span> QMCKL_SUCCESS;
 }
 </pre>
@@ -483,8 +483,8 @@ Allocates a new vector. If the allocation failed the size is zero.
 </div>
 </div>
 
-<div id="outline-container-org6e8df63" class="outline-3">
-<h3 id="org6e8df63"><span class="section-number-3">1.2</span> Matrix</h3>
+<div id="outline-container-org802f077" class="outline-3">
+<h3 id="org802f077"><span class="section-number-3">1.2</span> Matrix</h3>
 <div class="outline-text-3" id="text-1-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -575,27 +575,27 @@ Allocates a new matrix. If the allocation failed the sizes are zero.
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
 <span style="color: #0000ff;">qmckl_matrix_free</span>( <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, 
-                   <span style="color: #228b22;">qmckl_matrix</span> <span style="color: #a0522d;">matrix</span>);
+                   <span style="color: #228b22;">qmckl_matrix</span>* <span style="color: #a0522d;">matrix</span>);
 </pre>
 </div>
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
 <span style="color: #0000ff;">qmckl_matrix_free</span>( <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, 
-                   <span style="color: #228b22;">qmckl_matrix</span> <span style="color: #a0522d;">matrix</span>)
+                   <span style="color: #228b22;">qmckl_matrix</span>* <span style="color: #a0522d;">matrix</span>)
 {
   /* <span style="color: #b22222;">Always true </span>*/
-  assert (matrix.data != <span style="color: #008b8b;">NULL</span>);
+  assert (matrix-&gt;data != <span style="color: #008b8b;">NULL</span>);
 
   <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">rc</span>;
 
-  rc = qmckl_free(context, matrix.data);
+  rc = qmckl_free(context, matrix-&gt;data);
   <span style="color: #a020f0;">if</span> (rc != QMCKL_SUCCESS) {
     <span style="color: #a020f0;">return</span> rc;
   }
-  matrix.data = <span style="color: #008b8b;">NULL</span>;
-  matrix.size[0] = (<span style="color: #228b22;">int64_t</span>) 0;
-  matrix.size[1] = (<span style="color: #228b22;">int64_t</span>) 0;
+  matrix-&gt;data = <span style="color: #008b8b;">NULL</span>;
+  matrix-&gt;size[0] = (<span style="color: #228b22;">int64_t</span>) 0;
+  matrix-&gt;size[1] = (<span style="color: #228b22;">int64_t</span>) 0;
 
   <span style="color: #a020f0;">return</span> QMCKL_SUCCESS;
 }
@@ -604,8 +604,8 @@ Allocates a new matrix. If the allocation failed the sizes are zero.
 </div>
 </div>
 
-<div id="outline-container-org763199d" class="outline-3">
-<h3 id="org763199d"><span class="section-number-3">1.3</span> Tensor</h3>
+<div id="outline-container-orgf24d338" class="outline-3">
+<h3 id="orgf24d338"><span class="section-number-3">1.3</span> Tensor</h3>
 <div class="outline-text-3" id="text-1-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -713,26 +713,26 @@ is zero.
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
 <span style="color: #0000ff;">qmckl_tensor_free</span>( <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, 
-                   <span style="color: #228b22;">qmckl_tensor</span> <span style="color: #a0522d;">tensor</span>);
+                   <span style="color: #228b22;">qmckl_tensor</span>* <span style="color: #a0522d;">tensor</span>);
 </pre>
 </div>
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
 <span style="color: #0000ff;">qmckl_tensor_free</span>( <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, 
-                   <span style="color: #228b22;">qmckl_tensor</span> <span style="color: #a0522d;">tensor</span>)
+                   <span style="color: #228b22;">qmckl_tensor</span>* <span style="color: #a0522d;">tensor</span>)
 {
   /* <span style="color: #b22222;">Always true </span>*/
-  assert (tensor.data != <span style="color: #008b8b;">NULL</span>);
+  assert (tensor-&gt;data != <span style="color: #008b8b;">NULL</span>);
 
   <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">rc</span>;
 
-  rc = qmckl_free(context, tensor.data);
+  rc = qmckl_free(context, tensor-&gt;data);
   <span style="color: #a020f0;">if</span> (rc != QMCKL_SUCCESS) {
     <span style="color: #a020f0;">return</span> rc;
   }
 
-  memset(&amp;tensor, 0, <span style="color: #a020f0;">sizeof</span>(qmckl_tensor));
+  memset(tensor, 0, <span style="color: #a020f0;">sizeof</span>(qmckl_tensor));
 
   <span style="color: #a020f0;">return</span> QMCKL_SUCCESS;
 }
@@ -741,16 +741,16 @@ is zero.
 </div>
 </div>
 
-<div id="outline-container-orgd3093d5" class="outline-3">
-<h3 id="orgd3093d5"><span class="section-number-3">1.4</span> Reshaping</h3>
+<div id="outline-container-org6fcdc20" class="outline-3">
+<h3 id="org6fcdc20"><span class="section-number-3">1.4</span> Reshaping</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Reshaping occurs in-place and the pointer to the data is copied.
 </p>
 </div>
 
-<div id="outline-container-org303c2ba" class="outline-4">
-<h4 id="org303c2ba"><span class="section-number-4">1.4.1</span> Vector -&gt; Matrix</h4>
+<div id="outline-container-orge0b8007" class="outline-4">
+<h4 id="orge0b8007"><span class="section-number-4">1.4.1</span> Vector -&gt; Matrix</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_matrix</span>
@@ -786,8 +786,8 @@ Reshapes a vector into a matrix.
 </div>
 </div>
 
-<div id="outline-container-org209696a" class="outline-4">
-<h4 id="org209696a"><span class="section-number-4">1.4.2</span> Vector -&gt; Tensor</h4>
+<div id="outline-container-orgaa0c8aa" class="outline-4">
+<h4 id="orgaa0c8aa"><span class="section-number-4">1.4.2</span> Vector -&gt; Tensor</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_tensor</span>
@@ -825,8 +825,8 @@ Reshapes a vector into a tensor.
 </div>
 </div>
 
-<div id="outline-container-org805b954" class="outline-4">
-<h4 id="org805b954"><span class="section-number-4">1.4.3</span> Matrix -&gt; Vector</h4>
+<div id="outline-container-org190062d" class="outline-4">
+<h4 id="org190062d"><span class="section-number-4">1.4.3</span> Matrix -&gt; Vector</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_vector</span>
@@ -854,8 +854,8 @@ Reshapes a matrix into a vector.
 </div>
 </div>
 
-<div id="outline-container-org6bf9430" class="outline-4">
-<h4 id="org6bf9430"><span class="section-number-4">1.4.4</span> Matrix -&gt; Tensor</h4>
+<div id="outline-container-org7231cd2" class="outline-4">
+<h4 id="org7231cd2"><span class="section-number-4">1.4.4</span> Matrix -&gt; Tensor</h4>
 <div class="outline-text-4" id="text-1-4-4">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_tensor</span>
@@ -893,8 +893,8 @@ Reshapes a matrix into a tensor.
 </div>
 </div>
 
-<div id="outline-container-orga413f56" class="outline-4">
-<h4 id="orga413f56"><span class="section-number-4">1.4.5</span> Tensor -&gt; Vector</h4>
+<div id="outline-container-org3ecea59" class="outline-4">
+<h4 id="org3ecea59"><span class="section-number-4">1.4.5</span> Tensor -&gt; Vector</h4>
 <div class="outline-text-4" id="text-1-4-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_vector</span>
@@ -927,8 +927,8 @@ Reshapes a tensor into a vector.
 </div>
 </div>
 
-<div id="outline-container-org19b1891" class="outline-4">
-<h4 id="org19b1891"><span class="section-number-4">1.4.6</span> Tensor -&gt; Matrix</h4>
+<div id="outline-container-orga460a37" class="outline-4">
+<h4 id="orga460a37"><span class="section-number-4">1.4.6</span> Tensor -&gt; Matrix</h4>
 <div class="outline-text-4" id="text-1-4-6">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_matrix</span>
@@ -969,8 +969,8 @@ Reshapes a tensor into a vector.
 </div>
 </div>
 
-<div id="outline-container-org47ebaea" class="outline-3">
-<h3 id="org47ebaea"><span class="section-number-3">1.5</span> Access macros</h3>
+<div id="outline-container-org0745381" class="outline-3">
+<h3 id="org0745381"><span class="section-number-3">1.5</span> Access macros</h3>
 <div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#define</span> <span style="color: #0000ff;">qmckl_vec</span>(<span style="color: #a0522d;">v</span>, <span style="color: #a0522d;">i</span>) v.data[i]
@@ -984,8 +984,8 @@ Reshapes a tensor into a vector.
 </div>
 </div>
 
-<div id="outline-container-orgc15936e" class="outline-3">
-<h3 id="orgc15936e"><span class="section-number-3">1.6</span> Copy to/from to <code>double*</code></h3>
+<div id="outline-container-orga84eaf7" class="outline-3">
+<h3 id="orga84eaf7"><span class="section-number-3">1.6</span> Copy to/from to <code>double*</code></h3>
 <div class="outline-text-3" id="text-1-6">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
@@ -1191,8 +1191,8 @@ Converts a matrix to a <code>double*</code>.
 
 
 
-<div id="outline-container-orgb47c7eb" class="outline-3">
-<h3 id="orgb47c7eb"><span class="section-number-3">1.7</span> Tests</h3>
+<div id="outline-container-org6af2371" class="outline-3">
+<h3 id="org6af2371"><span class="section-number-3">1.7</span> Tests</h3>
 <div class="outline-text-3" id="text-1-7">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -1222,7 +1222,7 @@ Converts a matrix to a <code>double*</code>.
   <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;p ; ++i) 
       assert ( qmckl_vec(vec2, i) == qmckl_vec(vec, i) ) ;
 
-  qmckl_vector_free(context, vec);
+  qmckl_vector_free(context, &amp;vec);
 
 }
 </pre>
@@ -1230,12 +1230,12 @@ Converts a matrix to a <code>double*</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb7edafa" class="outline-2">
-<h2 id="orgb7edafa"><span class="section-number-2">2</span> Matrix operations</h2>
+<div id="outline-container-org2546159" class="outline-2">
+<h2 id="org2546159"><span class="section-number-2">2</span> Matrix operations</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org9e2dad7" class="outline-3">
-<h3 id="org9e2dad7"><span class="section-number-3">2.1</span> <code>qmckl_dgemm</code></h3>
+<div id="outline-container-orgd57e389" class="outline-3">
+<h3 id="orgd57e389"><span class="section-number-3">2.1</span> <code>qmckl_dgemm</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Matrix multiplication:
@@ -1247,7 +1247,7 @@ Matrix multiplication:
    \]
 </p>
 
-<table id="orgc474a95" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org7298716" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1467,8 +1467,8 @@ Requirements:
 </div>
 </div>
 
-<div id="outline-container-orgb23ccfa" class="outline-3">
-<h3 id="orgb23ccfa"><span class="section-number-3">2.2</span> <code>qmckl_matmul</code></h3>
+<div id="outline-container-org1dc03d6" class="outline-3">
+<h3 id="org1dc03d6"><span class="section-number-3">2.2</span> <code>qmckl_matmul</code></h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Matrix multiplication:
@@ -1480,7 +1480,7 @@ Matrix multiplication:
    \]
 </p>
 
-<table id="org695c6b5" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org3ece5c4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1713,8 +1713,8 @@ Matrix multiplication:
 </div>
 </div>
 
-<div id="outline-container-org0132e0e" class="outline-3">
-<h3 id="org0132e0e"><span class="section-number-3">2.3</span> <code>qmckl_adjugate</code></h3>
+<div id="outline-container-org5e429ec" class="outline-3">
+<h3 id="org5e429ec"><span class="section-number-3">2.3</span> <code>qmckl_adjugate</code></h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Given a matrix \(\mathbf{A}\), the adjugate matrix
@@ -1732,7 +1732,7 @@ of \(\mathbf{A}\).
 See also: <a href="https://en.wikipedia.org/wiki/Adjugate_matrix">https://en.wikipedia.org/wiki/Adjugate_matrix</a>
 </p>
 
-<table id="orgea0b577" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org4e048b7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1985,8 +1985,8 @@ determinant with the inverse:
 </div>
 </div>
 
-<div id="outline-container-org9708921" class="outline-3">
-<h3 id="org9708921"><span class="section-number-3">2.4</span> <code>qmckl_transpose</code></h3>
+<div id="outline-container-orgcc37e86" class="outline-3">
+<h3 id="orgcc37e86"><span class="section-number-3">2.4</span> <code>qmckl_transpose</code></h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Transposes a matrix: \(A^\dagger_{ji} = A_{ij}\).
@@ -2086,8 +2086,8 @@ Transposes a matrix: \(A^\dagger_{ji} = A_{ij}\).
 </div>
 </div>
 
-<div id="outline-container-orgdf36843" class="outline-4">
-<h4 id="orgdf36843"><span class="section-number-4">2.4.1</span> Test</h4>
+<div id="outline-container-org0328bea" class="outline-4">
+<h4 id="org0328bea"><span class="section-number-4">2.4.1</span> Test</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <div class="org-src-container">
 <pre class="src src-c">{
@@ -2108,8 +2108,8 @@ Transposes a matrix: \(A^\dagger_{ji} = A_{ij}\).
     <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;2 ; ++i)
       assert (qmckl_mat(A, i, j) == qmckl_mat(At, j, i));
 
-  qmckl_matrix_free(context, A);
-  qmckl_matrix_free(context, At);
+  qmckl_matrix_free(context, &amp;A);
+  qmckl_matrix_free(context, &amp;At);
 }
 
 </pre>
@@ -2121,7 +2121,7 @@ Transposes a matrix: \(A^\dagger_{ji} = A_{ij}\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-02-11 Fri 14:47</p>
+<p class="date">Created: 2022-02-17 Thu 18:13</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
