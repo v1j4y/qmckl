@@ -6,7 +6,7 @@
 <!-- 2022-04-08 Fri 07:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Memory management</title>
+<title>Code examples</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="TREX CoE" />
 <style type="text/css">
@@ -306,228 +306,257 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
-<h1 class="title">Memory management</h1>
+<h1 class="title">Code examples</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb8a1fde">1. Memory data structure for the context</a></li>
-<li><a href="#orgd08f94a">2. Passing info to allocation routines</a></li>
-<li><a href="#org279069b">3. Allocation/deallocation functions</a></li>
+<li><a href="#org9ea5af0">1. Checking errors</a></li>
+<li><a href="#org2e839c2">2. Computing an atomic orbital on a grid</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb8a1fde" class="outline-2">
-<h2 id="orgb8a1fde"><span class="section-number-2">1</span> Memory data structure for the context</h2>
+<div id="outline-container-org9ea5af0" class="outline-2">
+<h2 id="org9ea5af0"><span class="section-number-2">1</span> Checking errors</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Every time a new block of memory is allocated, the information
-relative to the allocation is stored in a new <code>qmckl_memory_info_struct</code>.
-A <code>qmckl_memory_info_struct</code> contains the pointer to the memory block,
-its size in bytes, and extra implementation-specific information such as
-alignment, pinning, if the memory should be allocated on CPU or GPU
-<i>etc</i>.
+All QMCkl functions return an error code. A convenient way to handle
+errors is to write an error-checking function that displays the
+error in text format and exits the program.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_memory_info_struct</span> {
-  <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">size</span>;
-  <span style="color: #228b22;">void</span>*  <span style="color: #a0522d;">pointer</span>;
-} <span style="color: #228b22;">qmckl_memory_info_struct</span>;
-
-<span style="color: #a020f0;">static</span> <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_memory_info_struct</span> <span style="color: #a0522d;">qmckl_memory_info_struct_zero</span> =
-  {
-   .size = (<span style="color: #228b22;">size_t</span>) 0,
-   .pointer = <span style="color: #008b8b;">NULL</span>
-  };
-</pre>
-</div>
-
-<p>
-The <code>memory</code> element of the context is a data structure which
-contains an array of <code>qmckl_memory_info_struct</code>, the size of the
-array, and the number of allocated blocks.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_memory_struct</span> {
-  <span style="color: #228b22;">size_t</span>                    <span style="color: #a0522d;">n_allocated</span>;
-  <span style="color: #228b22;">size_t</span>                    <span style="color: #a0522d;">array_size</span>;
-  <span style="color: #228b22;">qmckl_memory_info_struct</span>* <span style="color: #a0522d;">element</span>;
-} <span style="color: #228b22;">qmckl_memory_struct</span>;
+<pre class="src src-f90" id="orgaacf780"><span style="color: #a020f0;">subroutine</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, message)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+  <span style="color: #228b22;">integer</span>(qmckl_exit_code), <span style="color: #a020f0;">intent</span>(in) ::<span style="color: #a0522d;"> rc</span>
+  <span style="color: #228b22;">character</span>(len=*)        , <span style="color: #a020f0;">intent</span>(in) ::<span style="color: #a0522d;"> message</span>
+  <span style="color: #228b22;">character</span>(len=128)                   ::<span style="color: #a0522d;"> str_buffer</span>
+  <span style="color: #a020f0;">if</span> (rc /= QMCKL_SUCCESS) <span style="color: #a020f0;">then</span>
+     <span style="color: #a020f0;">print</span> *, message
+     <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_string_of_error</span>(rc, str_buffer)
+     <span style="color: #a020f0;">print</span> *, str_buffer
+     <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">exit</span>(rc)
+  <span style="color: #a020f0;">end if</span>
+<span style="color: #a020f0;">end subroutine</span> <span style="color: #0000ff;">qmckl_check_error</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd08f94a" class="outline-2">
-<h2 id="orgd08f94a"><span class="section-number-2">2</span> Passing info to allocation routines</h2>
+<div id="outline-container-org2e839c2" class="outline-2">
+<h2 id="org2e839c2"><span class="section-number-2">2</span> Computing an atomic orbital on a grid</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Passing information to the allocation routine should be done by
-passing an instance of a <code>qmckl_memory_info_struct</code>.
+The following program, in Fortran, computes the values of an atomic
+orbital on a regular 3-dimensional grid. The 100<sup>3</sup> grid points are
+automatically defined, such that the molecule fits in a box with 5
+atomic units in the borders.
 </p>
-</div>
-</div>
 
-<div id="outline-container-org279069b" class="outline-2">
-<h2 id="org279069b"><span class="section-number-2">3</span> Allocation/deallocation functions</h2>
-<div class="outline-text-2" id="text-3">
 <p>
-Memory allocation inside the library should be done with
-<code>qmckl_malloc</code>. It lets the library choose how the memory will be
-allocated, and a pointer is returned to the user.  The context is
-passed to let the library store data related to the allocation
-inside the context. In this particular implementation of the library,
-we store a list of allocated pointers so that all the memory can be
-properly freed when the library is de-initialized.
-If the allocation failed, the <code>NULL</code> pointer is returned.
+This program uses the <code>qmckl_check_error</code> function defined above.
+</p>
+
+<p>
+To use this program, run
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">void</span>* <span style="color: #0000ff;">qmckl_malloc</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
-                   <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_memory_info_struct</span> <span style="color: #a0522d;">info</span>);
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">void</span>* <span style="color: #0000ff;">qmckl_malloc</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_memory_info_struct</span> <span style="color: #a0522d;">info</span>) {
-
-  assert (qmckl_context_check(context) != QMCKL_NULL_CONTEXT);
-
-  <span style="color: #228b22;">qmckl_context_struct</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">ctx</span> = (<span style="color: #228b22;">qmckl_context_struct</span>* <span style="color: #a020f0;">const</span>) context;
-
-  /* <span style="color: #b22222;">Allocate memory and zero it </span>*/
-  <span style="color: #228b22;">void</span> * <span style="color: #a0522d;">pointer</span> = malloc(info.size);
-  <span style="color: #a020f0;">if</span> (pointer == <span style="color: #008b8b;">NULL</span>) {
-    <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">NULL</span>;
-  }
-  memset(pointer, 0, info.size);
-
-  qmckl_lock(context);
-  {
-    /* <span style="color: #b22222;">If qmckl_memory_struct is full, reallocate a larger one </span>*/
-    <span style="color: #a020f0;">if</span> (ctx-&gt;memory.n_allocated == ctx-&gt;memory.array_size) {
-      <span style="color: #a020f0;">const</span> <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">old_size</span> = ctx-&gt;memory.array_size;
-      <span style="color: #228b22;">qmckl_memory_info_struct</span> * <span style="color: #a0522d;">new_array</span> = realloc(ctx-&gt;memory.element,
-                                                          2L * old_size *
-                                                          <span style="color: #a020f0;">sizeof</span>(qmckl_memory_info_struct));
-      <span style="color: #a020f0;">if</span> (new_array == <span style="color: #008b8b;">NULL</span>) {
-        qmckl_unlock(context);
-        free(pointer);
-        <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">NULL</span>;
-      }
-
-      memset( &amp;(new_array[old_size]), 0, <span style="color: #228b22;">old_size</span> * <span style="color: #a020f0;">sizeof</span>(qmckl_memory_info_struct) );
-      ctx-&gt;memory.element = new_array;
-      ctx-&gt;memory.array_size = 2L * old_size;
-    }
-
-    /* <span style="color: #b22222;">Find first NULL entry </span>*/
-    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">pos</span> = (<span style="color: #228b22;">size_t</span>) 0;
-    <span style="color: #a020f0;">while</span> ( pos &lt; ctx-&gt;memory.array_size &amp;&amp; ctx-&gt;memory.element[pos].size &gt; (<span style="color: #228b22;">size_t</span>) 0) {
-      pos += (<span style="color: #228b22;">size_t</span>) 1;
-    }
-    assert (ctx-&gt;memory.element[pos].size == (<span style="color: #228b22;">size_t</span>) 0);
-
-    /* <span style="color: #b22222;">Copy info at the new location </span>*/
-    ctx-&gt;memory.element[pos].size    = info.size;
-    ctx-&gt;memory.element[pos].pointer = pointer;
-    ctx-&gt;memory.n_allocated += (<span style="color: #228b22;">size_t</span>) 1;
-  }
-  qmckl_unlock(context);
-
-  <span style="color: #a020f0;">return</span> pointer;
-}
+<pre class="src src-bash">$ ao_grid &lt;trexio_file&gt; &lt;AO_id&gt; &lt;point_num&gt;
 </pre>
 </div>
 
 
 <div class="org-src-container">
-<pre class="src src-c">/* <span style="color: #b22222;">Create a context </span>*/
-<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span> = qmckl_context_create();
+<pre class="src src-f90"><span style="color: #a020f0;">subroutine</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, message)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
+  <span style="color: #228b22;">integer</span>(qmckl_exit_code), <span style="color: #a020f0;">intent</span>(in) ::<span style="color: #a0522d;"> rc</span>
+  <span style="color: #228b22;">character</span>(len=*)        , <span style="color: #a020f0;">intent</span>(in) ::<span style="color: #a0522d;"> message</span>
+  <span style="color: #228b22;">character</span>(len=128)                   ::<span style="color: #a0522d;"> str_buffer</span>
+  <span style="color: #a020f0;">if</span> (rc /= QMCKL_SUCCESS) <span style="color: #a020f0;">then</span>
+     <span style="color: #a020f0;">print</span> *, message
+     <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_string_of_error</span>(rc, str_buffer)
+     <span style="color: #a020f0;">print</span> *, str_buffer
+     <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">exit</span>(rc)
+  <span style="color: #a020f0;">end if</span>
+<span style="color: #a020f0;">end subroutine</span> <span style="color: #0000ff;">qmckl_check_error</span>
 
-<span style="color: #228b22;">qmckl_memory_info_struct</span> <span style="color: #a0522d;">info</span> = qmckl_memory_info_struct_zero;
-info.size = (<span style="color: #228b22;">size_t</span>) 3;
+<span style="color: #a020f0;">program</span> <span style="color: #0000ff;">ao_grid</span>
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
 
-/* <span style="color: #b22222;">Allocate an array of ints </span>*/
-<span style="color: #228b22;">int</span> *<span style="color: #a0522d;">a</span> = (<span style="color: #228b22;">int</span>*) <span style="color: #0000ff;">qmckl_malloc</span>(context, info);
+  <span style="color: #228b22;">integer</span>(qmckl_context)    ::<span style="color: #a0522d;"> qmckl_ctx  </span>! <span style="color: #b22222;">QMCkl context</span>
+  <span style="color: #228b22;">integer</span>(qmckl_exit_code)  ::<span style="color: #a0522d;"> rc         </span>! <span style="color: #b22222;">Exit code of QMCkl functions</span>
 
-/* <span style="color: #b22222;">Check that array of ints is OK </span>*/
-<span style="color: #0000ff;">assert</span>(a != <span style="color: #008b8b;">NULL</span>);
-<span style="color: #228b22;">a</span>[0] = 1;  <span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">a</span>[0] == 1);
-<span style="color: #228b22;">a</span>[1] = 2;  <span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">a</span>[1] == 2);
-<span style="color: #228b22;">a</span>[2] = 3;  <span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">a</span>[2] == 3);
+  <span style="color: #228b22;">character</span>(len=128)            ::<span style="color: #a0522d;"> trexio_filename</span>
+  <span style="color: #228b22;">character</span>(len=128)            ::<span style="color: #a0522d;"> str_buffer</span>
+  <span style="color: #228b22;">integer</span>                       ::<span style="color: #a0522d;"> ao_id</span>
+  <span style="color: #228b22;">integer</span>                       ::<span style="color: #a0522d;"> point_num_x</span>
 
-/* <span style="color: #b22222;">Allocate another array of ints </span>*/
-<span style="color: #228b22;">int</span> *<span style="color: #a0522d;">b</span> = (<span style="color: #228b22;">int</span>*) <span style="color: #0000ff;">qmckl_malloc</span>(context, info);
+  <span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int64_t</span>)            ::<span style="color: #a0522d;"> nucl_num</span>
+  <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> nucl_coord(:,:)</span>
 
-/* <span style="color: #b22222;">Check that array of ints is OK </span>*/
-<span style="color: #0000ff;">assert</span>(b != <span style="color: #008b8b;">NULL</span>);
-<span style="color: #228b22;">b</span>[0] = 1;  <span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">b</span>[0] == 1);
-<span style="color: #228b22;">b</span>[1] = 2;  <span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">b</span>[1] == 2);
-<span style="color: #228b22;">b</span>[2] = 3;  <span style="color: #0000ff;">assert</span>(<span style="color: #228b22;">b</span>[2] == 3);
+  <span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int64_t</span>)            ::<span style="color: #a0522d;"> point_num</span>
+  <span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int64_t</span>)            ::<span style="color: #a0522d;"> ao_num</span>
+  <span style="color: #228b22;">integer</span>(<span style="color: #008b8b;">c_int64_t</span>)            ::<span style="color: #a0522d;"> ipoint, i, j, k</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> x, y, z, dr(3)</span>
+  <span style="color: #228b22;">double precision</span>              ::<span style="color: #a0522d;"> rmin(3), rmax(3)</span>
+  <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> points(:,:)</span>
+  <span style="color: #228b22;">double precision</span>, <span style="color: #a020f0;">allocatable</span> ::<span style="color: #a0522d;"> ao_vgl(:,:,:)</span>
 </pre>
 </div>
 
 <p>
-When freeing the memory with <code>qmckl_free</code>, the context is passed, in
-case some important information has been stored related to memory
-allocation and needs to be updated.
+Start by fetching the command-line arguments:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_free</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
-                           <span style="color: #228b22;">void</span> * <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">ptr</span>);
+<pre class="src src-f90"><span style="color: #a020f0;">if</span> (iargc() /= 3) <span style="color: #a020f0;">then</span>
+   <span style="color: #a020f0;">print</span> *, <span style="color: #8b2252;">'Syntax: ao_grid &lt;trexio_file&gt; &lt;AO_id&gt; &lt;point_num&gt;'</span>
+   <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">exit</span>(-1)
+<span style="color: #a020f0;">end if</span>
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">getarg</span>(1, trexio_filename)
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">getarg</span>(2, str_buffer)
+<span style="color: #a020f0;">read</span>(str_buffer, *) ao_id
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">getarg</span>(3, str_buffer)
+<span style="color: #a020f0;">read</span>(str_buffer, *) point_num_x
+
+<span style="color: #a020f0;">if</span> (point_num_x &lt; 0 <span style="color: #a020f0;">.or.</span> point_num_x &gt; 300) <span style="color: #a020f0;">then</span>
+   <span style="color: #a020f0;">print</span> *, <span style="color: #8b2252;">'Error: 0 &lt; point_num &lt; 300'</span>
+   <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">exit</span>(-1)
+<span style="color: #a020f0;">end if</span>
+</pre>
+</div>
+
+<p>
+Create the QMCkl context and initialize it with the wave function
+present in the TREXIO file:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90">qmckl_ctx = qmckl_context_create()
+rc  = qmckl_trexio_read(qmckl_ctx, trexio_filename, 1_8*<span style="color: #a020f0;">len</span>(<span style="color: #a020f0;">trim</span>(trexio_filename)))
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, <span style="color: #8b2252;">'Read TREXIO'</span>)
+</pre>
+</div>
+
+<p>
+We need to check that <code>ao_id</code> is in the range, so we get the total
+number of AOs from QMCkl:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90">rc = qmckl_get_ao_basis_ao_num(qmckl_ctx, ao_num)
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, <span style="color: #8b2252;">'Getting ao_num'</span>)
+
+<span style="color: #a020f0;">if</span> (ao_id &lt; 0 <span style="color: #a020f0;">.or.</span> ao_id &gt; ao_num) <span style="color: #a020f0;">then</span>
+   <span style="color: #a020f0;">print</span> *, <span style="color: #8b2252;">'Error: 0 &lt; ao_id &lt; '</span>, ao_num
+   <span style="color: #a020f0;">call</span> <span style="color: #0000ff;">exit</span>(-1)
+<span style="color: #a020f0;">end if</span>
+</pre>
+</div>
+
+<p>
+Now we will compute the limits of the box in which the molecule fits.
+For that, we first need to ask QMCkl the coordinates of nuclei.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90">rc = qmckl_get_nucleus_num(qmckl_ctx, nucl_num)
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, <span style="color: #8b2252;">'Get nucleus num'</span>)
+
+<span style="color: #a020f0;">allocate</span>( nucl_coord(3, nucl_num) )
+rc = qmckl_get_nucleus_coord(qmckl_ctx, <span style="color: #8b2252;">'N'</span>, nucl_coord, 3_8*nucl_num)
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, <span style="color: #8b2252;">'Get nucleus coord'</span>)
+</pre>
+</div>
+
+<p>
+We now compute the coordinates of opposite points of the box, and
+the distance between points along the 3 directions:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90">rmin(1) = <span style="color: #a020f0;">minval</span>( nucl_coord(1,:) ) - 5.d0
+rmin(2) = <span style="color: #a020f0;">minval</span>( nucl_coord(2,:) ) - 5.d0
+rmin(3) = <span style="color: #a020f0;">minval</span>( nucl_coord(3,:) ) - 5.d0
+
+rmax(1) = <span style="color: #a020f0;">maxval</span>( nucl_coord(1,:) ) + 5.d0
+rmax(2) = <span style="color: #a020f0;">maxval</span>( nucl_coord(2,:) ) + 5.d0
+rmax(3) = <span style="color: #a020f0;">maxval</span>( nucl_coord(3,:) ) + 5.d0
+
+dr(1:3) = (rmax(1:3) - rmin(1:3)) / <span style="color: #a020f0;">dble</span>(point_num_x-1)
+</pre>
+</div>
+
+<p>
+We now produce the list of point coordinates where the AO will be
+evaluated:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90">point_num = point_num_x**3
+<span style="color: #a020f0;">allocate</span>( points(point_num, 3) )
+ipoint=0
+z = rmin(3)
+<span style="color: #a020f0;">do</span> k=1,point_num_x
+   y = rmin(2)
+   <span style="color: #a020f0;">do</span> j=1,point_num_x
+      x = rmin(1)
+      <span style="color: #a020f0;">do</span> i=1,point_num_x
+         ipoint = ipoint+1
+         points(ipoint,1) = x
+         points(ipoint,2) = y
+         points(ipoint,3) = z
+         x = x + dr(1)
+      <span style="color: #a020f0;">end do</span>
+      y = y + dr(2)
+   <span style="color: #a020f0;">end do</span>
+   z = z + dr(3)
+<span style="color: #a020f0;">end do</span>
+</pre>
+</div>
+
+<p>
+We give the points to QMCkl:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90">rc = qmckl_set_point(qmckl_ctx, <span style="color: #8b2252;">'T'</span>, points, point_num)
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, <span style="color: #8b2252;">'Setting points'</span>)
+</pre>
+</div>
+
+<p>
+We allocate the space required to retrieve the values, gradients and
+Laplacian of all AOs, and ask to retrieve the values of the
+AOs computed at the point positions. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #a020f0;">allocate</span>( ao_vgl(ao_num, 5, point_num) )
+rc = qmckl_get_ao_basis_ao_vgl(qmckl_ctx, ao_vgl, ao_num*5_8*point_num)
+<span style="color: #a020f0;">call</span> <span style="color: #0000ff;">qmckl_check_error</span>(rc, <span style="color: #8b2252;">'Setting points'</span>)
+</pre>
+</div>
+
+<p>
+We finally print the value of the AO:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-f90"><span style="color: #a020f0;">do</span> ipoint=1, point_num
+   <span style="color: #a020f0;">print</span> <span style="color: #8b2252;">'(3(F16.10,X),E20.10)'</span>, points(ipoint, 1:3), ao_vgl(ao_id,1,ipoint)
+<span style="color: #a020f0;">end do</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_free</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">void</span> * <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">ptr</span>) {
-
-  <span style="color: #a020f0;">if</span> (qmckl_context_check(context) == QMCKL_NULL_CONTEXT) {
-      <span style="color: #a020f0;">return</span> qmckl_failwith(context,
-                            QMCKL_INVALID_CONTEXT,
-                            <span style="color: #8b2252;">"qmckl_free"</span>,
-                            <span style="color: #008b8b;">NULL</span>);
-  }
-
-  <span style="color: #a020f0;">if</span> (ptr == <span style="color: #008b8b;">NULL</span>) {
-    <span style="color: #a020f0;">return</span> qmckl_failwith(context,
-                          QMCKL_INVALID_ARG_2,
-                          <span style="color: #8b2252;">"qmckl_free"</span>,
-                          <span style="color: #8b2252;">"NULL pointer"</span>);
-  }
-
-  <span style="color: #228b22;">qmckl_context_struct</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">ctx</span> = (<span style="color: #228b22;">qmckl_context_struct</span>* <span style="color: #a020f0;">const</span>) context;
-
-  qmckl_lock(context);
-  {
-    /* <span style="color: #b22222;">Find pointer in array of saved pointers </span>*/
-    <span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">pos</span> = (<span style="color: #228b22;">size_t</span>) 0;
-    <span style="color: #a020f0;">while</span> ( pos &lt; ctx-&gt;memory.array_size &amp;&amp; ctx-&gt;memory.element[pos].pointer != ptr) {
-      pos += (<span style="color: #228b22;">size_t</span>) 1;
-    }
-
-    <span style="color: #a020f0;">if</span> (pos &gt;= ctx-&gt;memory.array_size) {
-      /* <span style="color: #b22222;">Not found </span>*/
-      qmckl_unlock(context);
-      <span style="color: #a020f0;">return</span> qmckl_failwith(context,
-                            QMCKL_FAILURE,
-                            <span style="color: #8b2252;">"qmckl_free"</span>,
-                            <span style="color: #8b2252;">"Pointer not found in context"</span>);
-    }
-
-    free(ptr);
-
-    memset( &amp;(ctx-&gt;memory.element[pos]), 0, <span style="color: #a020f0;">sizeof</span>(qmckl_memory_info_struct) );
-    ctx-&gt;memory.n_allocated -= (<span style="color: #228b22;">size_t</span>) 1;
-  }
-  qmckl_unlock(context);
-
-  <span style="color: #a020f0;">return</span> QMCKL_SUCCESS;
-}
+<pre class="src src-f90">  <span style="color: #a020f0;">deallocate</span>( nucl_coord, points, ao_vgl )
+<span style="color: #a020f0;">end program</span> <span style="color: #0000ff;">ao_grid</span>
 </pre>
 </div>
 </div>
