@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-06-09 Thu 15:20 -->
+<!-- 2022-08-08 Mon 14:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Error handling</title>
@@ -311,19 +311,20 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org360e65d">-</a></li>
-<li><a href="#orgc024d40">1. Decoding errors</a></li>
-<li><a href="#org8564572">2. Data structure in context</a></li>
-<li><a href="#orga569bdf">3. Updating errors in the context</a></li>
-<li><a href="#org16f3388">4. Get the error</a></li>
-<li><a href="#orge8b7045">5. Failing</a></li>
+<li><a href="#orgcf8da37">-</a></li>
+<li><a href="#org385dc96">1. Decoding errors</a></li>
+<li><a href="#orge865853">2. Data structure in context</a></li>
+<li><a href="#org8d58dbb">3. Updating errors in the context</a></li>
+<li><a href="#org52b2984">4. Get the error</a></li>
+<li><a href="#org6ab1135">5. Failing</a></li>
+<li><a href="#org993af1d">6. Last error</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org360e65d" class="outline-2">
-<h2 id="org360e65d">-</h2>
-<div class="outline-text-2" id="text-org360e65d">
+<div id="outline-container-orgcf8da37" class="outline-2">
+<h2 id="orgcf8da37">-</h2>
+<div class="outline-text-2" id="text-orgcf8da37">
 <p>
 The library should never make the calling programs abort, nor
 perform any input/output operations. This decision has to be taken
@@ -334,7 +335,7 @@ by the developer of the code calling the library.
 All the functions return with an exit code, defined as
 </p>
 <div class="org-src-container">
-<pre class="src src-c" id="orgf5ced1a"><span style="color: #a020f0;">typedef</span> <span style="color: #228b22;">int32_t</span> <span style="color: #228b22;">qmckl_exit_code</span>;
+<pre class="src src-c" id="orgf5c5c39"><span style="color: #a020f0;">typedef</span> <span style="color: #228b22;">int32_t</span> <span style="color: #228b22;">qmckl_exit_code</span>;
 </pre>
 </div>
 
@@ -351,7 +352,7 @@ error code is returned to the program.
 Here is the complete list of exit codes.
 </p>
 
-<table id="org16ee117" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgebcc1d0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -538,8 +539,14 @@ Here is the complete list of exit codes.
 </tr>
 
 <tr>
-<td class="org-left"><code>QMCKL_INVALID_EXIT_CODE</code></td>
+<td class="org-left"><code>QMCKL_ALREADY_SET</code></td>
 <td class="org-right">108</td>
+<td class="org-left">'Already set'</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>QMCKL_INVALID_EXIT_CODE</code></td>
+<td class="org-right">109</td>
 <td class="org-left">'Invalid exit code'</td>
 </tr>
 </tbody>
@@ -553,8 +560,8 @@ string is assumed to be large enough to contain the error message
 </div>
 </div>
 
-<div id="outline-container-orgc024d40" class="outline-2">
-<h2 id="orgc024d40"><span class="section-number-2">1</span> Decoding errors</h2>
+<div id="outline-container-org385dc96" class="outline-2">
+<h2 id="org385dc96"><span class="section-number-2">1</span> Decoding errors</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 To decode the error messages, <code>qmckl_string_of_error</code> converts an
@@ -572,8 +579,8 @@ The text strings are extracted from the previous table.
 </p>
 </div>
 </div>
-<div id="outline-container-org8564572" class="outline-2">
-<h2 id="org8564572"><span class="section-number-2">2</span> Data structure in context</h2>
+<div id="outline-container-orge865853" class="outline-2">
+<h2 id="orge865853"><span class="section-number-2">2</span> Data structure in context</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The strings are declared internally with a maximum fixed size to avoid
@@ -596,8 +603,8 @@ dynamic memory allocation.
 </div>
 </div>
 
-<div id="outline-container-orga569bdf" class="outline-2">
-<h2 id="orga569bdf"><span class="section-number-2">3</span> Updating errors in the context</h2>
+<div id="outline-container-org8d58dbb" class="outline-2">
+<h2 id="org8d58dbb"><span class="section-number-2">3</span> Updating errors in the context</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The error is updated in the context using <code>qmckl_set_error</code>.
@@ -616,8 +623,8 @@ explaining the error. The exit code can't be <code>QMCKL_SUCCESS</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-org16f3388" class="outline-2">
-<h2 id="org16f3388"><span class="section-number-2">4</span> Get the error</h2>
+<div id="outline-container-org52b2984" class="outline-2">
+<h2 id="org52b2984"><span class="section-number-2">4</span> Get the error</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Upon error, the error type and message can be obtained from the
@@ -636,8 +643,8 @@ function name and message is mandatory.
 </div>
 </div>
 </div>
-<div id="outline-container-orge8b7045" class="outline-2">
-<h2 id="orge8b7045"><span class="section-number-2">5</span> Failing</h2>
+<div id="outline-container-org6ab1135" class="outline-2">
+<h2 id="org6ab1135"><span class="section-number-2">5</span> Failing</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 To make a function fail, the <code>qmckl_failwith</code> function should be
@@ -673,10 +680,25 @@ For example, this function can be used as
 </div>
 </div>
 </div>
+
+<div id="outline-container-org993af1d" class="outline-2">
+<h2 id="org993af1d"><span class="section-number-2">6</span> Last error</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Returns a string describing the last error, using <code>qmckl_get_error</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
+<span style="color: #0000ff;">qmckl_last_error</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">char</span>* <span style="color: #a0522d;">buffer</span>);
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-06-09 Thu 15:20</p>
+<p class="date">Created: 2022-08-08 Mon 14:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
