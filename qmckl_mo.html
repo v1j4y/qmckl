@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-08-08 Mon 14:30 -->
+<!-- 2022-08-09 Tue 07:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Molecular Orbitals</title>
@@ -311,44 +311,44 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga97f1e7">1. Context</a>
+<li><a href="#orgd233a73">1. Context</a>
 <ul>
-<li><a href="#org1758650">1.1. Data structure</a></li>
-<li><a href="#orgc68a2f5">1.2. Access functions</a>
+<li><a href="#org17bf4a6">1.1. Data structure</a></li>
+<li><a href="#orgd12abde">1.2. Access functions</a>
 <ul>
-<li><a href="#org206c588">1.2.1. Fortran interfaces</a></li>
+<li><a href="#org3fd1710">1.2.1. Fortran interfaces</a></li>
 </ul>
 </li>
-<li><a href="#org2156a54">1.3. Initialization functions</a></li>
+<li><a href="#org7749a1d">1.3. Initialization functions</a></li>
 </ul>
 </li>
-<li><a href="#org3df06b5">2. Computation</a>
+<li><a href="#orgde8a6a1">2. Computation</a>
 <ul>
-<li><a href="#org57dcea8">2.1. Computation of MOs: values only</a>
+<li><a href="#org182fa52">2.1. Computation of MOs: values only</a>
 <ul>
-<li><a href="#org4a9f172">2.1.1. Get</a></li>
-<li><a href="#orga17e19a">2.1.2. Provide</a></li>
-<li><a href="#orgcf0249a">2.1.3. Compute</a></li>
-<li><a href="#org10f71a8">2.1.4. HPC version</a></li>
+<li><a href="#org66760cc">2.1.1. Get</a></li>
+<li><a href="#orgba2b8cd">2.1.2. Provide</a></li>
+<li><a href="#org97209b4">2.1.3. Compute</a></li>
+<li><a href="#org3ab5f86">2.1.4. HPC version</a></li>
 </ul>
 </li>
-<li><a href="#org129cfd3">2.2. Computation of MOs: values, gradient, Laplacian</a>
+<li><a href="#org8f42e5f">2.2. Computation of MOs: values, gradient, Laplacian</a>
 <ul>
-<li><a href="#org4959144">2.2.1. Get</a></li>
-<li><a href="#org8c77ff5">2.2.2. Provide</a></li>
-<li><a href="#org740bc56">2.2.3. Compute</a></li>
-<li><a href="#orgacbfa40">2.2.4. HPC version</a></li>
+<li><a href="#orgcaf8ffc">2.2.1. Get</a></li>
+<li><a href="#org8a0fe6c">2.2.2. Provide</a></li>
+<li><a href="#orgf7c93a5">2.2.3. Compute</a></li>
+<li><a href="#orgb0c50a3">2.2.4. HPC version</a></li>
 </ul>
 </li>
-<li><a href="#org0984a66">2.3. Test</a></li>
+<li><a href="#org990f9dc">2.3. Test</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga97f1e7" class="outline-2">
-<h2 id="orga97f1e7"><span class="section-number-2">1</span> Context</h2>
+<div id="outline-container-orgd233a73" class="outline-2">
+<h2 id="orgd233a73"><span class="section-number-2">1</span> Context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The following arrays are stored in the context:
@@ -428,8 +428,8 @@ Computed data:
 </table>
 </div>
 
-<div id="outline-container-org1758650" class="outline-3">
-<h3 id="org1758650"><span class="section-number-3">1.1</span> Data structure</h3>
+<div id="outline-container-org17bf4a6" class="outline-3">
+<h3 id="org17bf4a6"><span class="section-number-3">1.1</span> Data structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_mo_basis_struct</span> {
@@ -481,8 +481,8 @@ this mechanism.
 </div>
 </div>
 
-<div id="outline-container-orgc68a2f5" class="outline-3">
-<h3 id="orgc68a2f5"><span class="section-number-3">1.2</span> Access functions</h3>
+<div id="outline-container-orgd12abde" class="outline-3">
+<h3 id="orgd12abde"><span class="section-number-3">1.2</span> Access functions</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 When all the data for the AOs have been provided, the following
@@ -495,13 +495,13 @@ function returns <code>true</code>.
 </div>
 </div>
 
-<div id="outline-container-org206c588" class="outline-4">
-<h4 id="org206c588"><span class="section-number-4">1.2.1</span> Fortran interfaces</h4>
+<div id="outline-container-org3fd1710" class="outline-4">
+<h4 id="org3fd1710"><span class="section-number-4">1.2.1</span> Fortran interfaces</h4>
 </div>
 </div>
 
-<div id="outline-container-org2156a54" class="outline-3">
-<h3 id="org2156a54"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div id="outline-container-org7749a1d" class="outline-3">
+<h3 id="org7749a1d"><span class="section-number-3">1.3</span> Initialization functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 To set the basis set, all the following functions need to be
@@ -522,16 +522,16 @@ computed to accelerate the calculations.
 </div>
 </div>
 
-<div id="outline-container-org3df06b5" class="outline-2">
-<h2 id="org3df06b5"><span class="section-number-2">2</span> Computation</h2>
+<div id="outline-container-orgde8a6a1" class="outline-2">
+<h2 id="orgde8a6a1"><span class="section-number-2">2</span> Computation</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org57dcea8" class="outline-3">
-<h3 id="org57dcea8"><span class="section-number-3">2.1</span> Computation of MOs: values only</h3>
+<div id="outline-container-org182fa52" class="outline-3">
+<h3 id="org182fa52"><span class="section-number-3">2.1</span> Computation of MOs: values only</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org4a9f172" class="outline-4">
-<h4 id="org4a9f172"><span class="section-number-4">2.1.1</span> Get</h4>
+<div id="outline-container-org66760cc" class="outline-4">
+<h4 id="org66760cc"><span class="section-number-4">2.1.1</span> Get</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
@@ -555,8 +555,8 @@ Uses the given array to compute the values.
 </div>
 </div>
 
-<div id="outline-container-orga17e19a" class="outline-4">
-<h4 id="orga17e19a"><span class="section-number-4">2.1.2</span> Provide</h4>
+<div id="outline-container-orgba2b8cd" class="outline-4">
+<h4 id="orgba2b8cd"><span class="section-number-4">2.1.2</span> Provide</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_provide_mo_basis_mo_value</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
@@ -640,10 +640,10 @@ Uses the given array to compute the values.
 </div>
 </div>
 
-<div id="outline-container-orgcf0249a" class="outline-4">
-<h4 id="orgcf0249a"><span class="section-number-4">2.1.3</span> Compute</h4>
+<div id="outline-container-org97209b4" class="outline-4">
+<h4 id="org97209b4"><span class="section-number-4">2.1.3</span> Compute</h4>
 <div class="outline-text-4" id="text-2-1-3">
-<table id="orgfe78853" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org745be13" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -817,8 +817,8 @@ matrix multiplication instead of a dgemm, as exposed in
 </div>
 </div>
 
-<div id="outline-container-org10f71a8" class="outline-4">
-<h4 id="org10f71a8"><span class="section-number-4">2.1.4</span> HPC version</h4>
+<div id="outline-container-org3ab5f86" class="outline-4">
+<h4 id="org3ab5f86"><span class="section-number-4">2.1.4</span> HPC version</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#ifdef</span> HAVE_HPC
@@ -912,12 +912,12 @@ matrix multiplication instead of a dgemm, as exposed in
 </div>
 </div>
 
-<div id="outline-container-org129cfd3" class="outline-3">
-<h3 id="org129cfd3"><span class="section-number-3">2.2</span> Computation of MOs: values, gradient, Laplacian</h3>
+<div id="outline-container-org8f42e5f" class="outline-3">
+<h3 id="org8f42e5f"><span class="section-number-3">2.2</span> Computation of MOs: values, gradient, Laplacian</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org4959144" class="outline-4">
-<h4 id="org4959144"><span class="section-number-4">2.2.1</span> Get</h4>
+<div id="outline-container-orgcaf8ffc" class="outline-4">
+<h4 id="orgcaf8ffc"><span class="section-number-4">2.2.1</span> Get</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
@@ -941,8 +941,8 @@ Uses the given array to compute the VGL.
 </div>
 </div>
 
-<div id="outline-container-org8c77ff5" class="outline-4">
-<h4 id="org8c77ff5"><span class="section-number-4">2.2.2</span> Provide</h4>
+<div id="outline-container-org8a0fe6c" class="outline-4">
+<h4 id="org8a0fe6c"><span class="section-number-4">2.2.2</span> Provide</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_provide_mo_basis_mo_vgl</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>);
@@ -1026,10 +1026,10 @@ Uses the given array to compute the VGL.
 </div>
 </div>
 
-<div id="outline-container-org740bc56" class="outline-4">
-<h4 id="org740bc56"><span class="section-number-4">2.2.3</span> Compute</h4>
+<div id="outline-container-orgf7c93a5" class="outline-4">
+<h4 id="orgf7c93a5"><span class="section-number-4">2.2.3</span> Compute</h4>
 <div class="outline-text-4" id="text-2-2-3">
-<table id="orgc0f68ac" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org470fb23" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1201,8 +1201,8 @@ matrix multiplication instead of a dgemm, as exposed in
 </div>
 </div>
 
-<div id="outline-container-orgacbfa40" class="outline-4">
-<h4 id="orgacbfa40"><span class="section-number-4">2.2.4</span> HPC version</h4>
+<div id="outline-container-orgb0c50a3" class="outline-4">
+<h4 id="orgb0c50a3"><span class="section-number-4">2.2.4</span> HPC version</h4>
 <div class="outline-text-4" id="text-2-2-4">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#ifdef</span> HAVE_HPC
@@ -1349,14 +1349,14 @@ matrix multiplication instead of a dgemm, as exposed in
 </div>
 </div>
 
-<div id="outline-container-org0984a66" class="outline-3">
-<h3 id="org0984a66"><span class="section-number-3">2.3</span> Test</h3>
+<div id="outline-container-org990f9dc" class="outline-3">
+<h3 id="org990f9dc"><span class="section-number-3">2.3</span> Test</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-08-08 Mon 14:30</p>
+<p class="date">Created: 2022-08-09 Tue 07:20</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
