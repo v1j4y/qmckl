@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-08-09 Tue 07:20 -->
+<!-- 2022-10-07 Fri 19:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Nucleus</title>
@@ -333,35 +333,28 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org74c6b12">1. Context</a>
+<li><a href="#org7b8d750">1. Context</a>
 <ul>
-<li><a href="#org22048fc">1.1. Data structure</a></li>
-<li><a href="#org848f22b">1.2. Access functions</a></li>
-<li><a href="#org5b79874">1.3. Initialization functions</a></li>
-<li><a href="#org3e1d40c">1.4. Test</a></li>
+<li><a href="#org5dba35e">1.1. Data structure</a></li>
+<li><a href="#orgf6566d6">1.2. Access functions</a></li>
+<li><a href="#org9a59988">1.3. Initialization functions</a></li>
+<li><a href="#org6048a3c">1.4. Test</a></li>
 </ul>
 </li>
-<li><a href="#orge4a75ab">2. Computation</a>
+<li><a href="#org7858618">2. Computation</a>
 <ul>
-<li><a href="#org51a4a3c">2.1. Nucleus-nucleus distances</a>
+<li><a href="#org5b1d2c3">2.1. Nucleus-nucleus distances</a>
 <ul>
-<li><a href="#org13673f3">2.1.1. Get</a></li>
-<li><a href="#orgdeee35b">2.1.2. Compute</a></li>
-<li><a href="#orgefde12d">2.1.3. Test</a></li>
+<li><a href="#orgca05450">2.1.1. Get</a></li>
+<li><a href="#org353fca8">2.1.2. Compute</a></li>
+<li><a href="#org482ee7b">2.1.3. Test</a></li>
 </ul>
 </li>
-<li><a href="#org761f94f">2.2. Nucleus-nucleus rescaled distances</a>
+<li><a href="#org62e359f">2.2. Nuclear repulsion energy</a>
 <ul>
-<li><a href="#org90437b0">2.2.1. Get</a></li>
-<li><a href="#orgb5818db">2.2.2. Compute</a></li>
-<li><a href="#org72879f2">2.2.3. Test</a></li>
-</ul>
-</li>
-<li><a href="#org97d3708">2.3. Nuclear repulsion energy</a>
-<ul>
-<li><a href="#org5860cc8">2.3.1. Get</a></li>
-<li><a href="#org7dc745e">2.3.2. Compute</a></li>
-<li><a href="#org37edc06">2.3.3. Test</a></li>
+<li><a href="#orgfa6249d">2.2.1. Get</a></li>
+<li><a href="#org22b0439">2.2.2. Compute</a></li>
+<li><a href="#orgc3d3b4f">2.2.3. Test</a></li>
 </ul>
 </li>
 </ul>
@@ -370,8 +363,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org74c6b12" class="outline-2">
-<h2 id="org74c6b12"><span class="section-number-2">1</span> Context</h2>
+<div id="outline-container-org7b8d750" class="outline-2">
+<h2 id="org7b8d750"><span class="section-number-2">1</span> Context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The following data stored in the context:
@@ -423,12 +416,6 @@ The following data stored in the context:
 <td class="org-left">int64<sub>t</sub></td>
 <td class="org-left">Nuclear coordinates, date if modified</td>
 </tr>
-
-<tr>
-<td class="org-left"><code>rescale_factor_kappa</code></td>
-<td class="org-left">double</td>
-<td class="org-left">The distance scaling factor</td>
-</tr>
 </tbody>
 </table>
 
@@ -460,18 +447,6 @@ Computed data:
 </tr>
 
 <tr>
-<td class="org-left"><code>nn_distance_rescaled</code></td>
-<td class="org-left">qmckl<sub>matrix</sub></td>
-<td class="org-left">Nucleus-nucleus rescaled distances</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>nn_distance_rescaled_date</code></td>
-<td class="org-left">int64<sub>t</sub></td>
-<td class="org-left">Date when Nucleus-nucleus rescaled distances were computed</td>
-</tr>
-
-<tr>
 <td class="org-left"><code>repulsion</code></td>
 <td class="org-left">double</td>
 <td class="org-left">Nuclear repulsion energy</td>
@@ -486,22 +461,19 @@ Computed data:
 </table>
 </div>
 
-<div id="outline-container-org22048fc" class="outline-3">
-<h3 id="org22048fc"><span class="section-number-3">1.1</span> Data structure</h3>
+<div id="outline-container-org5dba35e" class="outline-3">
+<h3 id="org5dba35e"><span class="section-number-3">1.1</span> Data structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_nucleus_struct</span> {
   <span style="color: #228b22;">int64_t</span>      <span style="color: #a0522d;">num</span>;
   <span style="color: #228b22;">int64_t</span>      <span style="color: #a0522d;">repulsion_date</span>;
   <span style="color: #228b22;">int64_t</span>      <span style="color: #a0522d;">nn_distance_date</span>;
-  <span style="color: #228b22;">int64_t</span>      <span style="color: #a0522d;">nn_distance_rescaled_date</span>;
   <span style="color: #228b22;">int64_t</span>      <span style="color: #a0522d;">coord_date</span>;
   <span style="color: #228b22;">qmckl_vector</span> <span style="color: #a0522d;">charge</span>;
   <span style="color: #228b22;">qmckl_matrix</span> <span style="color: #a0522d;">coord</span>;
   <span style="color: #228b22;">qmckl_matrix</span> <span style="color: #a0522d;">nn_distance</span>;
-  <span style="color: #228b22;">qmckl_matrix</span> <span style="color: #a0522d;">nn_distance_rescaled</span>;
   <span style="color: #228b22;">double</span>       <span style="color: #a0522d;">repulsion</span>;
-  <span style="color: #228b22;">double</span>       <span style="color: #a0522d;">rescale_factor_kappa</span>;
   <span style="color: #228b22;">int32_t</span>      <span style="color: #a0522d;">uninitialized</span>;
   <span style="color: #228b22;">bool</span>         <span style="color: #a0522d;">provided</span>;
 } <span style="color: #228b22;">qmckl_nucleus_struct</span>;
@@ -536,7 +508,6 @@ this mechanism.
   ctx-&gt;nucleus.uninitialized = (1 &lt;&lt; 3) - 1;
 
   /* <span style="color: #b22222;">Default values </span>*/
-  ctx-&gt;nucleus.rescale_factor_kappa = 1.0;
 
   <span style="color: #a020f0;">return</span> QMCKL_SUCCESS;
 }
@@ -545,8 +516,8 @@ this mechanism.
 </div>
 </div>
 
-<div id="outline-container-org848f22b" class="outline-3">
-<h3 id="org848f22b"><span class="section-number-3">1.2</span> Access functions</h3>
+<div id="outline-container-orgf6566d6" class="outline-3">
+<h3 id="orgf6566d6"><span class="section-number-3">1.2</span> Access functions</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 When all the data relative to nuclei have been set, the following
@@ -560,8 +531,8 @@ function returns <code>true</code>.
 </div>
 </div>
 
-<div id="outline-container-org5b79874" class="outline-3">
-<h3 id="org5b79874"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div id="outline-container-org9a59988" class="outline-3">
+<h3 id="org9a59988"><span class="section-number-3">1.3</span> Initialization functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 To set the data relative to the nuclei in the context, the
@@ -604,27 +575,15 @@ Sets the nuclear charges of all the atoms.
 Sets the nuclear coordinates of all the atoms. The coordinates
 are be given in atomic units.
 </p>
-
-<div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
-<span style="color: #0000ff;">qmckl_set_nucleus_rescale_factor</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
-                                 <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> <span style="color: #a0522d;">kappa</span>);
-</pre>
-</div>
-
-<p>
-Sets the rescale parameter for the nuclear distances.
-</p>
 </div>
 </div>
 
-<div id="outline-container-org3e1d40c" class="outline-3">
-<h3 id="org3e1d40c"><span class="section-number-3">1.4</span> Test</h3>
+<div id="outline-container-org6048a3c" class="outline-3">
+<h3 id="org6048a3c"><span class="section-number-3">1.4</span> Test</h3>
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>*   <span style="color: #a0522d;">nucl_charge</span>   = chbrclf_charge;
 <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>*   <span style="color: #a0522d;">nucl_coord</span>    = &amp;(chbrclf_nucl_coord[0][0]);
-<span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>    <span style="color: #a0522d;">nucl_rescale_factor_kappa</span> = 2.0;
 
 /* <span style="color: #b22222;">--- </span>*/
 
@@ -638,25 +597,12 @@ rc = qmckl_get_nucleus_num (context, &amp;n);
 
 
 rc = qmckl_set_nucleus_num (context, chbrclf_nucl_num);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 assert(!qmckl_nucleus_provided(context));
 
 rc = qmckl_get_nucleus_num (context, &amp;n);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 <span style="color: #0000ff;">assert</span>(n == chbrclf_nucl_num);
-
-<span style="color: #228b22;">double</span> <span style="color: #a0522d;">k</span>;
-rc = qmckl_get_nucleus_rescale_factor (context, &amp;k);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
-<span style="color: #0000ff;">assert</span>(k == 1.0);
-
-
-rc = qmckl_set_nucleus_rescale_factor (context, nucl_rescale_factor_kappa);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
-
-rc = qmckl_get_nucleus_rescale_factor (context, &amp;k);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
-<span style="color: #0000ff;">assert</span>(k == nucl_rescale_factor_kappa);
 
 <span style="color: #228b22;">double</span> <span style="color: #a0522d;">nucl_coord2</span>[3*chbrclf_nucl_num];
 
@@ -664,12 +610,12 @@ rc = qmckl_get_nucleus_coord (context, <span style="color: #8b2252;">'T'</span>,
 <span style="color: #0000ff;">assert</span>(rc == QMCKL_NOT_PROVIDED);
 
 rc = qmckl_set_nucleus_coord (context, <span style="color: #8b2252;">'T'</span>, &amp;(nucl_coord[0]), 3*chbrclf_nucl_num);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 
 assert(!qmckl_nucleus_provided(context));
 
 rc = qmckl_get_nucleus_coord (context, <span style="color: #8b2252;">'N'</span>, nucl_coord2, 3*chbrclf_nucl_num);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">size_t</span> <span style="color: #a0522d;">k</span>=0 ; k&lt;3 ; ++k) {
   <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;chbrclf_nucl_num ; ++i) {
     assert( nucl_coord[chbrclf_nucl_num*k+i] == nucl_coord2[3*i+k] );
@@ -677,7 +623,7 @@ rc = qmckl_get_nucleus_coord (context, <span style="color: #8b2252;">'N'</span>,
 }
 
 rc = qmckl_get_nucleus_coord (context, <span style="color: #8b2252;">'T'</span>, nucl_coord2, 3*chbrclf_nucl_num);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;3*chbrclf_nucl_num ; ++i) {
   assert( nucl_coord[i] == nucl_coord2[i] );
 }
@@ -688,10 +634,10 @@ rc = qmckl_get_nucleus_charge(context, nucl_charge2, chbrclf_nucl_num);
 <span style="color: #0000ff;">assert</span>(rc == QMCKL_NOT_PROVIDED);
 
 rc = qmckl_set_nucleus_charge(context, nucl_charge, chbrclf_nucl_num);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 
 rc = qmckl_get_nucleus_charge(context, nucl_charge2, chbrclf_nucl_num);
-<span style="color: #0000ff;">assert</span>(rc == QMCKL_SUCCESS);
+<span style="color: #0000ff;">qmckl_check</span>(context, rc);
 <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;chbrclf_nucl_num ; ++i) {
   assert( nucl_charge[i] == nucl_charge2[i] );
  }
@@ -702,8 +648,8 @@ rc = qmckl_get_nucleus_charge(context, nucl_charge2, chbrclf_nucl_num);
 </div>
 </div>
 
-<div id="outline-container-orge4a75ab" class="outline-2">
-<h2 id="orge4a75ab"><span class="section-number-2">2</span> Computation</h2>
+<div id="outline-container-org7858618" class="outline-2">
+<h2 id="org7858618"><span class="section-number-2">2</span> Computation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The computed data is stored in the context so that it can be reused
@@ -716,12 +662,12 @@ current date is stored.
 </p>
 </div>
 
-<div id="outline-container-org51a4a3c" class="outline-3">
-<h3 id="org51a4a3c"><span class="section-number-3">2.1</span> Nucleus-nucleus distances</h3>
+<div id="outline-container-org5b1d2c3" class="outline-3">
+<h3 id="org5b1d2c3"><span class="section-number-3">2.1</span> Nucleus-nucleus distances</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org13673f3" class="outline-4">
-<h4 id="org13673f3"><span class="section-number-4">2.1.1</span> Get</h4>
+<div id="outline-container-orgca05450" class="outline-4">
+<h4 id="orgca05450"><span class="section-number-4">2.1.1</span> Get</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
@@ -733,10 +679,10 @@ current date is stored.
 </div>
 </div>
 
-<div id="outline-container-orgdeee35b" class="outline-4">
-<h4 id="orgdeee35b"><span class="section-number-4">2.1.2</span> Compute</h4>
+<div id="outline-container-org353fca8" class="outline-4">
+<h4 id="org353fca8"><span class="section-number-4">2.1.2</span> Compute</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<table id="orgad2a3c3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgd385a39" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -814,8 +760,8 @@ current date is stored.
 </div>
 </div>
 
-<div id="outline-container-orgefde12d" class="outline-4">
-<h4 id="orgefde12d"><span class="section-number-4">2.1.3</span> Test</h4>
+<div id="outline-container-org482ee7b" class="outline-4">
+<h4 id="org482ee7b"><span class="section-number-4">2.1.3</span> Test</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
 <pre class="src src-c">/* <span style="color: #b22222;">Reference input data </span>*/
@@ -834,129 +780,9 @@ rc = qmckl_get_nucleus_nn_distance(context, distance, chbrclf_nucl_num*chbrclf_n
 </div>
 </div>
 
-<div id="outline-container-org761f94f" class="outline-3">
-<h3 id="org761f94f"><span class="section-number-3">2.2</span> Nucleus-nucleus rescaled distances</h3>
+<div id="outline-container-org62e359f" class="outline-3">
+<h3 id="org62e359f"><span class="section-number-3">2.2</span> Nuclear repulsion energy</h3>
 <div class="outline-text-3" id="text-2-2">
-</div>
-<div id="outline-container-org90437b0" class="outline-4">
-<h4 id="org90437b0"><span class="section-number-4">2.2.1</span> Get</h4>
-<div class="outline-text-4" id="text-2-2-1">
-<div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span>
-<span style="color: #0000ff;">qmckl_get_nucleus_nn_distance_rescaled</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
-                                       <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">distance_rescaled</span>,
-                                       <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">size_max</span>);
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgb5818db" class="outline-4">
-<h4 id="orgb5818db"><span class="section-number-4">2.2.2</span> Compute</h4>
-<div class="outline-text-4" id="text-2-2-2">
-<table id="orge53a1b8" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">qmckl<sub>context</sub></td>
-<td class="org-left">context</td>
-<td class="org-left">in</td>
-<td class="org-left">Global state</td>
-</tr>
-
-<tr>
-<td class="org-left">int64<sub>t</sub></td>
-<td class="org-left">nucl<sub>num</sub></td>
-<td class="org-left">in</td>
-<td class="org-left">Number of nuclei</td>
-</tr>
-
-<tr>
-<td class="org-left">double</td>
-<td class="org-left">coord[3][nucl<sub>num</sub>]</td>
-<td class="org-left">in</td>
-<td class="org-left">Nuclear coordinates (au)</td>
-</tr>
-
-<tr>
-<td class="org-left">double</td>
-<td class="org-left">nn<sub>distance</sub><sub>rescaled</sub>[nucl<sub>num</sub>][nucl<sub>num</sub>]</td>
-<td class="org-left">out</td>
-<td class="org-left">Nucleus-nucleus rescaled distances (au)</td>
-</tr>
-</tbody>
-</table>
-
-<div class="org-src-container">
-<pre class="src src-f90"><span style="color: #228b22;">integer </span><span style="color: #a020f0;">function</span><span style="color: #a0522d;"> </span><span style="color: #0000ff;">qmckl_compute_nn_distance_rescaled_f</span><span style="color: #000000; background-color: #ffffff;">(context, nucl_num, rescale_factor_kappa, coord, nn_distance_rescaled)</span><span style="color: #a0522d;"> </span><span style="color: #a020f0;">&amp;</span>
-     <span style="color: #a020f0;">result</span>(info)
-  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
-  <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
-  <span style="color: #228b22;">integer</span>(qmckl_context), <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
-  <span style="color: #228b22;">integer</span>*8             , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> nucl_num</span>
-  <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> rescale_factor_kappa</span>
-  <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> coord(nucl_num,3)</span>
-  <span style="color: #228b22;">double precision</span>      , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> nn_distance_rescaled(nucl_num,nucl_num)</span>
-
-  <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> k</span>
-
-  info = QMCKL_SUCCESS
-
-  <span style="color: #a020f0;">if</span> (context == QMCKL_NULL_CONTEXT) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_CONTEXT
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (nucl_num &lt;= 0) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_2
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  info = qmckl_distance_rescaled(context, <span style="color: #8b2252;">'T'</span>, <span style="color: #8b2252;">'T'</span>, nucl_num, nucl_num, <span style="color: #a020f0;">&amp;</span>
-          coord, nucl_num, <span style="color: #a020f0;">&amp;</span>
-          coord, nucl_num, <span style="color: #a020f0;">&amp;</span>
-          nn_distance_rescaled, nucl_num, rescale_factor_kappa)
-
-<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_compute_nn_distance_rescaled_f</span>
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org72879f2" class="outline-4">
-<h4 id="org72879f2"><span class="section-number-4">2.2.3</span> Test</h4>
-<div class="outline-text-4" id="text-2-2-3">
-<div class="org-src-container">
-<pre class="src src-c">/* <span style="color: #b22222;">Reference input data </span>*/
-/* <span style="color: #b22222;">TODO </span>*/
-
-//<span style="color: #b22222;">assert(qmckl_nucleus_provided(context));</span>
-//
-//<span style="color: #b22222;">double distance[nucl_num*nucl_num];</span>
-//<span style="color: #b22222;">rc = qmckl_get_nucleus_nn_distance(context, distance, nucl_num*nucl_num);</span>
-//<span style="color: #b22222;">assert(distance[0] == 0.);</span>
-//<span style="color: #b22222;">assert(distance[1] == distance[nucl_num]);</span>
-//<span style="color: #b22222;">assert(fabs(distance[1]-2.070304721365169) &lt; 1.e-12);</span>
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org97d3708" class="outline-3">
-<h3 id="org97d3708"><span class="section-number-3">2.3</span> Nuclear repulsion energy</h3>
-<div class="outline-text-3" id="text-2-3">
 <p>
 \[
    V_{NN} = \sum_{A=1}^{N-1} \sum_{B>A}^N \frac{Q_A Q_B}{R_{AB}}
@@ -964,9 +790,9 @@ rc = qmckl_get_nucleus_nn_distance(context, distance, chbrclf_nucl_num*chbrclf_n
 </p>
 </div>
 
-<div id="outline-container-org5860cc8" class="outline-4">
-<h4 id="org5860cc8"><span class="section-number-4">2.3.1</span> Get</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<div id="outline-container-orgfa6249d" class="outline-4">
+<h4 id="orgfa6249d"><span class="section-number-4">2.2.1</span> Get</h4>
+<div class="outline-text-4" id="text-2-2-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_get_nucleus_repulsion</span>(<span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>, <span style="color: #228b22;">double</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">energy</span>);
 </pre>
@@ -974,10 +800,10 @@ rc = qmckl_get_nucleus_nn_distance(context, distance, chbrclf_nucl_num*chbrclf_n
 </div>
 </div>
 
-<div id="outline-container-org7dc745e" class="outline-4">
-<h4 id="org7dc745e"><span class="section-number-4">2.3.2</span> Compute</h4>
-<div class="outline-text-4" id="text-2-3-2">
-<table id="orgb8ea564" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org22b0439" class="outline-4">
+<h4 id="org22b0439"><span class="section-number-4">2.2.2</span> Compute</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<table id="orgc045f97" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1067,9 +893,9 @@ rc = qmckl_get_nucleus_nn_distance(context, distance, chbrclf_nucl_num*chbrclf_n
 </div>
 </div>
 
-<div id="outline-container-org37edc06" class="outline-4">
-<h4 id="org37edc06"><span class="section-number-4">2.3.3</span> Test</h4>
-<div class="outline-text-4" id="text-2-3-3">
+<div id="outline-container-orgc3d3b4f" class="outline-4">
+<h4 id="orgc3d3b4f"><span class="section-number-4">2.2.3</span> Test</h4>
+<div class="outline-text-4" id="text-2-2-3">
 <div class="org-src-container">
 <pre class="src src-c">/* <span style="color: #b22222;">Reference input data </span>*/
 
@@ -1088,7 +914,7 @@ rc = qmckl_get_nucleus_repulsion(context, &amp;rep);
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2022-08-09 Tue 07:20</p>
+<p class="date">Created: 2022-10-07 Fri 19:35</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
