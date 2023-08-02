@@ -346,25 +346,25 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgdf1ace9">1. Context</a>
+<li><a href="#orgde47f0f">1. Context</a>
 <ul>
-<li><a href="#orgae8d6ec">1.1. Data structure</a></li>
-<li><a href="#org3e23ad1">1.2. Access functions</a>
+<li><a href="#orgf0bf8e1">1.1. Data structure</a></li>
+<li><a href="#org6a82c4c">1.2. Access functions</a>
 <ul>
-<li><a href="#org10c01f8">1.2.1. Number of points</a></li>
-<li><a href="#org6eeb64d">1.2.2. Point coordinates</a></li>
+<li><a href="#org68c89ff">1.2.1. Number of points</a></li>
+<li><a href="#orgc5045c7">1.2.2. Point coordinates</a></li>
 </ul>
 </li>
-<li><a href="#org223c06c">1.3. Initialization functions</a></li>
-<li><a href="#org30722a6">1.4. Test</a></li>
+<li><a href="#orgd3aa2d8">1.3. Initialization functions</a></li>
+<li><a href="#org382df79">1.4. Test</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgdf1ace9" class="outline-2">
-<h2 id="orgdf1ace9"><span class="section-number-2">1</span> Context</h2>
+<div id="outline-container-orgde47f0f" class="outline-2">
+<h2 id="orgde47f0f"><span class="section-number-2">1</span> Context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 The following data stored in the context:
@@ -414,8 +414,8 @@ corresponds to the 3 &times; <code>num</code> matrix.
 </p>
 </div>
 
-<div id="outline-container-orgae8d6ec" class="outline-3">
-<h3 id="orgae8d6ec"><span class="section-number-3">1.1</span> Data structure</h3>
+<div id="outline-container-orgf0bf8e1" class="outline-3">
+<h3 id="orgf0bf8e1"><span class="section-number-3">1.1</span> Data structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #a020f0;">typedef</span> <span style="color: #a020f0;">struct</span> <span style="color: #228b22;">qmckl_point_struct</span> {
@@ -451,8 +451,8 @@ corresponds to the 3 &times; <code>num</code> matrix.
 </div>
 </div>
 
-<div id="outline-container-org3e23ad1" class="outline-3">
-<h3 id="org3e23ad1"><span class="section-number-3">1.2</span> Access functions</h3>
+<div id="outline-container-org6a82c4c" class="outline-3">
+<h3 id="org6a82c4c"><span class="section-number-3">1.2</span> Access functions</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Access functions return <code>QMCKL_SUCCESS</code> when the data has been
@@ -463,8 +463,8 @@ contains the requested data. Otherwise, this variable is untouched.
 </p>
 </div>
 
-<div id="outline-container-org10c01f8" class="outline-4">
-<h4 id="org10c01f8"><span class="section-number-4">1.2.1</span> Number of points</h4>
+<div id="outline-container-org68c89ff" class="outline-4">
+<h4 id="org68c89ff"><span class="section-number-4">1.2.1</span> Number of points</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Returns the number of points stored in the context.
@@ -486,8 +486,8 @@ Returns the number of points stored in the context.
 </div>
 </div>
 
-<div id="outline-container-org6eeb64d" class="outline-4">
-<h4 id="org6eeb64d"><span class="section-number-4">1.2.2</span> Point coordinates</h4>
+<div id="outline-container-orgc5045c7" class="outline-4">
+<h4 id="orgc5045c7"><span class="section-number-4">1.2.2</span> Point coordinates</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Returns the point coordinates as sequences of (x,y,z).
@@ -515,8 +515,8 @@ The pointer is assumed to point on a memory block of size
 </div>
 
 
-<div id="outline-container-org223c06c" class="outline-3">
-<h3 id="org223c06c"><span class="section-number-3">1.3</span> Initialization functions</h3>
+<div id="outline-container-orgd3aa2d8" class="outline-3">
+<h3 id="orgd3aa2d8"><span class="section-number-3">1.3</span> Initialization functions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 When the data is set in the context, if the arrays are large
@@ -655,8 +655,8 @@ Copy a sequence of <code>num</code> points \((x,y,z)\) into the context.
 </div>
 
 
-<div id="outline-container-org30722a6" class="outline-3">
-<h3 id="org30722a6"><span class="section-number-3">1.4</span> Test</h3>
+<div id="outline-container-org382df79" class="outline-3">
+<h3 id="org382df79"><span class="section-number-3">1.4</span> Test</h3>
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 <pre class="src src-c">/* <span style="color: #b22222;">Reference input data</span> */

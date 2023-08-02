@@ -324,16 +324,16 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9717c2b">1. Memory data structure for the context</a></li>
-<li><a href="#org5263094">2. Passing info to allocation routines</a></li>
-<li><a href="#org3d0fdba">3. Allocation/deallocation functions</a></li>
-<li><a href="#org285a148">4. Get the size of a memory block</a></li>
+<li><a href="#org58db873">1. Memory data structure for the context</a></li>
+<li><a href="#orgeba7b75">2. Passing info to allocation routines</a></li>
+<li><a href="#org3b15f18">3. Allocation/deallocation functions</a></li>
+<li><a href="#org90c4c96">4. Get the size of a memory block</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9717c2b" class="outline-2">
-<h2 id="org9717c2b"><span class="section-number-2">1</span> Memory data structure for the context</h2>
+<div id="outline-container-org58db873" class="outline-2">
+<h2 id="org58db873"><span class="section-number-2">1</span> Memory data structure for the context</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Every time a new block of memory is allocated, the information
@@ -375,8 +375,8 @@ array, and the number of allocated blocks.
 </div>
 </div>
 
-<div id="outline-container-org5263094" class="outline-2">
-<h2 id="org5263094"><span class="section-number-2">2</span> Passing info to allocation routines</h2>
+<div id="outline-container-orgeba7b75" class="outline-2">
+<h2 id="orgeba7b75"><span class="section-number-2">2</span> Passing info to allocation routines</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Passing information to the allocation routine should be done by
@@ -385,8 +385,8 @@ passing an instance of a <code>qmckl_memory_info_struct</code>.
 </div>
 </div>
 
-<div id="outline-container-org3d0fdba" class="outline-2">
-<h2 id="org3d0fdba"><span class="section-number-2">3</span> Allocation/deallocation functions</h2>
+<div id="outline-container-org3b15f18" class="outline-2">
+<h2 id="org3b15f18"><span class="section-number-2">3</span> Allocation/deallocation functions</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Memory allocation inside the library should be done with
@@ -646,8 +646,8 @@ successful deallocation of the memory block.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org285a148" class="outline-2">
-<h2 id="org285a148"><span class="section-number-2">4</span> Get the size of a memory block</h2>
+<div id="outline-container-org90c4c96" class="outline-2">
+<h2 id="org90c4c96"><span class="section-number-2">4</span> Get the size of a memory block</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 All the blocks allocated with <code>qmckl_malloc</code> keep track of how many

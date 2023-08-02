@@ -346,118 +346,118 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgaf03f0c">1. Headers</a></li>
-<li><a href="#orgf76f6fc">2. Naïve Sherman-Morrison</a>
+<li><a href="#orgb772544">1. Headers</a></li>
+<li><a href="#org37c21b3">2. Naïve Sherman-Morrison</a>
 <ul>
-<li><a href="#org75c23bc">2.1. <code>qmckl_sm_naive</code></a>
+<li><a href="#org613e7d9">2.1. <code>qmckl_sm_naive</code></a>
 <ul>
-<li><a href="#orgd1a6e80">2.1.1. Introduction</a></li>
-<li><a href="#org218c845">2.1.2. API</a></li>
-<li><a href="#org8882c83">2.1.3. Requirements</a></li>
-<li><a href="#orgd5bab4e">2.1.4. Pedagogical kernel source (in Fortran)</a>
+<li><a href="#orgf056776">2.1.1. Introduction</a></li>
+<li><a href="#orgb200279">2.1.2. API</a></li>
+<li><a href="#org5c7e511">2.1.3. Requirements</a></li>
+<li><a href="#org8b1d2e6">2.1.4. Pedagogical kernel source (in Fortran)</a>
 <ul>
-<li><a href="#orgddd53dd">2.1.4.1. C interface (not directly exposed)</a></li>
+<li><a href="#org967b56e">2.1.4.1. C interface (not directly exposed)</a></li>
 </ul>
 </li>
-<li><a href="#orgeb08849">2.1.5. C headers (exposed in qmckl.h)</a></li>
-<li><a href="#orge195614">2.1.6. C sources</a></li>
-<li><a href="#orgf268dc2">2.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
-<li><a href="#orgc5ad43a">2.1.8. Performance</a></li>
-<li><a href="#orga92f458">2.1.9. Tests</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgdf3139b">3. Sherman-Morrison with Slagel Splitting (core)</a>
-<ul>
-<li><a href="#org4e81dd9">3.1. <code>qmckl_sm_splitting_core</code></a>
-<ul>
-<li><a href="#orga0c11f1">3.1.1. Introduction</a></li>
-<li><a href="#org6425f90">3.1.2. API</a></li>
-<li><a href="#org668ecd3">3.1.3. Requirements</a></li>
-<li><a href="#org313740c">3.1.4. Pedagogical kernel source (in Fortran)</a>
-<ul>
-<li><a href="#org0d78f3f">3.1.4.1. C interface to the pedagogical kernel (not directly exposed)</a></li>
-</ul>
-</li>
-<li><a href="#org10cd818">3.1.5. C headers (exposed in qmckl.h)</a></li>
-<li><a href="#orgf1618e8">3.1.6. C sources</a></li>
-<li><a href="#org4c5c30c">3.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
-<li><a href="#orga8df6ba">3.1.8. Performance</a></li>
+<li><a href="#org6da911f">2.1.5. C headers (exposed in qmckl.h)</a></li>
+<li><a href="#org2e6259c">2.1.6. C sources</a></li>
+<li><a href="#org25a328a">2.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
+<li><a href="#org3dd220c">2.1.8. Performance</a></li>
+<li><a href="#orgba25b7a">2.1.9. Tests</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgde425ac">4. Woodbury 2x2</a>
+<li><a href="#orgfbe1f58">3. Sherman-Morrison with Slagel Splitting (core)</a>
 <ul>
-<li><a href="#org66fe9cb">4.1. <code>qmckl_woodbury_2x2</code></a>
+<li><a href="#org4d64d00">3.1. <code>qmckl_sm_splitting_core</code></a>
 <ul>
-<li><a href="#org6563e32">4.1.1. Introduction</a></li>
-<li><a href="#org5266534">4.1.2. API</a></li>
-<li><a href="#org64e7560">4.1.3. Requirements</a></li>
-<li><a href="#org4c9fac4">4.1.4. Pedagogical kernel source (in Fortran)</a>
+<li><a href="#org2d8b80e">3.1.1. Introduction</a></li>
+<li><a href="#orgd55787d">3.1.2. API</a></li>
+<li><a href="#orgff1a904">3.1.3. Requirements</a></li>
+<li><a href="#org996bf94">3.1.4. Pedagogical kernel source (in Fortran)</a>
 <ul>
-<li><a href="#org1b5ccf4">4.1.4.1. C interface (not directly exposed)</a></li>
+<li><a href="#org064322d">3.1.4.1. C interface to the pedagogical kernel (not directly exposed)</a></li>
 </ul>
 </li>
-<li><a href="#orgf2e9f66">4.1.5. C headers (exposed in qmckl.h)</a></li>
-<li><a href="#orgf8f2558">4.1.6. C sources</a></li>
-<li><a href="#orgc00efe3">4.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
-<li><a href="#org4988cac">4.1.8. Performance</a></li>
-<li><a href="#org36c28f0">4.1.9. Tests</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org6491ad7">5. Woodbury 3x3</a>
-<ul>
-<li><a href="#org9b711a4">5.1. <code>qmckl_woodbury_3x3</code></a>
-<ul>
-<li><a href="#org101a0c9">5.1.1. Introduction</a></li>
-<li><a href="#orgd560bdd">5.1.2. API</a></li>
-<li><a href="#org750a2f3">5.1.3. Requirements</a></li>
-<li><a href="#orgb4defae">5.1.4. Pedagogical kernel source (in Fortran)</a>
-<ul>
-<li><a href="#org102ac41">5.1.4.1. C interface (not directly exposed)</a></li>
-</ul>
-</li>
-<li><a href="#orge2800fb">5.1.5. C headers (exposed in qmckl.h)</a></li>
-<li><a href="#org3d31e3e">5.1.6. C sources</a></li>
-<li><a href="#org6aa2088">5.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
-<li><a href="#org515609e">5.1.8. Performance</a></li>
-<li><a href="#org31eb9ad">5.1.9. Tests</a></li>
+<li><a href="#org80eb8dd">3.1.5. C headers (exposed in qmckl.h)</a></li>
+<li><a href="#org46d469e">3.1.6. C sources</a></li>
+<li><a href="#org39f58c3">3.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
+<li><a href="#org0579b8c">3.1.8. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6f73010">6. Sherman-Morrison with Slagel Splitting</a>
+<li><a href="#org42aa23d">4. Woodbury 2x2</a>
 <ul>
-<li><a href="#orgbabccac">6.1. <code>qmckl_sm_splitting</code></a>
+<li><a href="#orga78c975">4.1. <code>qmckl_woodbury_2x2</code></a>
 <ul>
-<li><a href="#org962d17e">6.1.1. Introduction</a></li>
-<li><a href="#org4724302">6.1.2. API</a></li>
-<li><a href="#org3765ad2">6.1.3. Requirements</a></li>
-<li><a href="#org1f9d198">6.1.4. Pedagogical kernel source (in Fortran)</a>
+<li><a href="#org970609f">4.1.1. Introduction</a></li>
+<li><a href="#org9073cee">4.1.2. API</a></li>
+<li><a href="#org1a7cbac">4.1.3. Requirements</a></li>
+<li><a href="#orgef0bdc8">4.1.4. Pedagogical kernel source (in Fortran)</a>
 <ul>
-<li><a href="#orgcb55a08">6.1.4.1. C interface to the pedagogical kernel (not directly exposed)</a></li>
+<li><a href="#org13c4d4f">4.1.4.1. C interface (not directly exposed)</a></li>
 </ul>
 </li>
-<li><a href="#org2b56071">6.1.5. C headers (exposed in qmckl.h)</a></li>
-<li><a href="#org917ca90">6.1.6. C source</a></li>
-<li><a href="#org9aa7986">6.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
-<li><a href="#org8e60491">6.1.8. Performance&#x2026;</a></li>
-<li><a href="#org21e0887">6.1.9. Test</a></li>
+<li><a href="#org1e59ec1">4.1.5. C headers (exposed in qmckl.h)</a></li>
+<li><a href="#org97d41ba">4.1.6. C sources</a></li>
+<li><a href="#orgfaee1de">4.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
+<li><a href="#org05dab92">4.1.8. Performance</a></li>
+<li><a href="#org0a00de8">4.1.9. Tests</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgaeb2495">7. End of files</a></li>
+<li><a href="#orgb8a7600">5. Woodbury 3x3</a>
+<ul>
+<li><a href="#org2fc5bac">5.1. <code>qmckl_woodbury_3x3</code></a>
+<ul>
+<li><a href="#orge34228a">5.1.1. Introduction</a></li>
+<li><a href="#org826309c">5.1.2. API</a></li>
+<li><a href="#orge83a570">5.1.3. Requirements</a></li>
+<li><a href="#orgadcc236">5.1.4. Pedagogical kernel source (in Fortran)</a>
+<ul>
+<li><a href="#org24158fd">5.1.4.1. C interface (not directly exposed)</a></li>
+</ul>
+</li>
+<li><a href="#org0270444">5.1.5. C headers (exposed in qmckl.h)</a></li>
+<li><a href="#org5168cad">5.1.6. C sources</a></li>
+<li><a href="#org7cefe91">5.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
+<li><a href="#orgf8e7525">5.1.8. Performance</a></li>
+<li><a href="#org1dfb7c5">5.1.9. Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8028c95">6. Sherman-Morrison with Slagel Splitting</a>
+<ul>
+<li><a href="#org14b3416">6.1. <code>qmckl_sm_splitting</code></a>
+<ul>
+<li><a href="#org1480798">6.1.1. Introduction</a></li>
+<li><a href="#orgc5d4093">6.1.2. API</a></li>
+<li><a href="#org4502870">6.1.3. Requirements</a></li>
+<li><a href="#org51604b9">6.1.4. Pedagogical kernel source (in Fortran)</a>
+<ul>
+<li><a href="#org37c1d91">6.1.4.1. C interface to the pedagogical kernel (not directly exposed)</a></li>
+</ul>
+</li>
+<li><a href="#org0f1ebbb">6.1.5. C headers (exposed in qmckl.h)</a></li>
+<li><a href="#orgc835f45">6.1.6. C source</a></li>
+<li><a href="#org1723947">6.1.7. Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</a></li>
+<li><a href="#org1d009cb">6.1.8. Performance&#x2026;</a></li>
+<li><a href="#org499bf22">6.1.9. Test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgebebe83">7. End of files</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgaf03f0c" class="outline-2">
-<h2 id="orgaf03f0c"><span class="section-number-2">1</span> Headers</h2>
+<div id="outline-container-orgb772544" class="outline-2">
+<h2 id="orgb772544"><span class="section-number-2">1</span> Headers</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"qmckl.h"</span>
@@ -479,17 +479,17 @@ This is the range that determines the how many high performance kernel instantce
 </p>
 </div>
 </div>
-<div id="outline-container-orgf76f6fc" class="outline-2">
-<h2 id="orgf76f6fc"><span class="section-number-2">2</span> Naïve Sherman-Morrison</h2>
+<div id="outline-container-org37c21b3" class="outline-2">
+<h2 id="org37c21b3"><span class="section-number-2">2</span> Naïve Sherman-Morrison</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org75c23bc" class="outline-3">
-<h3 id="org75c23bc"><span class="section-number-3">2.1</span> <code>qmckl_sm_naive</code></h3>
+<div id="outline-container-org613e7d9" class="outline-3">
+<h3 id="org613e7d9"><span class="section-number-3">2.1</span> <code>qmckl_sm_naive</code></h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
 
-<div id="outline-container-orgd1a6e80" class="outline-4">
-<h4 id="orgd1a6e80"><span class="section-number-4">2.1.1</span> Introduction</h4>
+<div id="outline-container-orgf056776" class="outline-4">
+<h4 id="orgf056776"><span class="section-number-4">2.1.1</span> Introduction</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 This is the simplest of the available Sherman-Morrison-Woodbury kernels. It applies rank-1 updates one by one in
@@ -539,10 +539,10 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org218c845" class="outline-4">
-<h4 id="org218c845"><span class="section-number-4">2.1.2</span> API</h4>
+<div id="outline-container-orgb200279" class="outline-4">
+<h4 id="orgb200279"><span class="section-number-4">2.1.2</span> API</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<table id="orgb190372" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org558c457" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -630,8 +630,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org8882c83" class="outline-4">
-<h4 id="org8882c83"><span class="section-number-4">2.1.3</span> Requirements</h4>
+<div id="outline-container-org5c7e511" class="outline-4">
+<h4 id="org5c7e511"><span class="section-number-4">2.1.3</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -647,8 +647,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgd5bab4e" class="outline-4">
-<h4 id="orgd5bab4e"><span class="section-number-4">2.1.4</span> Pedagogical kernel source (in Fortran)</h4>
+<div id="outline-container-org8b1d2e6" class="outline-4">
+<h4 id="org8b1d2e6"><span class="section-number-4">2.1.4</span> Pedagogical kernel source (in Fortran)</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 The following source code written in Fortran is inteded to illustrate how the kernel works. Even though the kernel is
@@ -742,8 +742,8 @@ not be used in real workloads.
 </div>
 </div>
 
-<div id="outline-container-orgddd53dd" class="outline-5">
-<h5 id="orgddd53dd"><span class="section-number-5">2.1.4.1</span> C interface (not directly exposed)</h5>
+<div id="outline-container-org967b56e" class="outline-5">
+<h5 id="org967b56e"><span class="section-number-5">2.1.4.1</span> C interface (not directly exposed)</h5>
 <div class="outline-text-5" id="text-2-1-4-1">
 <p>
 The following Fortran function <code>qmckl_sm_naive_doc</code> makes sure
@@ -755,8 +755,8 @@ for C users and in the module file 'qmckl<sub>f.F90</sub>' for Fortran users.
 </div>
 </div>
 
-<div id="outline-container-orgeb08849" class="outline-4">
-<h4 id="orgeb08849"><span class="section-number-4">2.1.5</span> C headers (exposed in qmckl.h)</h4>
+<div id="outline-container-org6da911f" class="outline-4">
+<h4 id="org6da911f"><span class="section-number-4">2.1.5</span> C headers (exposed in qmckl.h)</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sm_naive</span> (
@@ -802,8 +802,8 @@ for C users and in the module file 'qmckl<sub>f.F90</sub>' for Fortran users.
 </div>
 </div>
 
-<div id="outline-container-orge195614" class="outline-4">
-<h4 id="orge195614"><span class="section-number-4">2.1.6</span> C sources</h4>
+<div id="outline-container-org2e6259c" class="outline-4">
+<h4 id="org2e6259c"><span class="section-number-4">2.1.6</span> C sources</h4>
 <div class="outline-text-4" id="text-2-1-6">
 <p>
 Common includes and macros used by all the Sherman-Morrison-Woodbury kernels.
@@ -921,7 +921,7 @@ multiple of <code>SIMD_LENGTH</code>.
 <code>qmckl_exit_code qmckl_sm_naive_{Dim}</code> is a C function-template that is used to genereate instances of C fucntions based on the range given above. The advantage of this method is that for each of these instances all the dimensions and loop-bounds are known at compile time, allowing the compiler to optimize more aggressively.
 </p>
 <div class="org-src-container">
-<pre class="src src-c" id="org30cb6cc"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_sm_naive_</span>{Dim}(
+<pre class="src src-c" id="orgcb8d804"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_sm_naive_</span>{Dim}(
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">N_updates</span>,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">__restrict</span> Updates,
@@ -997,7 +997,7 @@ multiple of <code>SIMD_LENGTH</code>.
 This is the kernel generator written in Python. It uses the kernel generator range and templates defined above to generate the C kernel instances.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org95f0f6f"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
+<pre class="src src-python" id="org1df6dc8"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
 <span style="color: #8b2252;">static inline qmckl_exit_code qmckl_sm_naive_{Dim}(</span>
 <span style="color: #8b2252;">    const qmckl_context context,</span>
 <span style="color: #8b2252;">    const uint64_t N_updates,</span>
@@ -1081,7 +1081,7 @@ This is the kernel generator written in Python. It uses the kernel generator ran
 Python script that generated C switch cases that call individual kernel instances.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org2648971"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
+<pre class="src src-python" id="org46673e7"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
 <span style="color: #8b2252;">case {Dim}:  </span>
 <span style="color: #8b2252;">  return qmckl_sm_naive_{Dim}(context,</span>
 <span style="color: #8b2252;">    N_updates,</span>
@@ -2721,14 +2721,14 @@ Python script that generated C switch cases that call individual kernel instance
 </div>
 </div>
 
-<div id="outline-container-orgf268dc2" class="outline-4">
-<h4 id="orgf268dc2"><span class="section-number-4">2.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
+<div id="outline-container-org25a328a" class="outline-4">
+<h4 id="org25a328a"><span class="section-number-4">2.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
 <div class="outline-text-4" id="text-2-1-7">
 </div>
 </div>
 
-<div id="outline-container-orgc5ad43a" class="outline-4">
-<h4 id="orgc5ad43a"><span class="section-number-4">2.1.8</span> Performance</h4>
+<div id="outline-container-org3dd220c" class="outline-4">
+<h4 id="org3dd220c"><span class="section-number-4">2.1.8</span> Performance</h4>
 <div class="outline-text-4" id="text-2-1-8">
 <p>
 This function performs best when there is only 1 rank-1 update in the update cycle. It is 
@@ -2737,8 +2737,8 @@ can never resolve a situation where applying the update causes singular behaviou
 </p>
 </div>
 </div>
-<div id="outline-container-orga92f458" class="outline-4">
-<h4 id="orga92f458"><span class="section-number-4">2.1.9</span> Tests</h4>
+<div id="outline-container-orgba25b7a" class="outline-4">
+<h4 id="orgba25b7a"><span class="section-number-4">2.1.9</span> Tests</h4>
 <div class="outline-text-4" id="text-2-1-9">
 <p>
 The tests for the kernels are executed on datasets that are extracted from a run of 
@@ -2806,17 +2806,17 @@ rc = QMCKL_SUCCESS;
 </div>
 
 
-<div id="outline-container-orgdf3139b" class="outline-2">
-<h2 id="orgdf3139b"><span class="section-number-2">3</span> Sherman-Morrison with Slagel Splitting (core)</h2>
+<div id="outline-container-orgfbe1f58" class="outline-2">
+<h2 id="orgfbe1f58"><span class="section-number-2">3</span> Sherman-Morrison with Slagel Splitting (core)</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org4e81dd9" class="outline-3">
-<h3 id="org4e81dd9"><span class="section-number-3">3.1</span> <code>qmckl_sm_splitting_core</code></h3>
+<div id="outline-container-org4d64d00" class="outline-3">
+<h3 id="org4d64d00"><span class="section-number-3">3.1</span> <code>qmckl_sm_splitting_core</code></h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
 
-<div id="outline-container-orga0c11f1" class="outline-4">
-<h4 id="orga0c11f1"><span class="section-number-4">3.1.1</span> Introduction</h4>
+<div id="outline-container-org2d8b80e" class="outline-4">
+<h4 id="org2d8b80e"><span class="section-number-4">3.1.1</span> Introduction</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 <code>qmckl_sm_splitting_core</code> is the inner core part of 'Sherman-Morrison with update splitting' in the next section.
@@ -2844,10 +2844,10 @@ If the determinant is passed it will only be partially updated if there were any
 </div>
 </div>
 
-<div id="outline-container-org6425f90" class="outline-4">
-<h4 id="org6425f90"><span class="section-number-4">3.1.2</span> API</h4>
+<div id="outline-container-orgd55787d" class="outline-4">
+<h4 id="orgd55787d"><span class="section-number-4">3.1.2</span> API</h4>
 <div class="outline-text-4" id="text-3-1-2">
-<table id="org24432ae" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgafd5d90" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -2956,8 +2956,8 @@ If the determinant is passed it will only be partially updated if there were any
 </div>
 </div>
 
-<div id="outline-container-org668ecd3" class="outline-4">
-<h4 id="org668ecd3"><span class="section-number-4">3.1.3</span> Requirements</h4>
+<div id="outline-container-orgff1a904" class="outline-4">
+<h4 id="orgff1a904"><span class="section-number-4">3.1.3</span> Requirements</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <ul class="org-ul">
 <li><code>LDS &gt;= 2</code></li>
@@ -2974,8 +2974,8 @@ If the determinant is passed it will only be partially updated if there were any
 </div>
 </div>
 
-<div id="outline-container-org313740c" class="outline-4">
-<h4 id="org313740c"><span class="section-number-4">3.1.4</span> Pedagogical kernel source (in Fortran)</h4>
+<div id="outline-container-org996bf94" class="outline-4">
+<h4 id="org996bf94"><span class="section-number-4">3.1.4</span> Pedagogical kernel source (in Fortran)</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 The following source code written in Fortran is inteded to illustrate how the kernel works. Even though the kernel is
@@ -3091,8 +3091,8 @@ not be used in real workloads.
 </div>
 </div>
 
-<div id="outline-container-org0d78f3f" class="outline-5">
-<h5 id="org0d78f3f"><span class="section-number-5">3.1.4.1</span> C interface to the pedagogical kernel (not directly exposed)</h5>
+<div id="outline-container-org064322d" class="outline-5">
+<h5 id="org064322d"><span class="section-number-5">3.1.4.1</span> C interface to the pedagogical kernel (not directly exposed)</h5>
 <div class="outline-text-5" id="text-3-1-4-1">
 <p>
 The function <code>qmckl_sm_splitting_core_doc</code> makes sure that
@@ -3105,8 +3105,8 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-org10cd818" class="outline-4">
-<h4 id="org10cd818"><span class="section-number-4">3.1.5</span> C headers (exposed in qmckl.h)</h4>
+<div id="outline-container-org80eb8dd" class="outline-4">
+<h4 id="org80eb8dd"><span class="section-number-4">3.1.5</span> C headers (exposed in qmckl.h)</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sm_splitting_core</span> (
@@ -3161,8 +3161,8 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-orgf1618e8" class="outline-4">
-<h4 id="orgf1618e8"><span class="section-number-4">3.1.6</span> C sources</h4>
+<div id="outline-container-org46d469e" class="outline-4">
+<h4 id="org46d469e"><span class="section-number-4">3.1.6</span> C sources</h4>
 <div class="outline-text-4" id="text-3-1-6">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sm_splitting_core_hpc</span>(
@@ -3251,7 +3251,7 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 
 <div class="org-src-container">
-<pre class="src src-c" id="org6c55efa"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_sm_splitting_core_</span>{Dim}(
+<pre class="src src-c" id="org0904678"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_sm_splitting_core_</span>{Dim}(
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
     <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">N_updates</span>,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">__restrict</span> Updates,
@@ -3335,7 +3335,7 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf3f6aef"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
+<pre class="src src-python" id="org95f17dd"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
 <span style="color: #8b2252;">static inline qmckl_exit_code qmckl_sm_splitting_core_{Dim}(</span>
 <span style="color: #8b2252;">    const qmckl_context context,</span>
 <span style="color: #8b2252;">    uint64_t N_updates,</span>
@@ -3427,7 +3427,7 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org143ed24"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
+<pre class="src src-python" id="org4bef36c"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
 <span style="color: #8b2252;">case {Dim}: {</span>
 <span style="color: #8b2252;">  return qmckl_sm_splitting_core_{Dim}(</span>
 <span style="color: #8b2252;">      context,</span>
@@ -5416,14 +5416,14 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-org4c5c30c" class="outline-4">
-<h4 id="org4c5c30c"><span class="section-number-4">3.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
+<div id="outline-container-org39f58c3" class="outline-4">
+<h4 id="org39f58c3"><span class="section-number-4">3.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
 <div class="outline-text-4" id="text-3-1-7">
 </div>
 </div>
 
-<div id="outline-container-orga8df6ba" class="outline-4">
-<h4 id="orga8df6ba"><span class="section-number-4">3.1.8</span> Performance</h4>
+<div id="outline-container-org0579b8c" class="outline-4">
+<h4 id="org0579b8c"><span class="section-number-4">3.1.8</span> Performance</h4>
 <div class="outline-text-4" id="text-3-1-8">
 <p>
 This function cannot be used by itself and is used in Sherman-Morrison with update splitting and Woodbury 3x3 and 2x2
@@ -5435,17 +5435,17 @@ with Sherman-Morrison and update splitting. Please look at the performance recco
 </div>
 
 
-<div id="outline-container-orgde425ac" class="outline-2">
-<h2 id="orgde425ac"><span class="section-number-2">4</span> Woodbury 2x2</h2>
+<div id="outline-container-org42aa23d" class="outline-2">
+<h2 id="org42aa23d"><span class="section-number-2">4</span> Woodbury 2x2</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org66fe9cb" class="outline-3">
-<h3 id="org66fe9cb"><span class="section-number-3">4.1</span> <code>qmckl_woodbury_2x2</code></h3>
+<div id="outline-container-orga78c975" class="outline-3">
+<h3 id="orga78c975"><span class="section-number-3">4.1</span> <code>qmckl_woodbury_2x2</code></h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
 
-<div id="outline-container-org6563e32" class="outline-4">
-<h4 id="org6563e32"><span class="section-number-4">4.1.1</span> Introduction</h4>
+<div id="outline-container-org970609f" class="outline-4">
+<h4 id="org970609f"><span class="section-number-4">4.1.1</span> Introduction</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 The Woodbury 2x2 kernel. It is used to apply two rank-1 updates at once. The formula used in
@@ -5469,10 +5469,10 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org5266534" class="outline-4">
-<h4 id="org5266534"><span class="section-number-4">4.1.2</span> API</h4>
+<div id="outline-container-org9073cee" class="outline-4">
+<h4 id="org9073cee"><span class="section-number-4">4.1.2</span> API</h4>
 <div class="outline-text-4" id="text-4-1-2">
-<table id="org8ac1ba0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org4ced9dc" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -5553,8 +5553,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org64e7560" class="outline-4">
-<h4 id="org64e7560"><span class="section-number-4">4.1.3</span> Requirements</h4>
+<div id="outline-container-org1a7cbac" class="outline-4">
+<h4 id="org1a7cbac"><span class="section-number-4">4.1.3</span> Requirements</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <ul class="org-ul">
 <li><code>context</code> is not <code>qmckl_null_context</code></li>
@@ -5568,8 +5568,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org4c9fac4" class="outline-4">
-<h4 id="org4c9fac4"><span class="section-number-4">4.1.4</span> Pedagogical kernel source (in Fortran)</h4>
+<div id="outline-container-orgef0bdc8" class="outline-4">
+<h4 id="orgef0bdc8"><span class="section-number-4">4.1.4</span> Pedagogical kernel source (in Fortran)</h4>
 <div class="outline-text-4" id="text-4-1-4">
 <p>
 The following source code written in Fortran is inteded to illustrate how the kernel works. Even though the kernel is
@@ -5705,8 +5705,8 @@ not be used in real workloads.
 </div>
 </div>
 
-<div id="outline-container-org1b5ccf4" class="outline-5">
-<h5 id="org1b5ccf4"><span class="section-number-5">4.1.4.1</span> C interface (not directly exposed)</h5>
+<div id="outline-container-org13c4d4f" class="outline-5">
+<h5 id="org13c4d4f"><span class="section-number-5">4.1.4.1</span> C interface (not directly exposed)</h5>
 <div class="outline-text-5" id="text-4-1-4-1">
 <p>
 The function <code>qmckl_sm_splitting_core_doc</code> makes sure that
@@ -5719,8 +5719,8 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-orgf2e9f66" class="outline-4">
-<h4 id="orgf2e9f66"><span class="section-number-4">4.1.5</span> C headers (exposed in qmckl.h)</h4>
+<div id="outline-container-org1e59ec1" class="outline-4">
+<h4 id="org1e59ec1"><span class="section-number-4">4.1.5</span> C headers (exposed in qmckl.h)</h4>
 <div class="outline-text-4" id="text-4-1-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_woodbury_2x2</span> (
@@ -5763,8 +5763,8 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-orgf8f2558" class="outline-4">
-<h4 id="orgf8f2558"><span class="section-number-4">4.1.6</span> C sources</h4>
+<div id="outline-container-org97d41ba" class="outline-4">
+<h4 id="org97d41ba"><span class="section-number-4">4.1.6</span> C sources</h4>
 <div class="outline-text-4" id="text-4-1-6">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_woodbury_2x2_hpc</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
@@ -5854,7 +5854,7 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 
 <div class="org-src-container">
-<pre class="src src-c" id="org1bd91fb"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_woodbury_2x2_</span>{Dim}(
+<pre class="src src-c" id="org189ea77"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_woodbury_2x2_</span>{Dim}(
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">__restrict</span> Updates,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">uint64_t</span>* <span style="color: #a0522d;">__restrict</span> Updates_index,
@@ -7804,14 +7804,14 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-orgc00efe3" class="outline-4">
-<h4 id="orgc00efe3"><span class="section-number-4">4.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
+<div id="outline-container-orgfaee1de" class="outline-4">
+<h4 id="orgfaee1de"><span class="section-number-4">4.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
 <div class="outline-text-4" id="text-4-1-7">
 </div>
 </div>
 
-<div id="outline-container-org4988cac" class="outline-4">
-<h4 id="org4988cac"><span class="section-number-4">4.1.8</span> Performance</h4>
+<div id="outline-container-org05dab92" class="outline-4">
+<h4 id="org05dab92"><span class="section-number-4">4.1.8</span> Performance</h4>
 <div class="outline-text-4" id="text-4-1-8">
 <p>
 This function is most efficient when used in cases where there are only 2 rank-1 updates and
@@ -7820,8 +7820,8 @@ it is sure they will not result in a singular matrix.
 </div>
 </div>
 
-<div id="outline-container-org36c28f0" class="outline-4">
-<h4 id="org36c28f0"><span class="section-number-4">4.1.9</span> Tests</h4>
+<div id="outline-container-org0a00de8" class="outline-4">
+<h4 id="org0a00de8"><span class="section-number-4">4.1.9</span> Tests</h4>
 <div class="outline-text-4" id="text-4-1-9">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000ff;">assert</span>(Updates2 != <span style="color: #008b8b;">NULL</span>);
@@ -7858,17 +7858,17 @@ rc = QMCKL_SUCCESS;
 </div>
 
 
-<div id="outline-container-org6491ad7" class="outline-2">
-<h2 id="org6491ad7"><span class="section-number-2">5</span> Woodbury 3x3</h2>
+<div id="outline-container-orgb8a7600" class="outline-2">
+<h2 id="orgb8a7600"><span class="section-number-2">5</span> Woodbury 3x3</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org9b711a4" class="outline-3">
-<h3 id="org9b711a4"><span class="section-number-3">5.1</span> <code>qmckl_woodbury_3x3</code></h3>
+<div id="outline-container-org2fc5bac" class="outline-3">
+<h3 id="org2fc5bac"><span class="section-number-3">5.1</span> <code>qmckl_woodbury_3x3</code></h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
 
-<div id="outline-container-org101a0c9" class="outline-4">
-<h4 id="org101a0c9"><span class="section-number-4">5.1.1</span> Introduction</h4>
+<div id="outline-container-orge34228a" class="outline-4">
+<h4 id="orge34228a"><span class="section-number-4">5.1.1</span> Introduction</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 The Woodbury 3x3 kernel. It is used to apply two rank-1 updates at once. The formula used in
@@ -7892,10 +7892,10 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgd560bdd" class="outline-4">
-<h4 id="orgd560bdd"><span class="section-number-4">5.1.2</span> API</h4>
+<div id="outline-container-org826309c" class="outline-4">
+<h4 id="org826309c"><span class="section-number-4">5.1.2</span> API</h4>
 <div class="outline-text-4" id="text-5-1-2">
-<table id="org218c490" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org009e143" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -7976,8 +7976,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org750a2f3" class="outline-4">
-<h4 id="org750a2f3"><span class="section-number-4">5.1.3</span> Requirements</h4>
+<div id="outline-container-orge83a570" class="outline-4">
+<h4 id="orge83a570"><span class="section-number-4">5.1.3</span> Requirements</h4>
 <div class="outline-text-4" id="text-5-1-3">
 <ul class="org-ul">
 <li><code>context</code> is not <code>qmckl_null_context</code></li>
@@ -7991,8 +7991,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-orgb4defae" class="outline-4">
-<h4 id="orgb4defae"><span class="section-number-4">5.1.4</span> Pedagogical kernel source (in Fortran)</h4>
+<div id="outline-container-orgadcc236" class="outline-4">
+<h4 id="orgadcc236"><span class="section-number-4">5.1.4</span> Pedagogical kernel source (in Fortran)</h4>
 <div class="outline-text-4" id="text-5-1-4">
 <p>
 The following source code written in Fortran is inteded to illustrate how the kernel works. Even though the kernel is
@@ -8137,8 +8137,8 @@ not be used in real workloads.
 </div>
 </div>
 
-<div id="outline-container-org102ac41" class="outline-5">
-<h5 id="org102ac41"><span class="section-number-5">5.1.4.1</span> C interface (not directly exposed)</h5>
+<div id="outline-container-org24158fd" class="outline-5">
+<h5 id="org24158fd"><span class="section-number-5">5.1.4.1</span> C interface (not directly exposed)</h5>
 <div class="outline-text-5" id="text-5-1-4-1">
 <p>
 The function <code>qmckl_sm_splitting_core_doc</code> makes sure that
@@ -8151,8 +8151,8 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-orge2800fb" class="outline-4">
-<h4 id="orge2800fb"><span class="section-number-4">5.1.5</span> C headers (exposed in qmckl.h)</h4>
+<div id="outline-container-org0270444" class="outline-4">
+<h4 id="org0270444"><span class="section-number-4">5.1.5</span> C headers (exposed in qmckl.h)</h4>
 <div class="outline-text-4" id="text-5-1-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_woodbury_3x3</span> (
@@ -8195,8 +8195,8 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-org3d31e3e" class="outline-4">
-<h4 id="org3d31e3e"><span class="section-number-4">5.1.6</span> C sources</h4>
+<div id="outline-container-org5168cad" class="outline-4">
+<h4 id="org5168cad"><span class="section-number-4">5.1.6</span> C sources</h4>
 <div class="outline-text-4" id="text-5-1-6">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_woodbury_3x3_hpc</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
@@ -8306,7 +8306,7 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 
 <div class="org-src-container">
-<pre class="src src-c" id="org7199817"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_woodbury_3x3_</span>{Dim}(
+<pre class="src src-c" id="org37b4835"><span style="color: #a020f0;">static</span> <span style="color: #a020f0;">inline</span> <span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #a0522d;">qmckl_woodbury_3x3_</span>{Dim}(
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span>* <span style="color: #a0522d;">__restrict</span> Updates,
     <span style="color: #a020f0;">const</span> <span style="color: #228b22;">uint64_t</span>* <span style="color: #a0522d;">__restrict</span> Updates_index,
@@ -10676,14 +10676,14 @@ exposed in <code>qmckl.h</code> and <code>qmckl_f.F90</code>, but
 </div>
 </div>
 
-<div id="outline-container-org6aa2088" class="outline-4">
-<h4 id="org6aa2088"><span class="section-number-4">5.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
+<div id="outline-container-org7cefe91" class="outline-4">
+<h4 id="org7cefe91"><span class="section-number-4">5.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
 <div class="outline-text-4" id="text-5-1-7">
 </div>
 </div>
 
-<div id="outline-container-org515609e" class="outline-4">
-<h4 id="org515609e"><span class="section-number-4">5.1.8</span> Performance</h4>
+<div id="outline-container-orgf8e7525" class="outline-4">
+<h4 id="orgf8e7525"><span class="section-number-4">5.1.8</span> Performance</h4>
 <div class="outline-text-4" id="text-5-1-8">
 <p>
 This function is most efficient when used in cases where there are only 3 rank-1 updates and
@@ -10692,8 +10692,8 @@ it is sure they will not result in a singular matrix.
 </div>
 </div>
 
-<div id="outline-container-org31eb9ad" class="outline-4">
-<h4 id="org31eb9ad"><span class="section-number-4">5.1.9</span> Tests</h4>
+<div id="outline-container-org1dfb7c5" class="outline-4">
+<h4 id="org1dfb7c5"><span class="section-number-4">5.1.9</span> Tests</h4>
 <div class="outline-text-4" id="text-5-1-9">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000ff;">assert</span>(Updates3 != <span style="color: #008b8b;">NULL</span>);
@@ -10730,17 +10730,17 @@ rc = QMCKL_SUCCESS;
 </div>
 
 
-<div id="outline-container-org6f73010" class="outline-2">
-<h2 id="org6f73010"><span class="section-number-2">6</span> Sherman-Morrison with Slagel Splitting</h2>
+<div id="outline-container-org8028c95" class="outline-2">
+<h2 id="org8028c95"><span class="section-number-2">6</span> Sherman-Morrison with Slagel Splitting</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgbabccac" class="outline-3">
-<h3 id="orgbabccac"><span class="section-number-3">6.1</span> <code>qmckl_sm_splitting</code></h3>
+<div id="outline-container-org14b3416" class="outline-3">
+<h3 id="org14b3416"><span class="section-number-3">6.1</span> <code>qmckl_sm_splitting</code></h3>
 <div class="outline-text-3" id="text-6-1">
 </div>
 
-<div id="outline-container-org962d17e" class="outline-4">
-<h4 id="org962d17e"><span class="section-number-4">6.1.1</span> Introduction</h4>
+<div id="outline-container-org1480798" class="outline-4">
+<h4 id="org1480798"><span class="section-number-4">6.1.1</span> Introduction</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <p>
 This is a variation on the 'Naive' Sherman-Morrison kernel. Whenever the denominator \(1+v_j^T S^{-1} u_j\) in
@@ -10764,10 +10764,10 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org4724302" class="outline-4">
-<h4 id="org4724302"><span class="section-number-4">6.1.2</span> API</h4>
+<div id="outline-container-orgc5d4093" class="outline-4">
+<h4 id="orgc5d4093"><span class="section-number-4">6.1.2</span> API</h4>
 <div class="outline-text-4" id="text-6-1-2">
-<table id="org83094db" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org09b85c0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -10855,8 +10855,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org3765ad2" class="outline-4">
-<h4 id="org3765ad2"><span class="section-number-4">6.1.3</span> Requirements</h4>
+<div id="outline-container-org4502870" class="outline-4">
+<h4 id="org4502870"><span class="section-number-4">6.1.3</span> Requirements</h4>
 <div class="outline-text-4" id="text-6-1-3">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -10871,8 +10871,8 @@ from applying the updates to the original matrix.
 </div>
 </div>
 
-<div id="outline-container-org1f9d198" class="outline-4">
-<h4 id="org1f9d198"><span class="section-number-4">6.1.4</span> Pedagogical kernel source (in Fortran)</h4>
+<div id="outline-container-org51604b9" class="outline-4">
+<h4 id="org51604b9"><span class="section-number-4">6.1.4</span> Pedagogical kernel source (in Fortran)</h4>
 <div class="outline-text-4" id="text-6-1-4">
 <p>
 The following source code written in Fortran is inteded to illustrate how the kernel works. Even though the kernel is
@@ -10951,8 +10951,8 @@ not be used in real workloads.
 </div>
 </div>
 
-<div id="outline-container-orgcb55a08" class="outline-5">
-<h5 id="orgcb55a08"><span class="section-number-5">6.1.4.1</span> C interface to the pedagogical kernel (not directly exposed)</h5>
+<div id="outline-container-org37c1d91" class="outline-5">
+<h5 id="org37c1d91"><span class="section-number-5">6.1.4.1</span> C interface to the pedagogical kernel (not directly exposed)</h5>
 <div class="outline-text-5" id="text-6-1-4-1">
 <p>
 The following Fortran function <code>qmckl_sm_splitting_core_doc</code> makes sure
@@ -10965,8 +10965,8 @@ for C users and in the module file 'qmckl<sub>f.F90</sub>' for Fortran users.
 </div>
 </div>
 
-<div id="outline-container-org2b56071" class="outline-4">
-<h4 id="org2b56071"><span class="section-number-4">6.1.5</span> C headers (exposed in qmckl.h)</h4>
+<div id="outline-container-org0f1ebbb" class="outline-4">
+<h4 id="org0f1ebbb"><span class="section-number-4">6.1.5</span> C headers (exposed in qmckl.h)</h4>
 <div class="outline-text-4" id="text-6-1-5">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_sm_splitting</span> (
@@ -11012,11 +11012,11 @@ for C users and in the module file 'qmckl<sub>f.F90</sub>' for Fortran users.
 </div>
 </div>
 
-<div id="outline-container-org917ca90" class="outline-4">
-<h4 id="org917ca90"><span class="section-number-4">6.1.6</span> C source</h4>
+<div id="outline-container-orgc835f45" class="outline-4">
+<h4 id="orgc835f45"><span class="section-number-4">6.1.6</span> C source</h4>
 <div class="outline-text-4" id="text-6-1-6">
 <div class="org-src-container">
-<pre class="src src-python" id="orgf05e6bf"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
+<pre class="src src-python" id="org942e711"><span style="color: #a0522d;">text</span>=<span style="color: #8b2252;">"""</span>
 <span style="color: #8b2252;">case {Dim}: {</span>
 <span style="color: #8b2252;">  rc = qmckl_sm_splitting_core_{Dim}(</span>
 <span style="color: #8b2252;">      context,</span>
@@ -11420,14 +11420,14 @@ for C users and in the module file 'qmckl<sub>f.F90</sub>' for Fortran users.
 </div>
 </div>
 
-<div id="outline-container-org9aa7986" class="outline-4">
-<h4 id="org9aa7986"><span class="section-number-4">6.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
+<div id="outline-container-org1723947" class="outline-4">
+<h4 id="org1723947"><span class="section-number-4">6.1.7</span> Fortran interfaces (exposed in qmckl<sub>f.F90</sub>)</h4>
 <div class="outline-text-4" id="text-6-1-7">
 </div>
 </div>
 
-<div id="outline-container-org8e60491" class="outline-4">
-<h4 id="org8e60491"><span class="section-number-4">6.1.8</span> Performance&#x2026;</h4>
+<div id="outline-container-org1d009cb" class="outline-4">
+<h4 id="org1d009cb"><span class="section-number-4">6.1.8</span> Performance&#x2026;</h4>
 <div class="outline-text-4" id="text-6-1-8">
 <p>
 This kernel performs best when there are 2 or more rank-1 update cycles and fail-rate is high.
@@ -11435,8 +11435,8 @@ This kernel performs best when there are 2 or more rank-1 update cycles and fail
 </div>
 </div>
 
-<div id="outline-container-org21e0887" class="outline-4">
-<h4 id="org21e0887"><span class="section-number-4">6.1.9</span> Test</h4>
+<div id="outline-container-org499bf22" class="outline-4">
+<h4 id="org499bf22"><span class="section-number-4">6.1.9</span> Test</h4>
 <div class="outline-text-4" id="text-6-1-9">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000ff;">assert</span>(Updates3 != <span style="color: #008b8b;">NULL</span>);
@@ -11474,8 +11474,8 @@ rc = QMCKL_SUCCESS;
 
 
 
-<div id="outline-container-orgaeb2495" class="outline-2">
-<h2 id="orgaeb2495"><span class="section-number-2">7</span> End of files</h2>
+<div id="outline-container-orgebebe83" class="outline-2">
+<h2 id="orgebebe83"><span class="section-number-2">7</span> End of files</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #0000ff;">assert</span> (<span style="color: #228b22;">qmckl_context_destroy</span>(<span style="color: #a0522d;">context</span>) == QMCKL_SUCCESS);
