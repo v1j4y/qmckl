@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-04-04 Tue 08:38 -->
+<!-- 2023-08-02 Wed 09:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Inter-particle distances</title>
@@ -346,54 +346,54 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org600df25">1. Squared distance</a>
+<li><a href="#org535a78b">1. Squared distance</a>
 <ul>
-<li><a href="#org6045d80">1.1. <code>qmckl_distance_sq</code></a>
+<li><a href="#org3b2766e">1.1. <code>qmckl_distance_sq</code></a>
 <ul>
-<li><a href="#orgd9eef06">1.1.1. Performance</a></li>
+<li><a href="#orgfdec3bb">1.1.1. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6df50b7">2. Distance</a>
+<li><a href="#org2abdfa5">2. Distance</a>
 <ul>
-<li><a href="#orgba8ef3e">2.1. <code>qmckl_distance</code></a>
+<li><a href="#orge1d55e8">2.1. <code>qmckl_distance</code></a>
 <ul>
-<li><a href="#orgef6c852">2.1.1. Requirements</a></li>
-<li><a href="#org682349e">2.1.2. C header</a></li>
-<li><a href="#org3b575cf">2.1.3. Source</a></li>
-<li><a href="#org2b5ae59">2.1.4. Performance</a></li>
+<li><a href="#org441217b">2.1.1. Requirements</a></li>
+<li><a href="#orge4e3e64">2.1.2. C header</a></li>
+<li><a href="#org09f7c20">2.1.3. Source</a></li>
+<li><a href="#org8b65667">2.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org54fb969">3. Rescaled Distance</a>
+<li><a href="#org7e01453">3. Rescaled Distance</a>
 <ul>
-<li><a href="#orgc3c956c">3.1. <code>qmckl_distance_rescaled</code></a>
+<li><a href="#org967c8db">3.1. <code>qmckl_distance_rescaled</code></a>
 <ul>
-<li><a href="#orge66f814">3.1.1. Requirements</a></li>
-<li><a href="#orgf1bea40">3.1.2. C header</a></li>
-<li><a href="#org5c6bade">3.1.3. Source</a></li>
-<li><a href="#org04fce3a">3.1.4. Performance</a></li>
+<li><a href="#org56a2a97">3.1.1. Requirements</a></li>
+<li><a href="#orgc85d617">3.1.2. C header</a></li>
+<li><a href="#org418466b">3.1.3. Source</a></li>
+<li><a href="#org1e6fbb0">3.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgfec1185">4. Rescaled Distance Derivatives</a>
+<li><a href="#orga0091f0">4. Rescaled Distance Derivatives</a>
 <ul>
-<li><a href="#org94c7050">4.1. <code>qmckl_distance_rescaled_deriv_e</code></a></li>
+<li><a href="#orgc065664">4.1. <code>qmckl_distance_rescaled_gl</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org600df25" class="outline-2">
-<h2 id="org600df25"><span class="section-number-2">1</span> Squared distance</h2>
+<div id="outline-container-org535a78b" class="outline-2">
+<h2 id="org535a78b"><span class="section-number-2">1</span> Squared distance</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org6045d80" class="outline-3">
-<h3 id="org6045d80"><span class="section-number-3">1.1</span> <code>qmckl_distance_sq</code></h3>
+<div id="outline-container-org3b2766e" class="outline-3">
+<h3 id="org3b2766e"><span class="section-number-3">1.1</span> <code>qmckl_distance_sq</code></h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 <code>qmckl_distance_sq</code> computes the matrix of the squared distances
@@ -406,7 +406,7 @@ between all pairs of points in two sets, one point within each set:
    \]
 </p>
 
-<table id="org6293607" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org14c53ae" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -608,12 +608,12 @@ Requirements:
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDA &lt; 3) <span style="color: #a020f0;">then</span>
+  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_7
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 2 <span style="color: #a020f0;">.and.</span> LDA &lt; m) <span style="color: #a020f0;">then</span>
+  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 2 <span style="color: #a020f0;">.and.</span> LDB &lt; n) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_7
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
@@ -672,8 +672,8 @@ Requirements:
 </div>
 </div>
 
-<div id="outline-container-orgd9eef06" class="outline-4">
-<h4 id="orgd9eef06"><span class="section-number-4">1.1.1</span> Performance</h4>
+<div id="outline-container-orgfdec3bb" class="outline-4">
+<h4 id="orgfdec3bb"><span class="section-number-4">1.1.1</span> Performance</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 This function is more efficient when <code>A</code> and <code>B</code> are
@@ -683,12 +683,12 @@ transposed.
 </div>
 </div>
 </div>
-<div id="outline-container-org6df50b7" class="outline-2">
-<h2 id="org6df50b7"><span class="section-number-2">2</span> Distance</h2>
+<div id="outline-container-org2abdfa5" class="outline-2">
+<h2 id="org2abdfa5"><span class="section-number-2">2</span> Distance</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgba8ef3e" class="outline-3">
-<h3 id="orgba8ef3e"><span class="section-number-3">2.1</span> <code>qmckl_distance</code></h3>
+<div id="outline-container-orge1d55e8" class="outline-3">
+<h3 id="orge1d55e8"><span class="section-number-3">2.1</span> <code>qmckl_distance</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 <code>qmckl_distance</code> computes the matrix of the distances between all
@@ -706,7 +706,7 @@ If the input array is normal (<code>'N'</code>), the xyz coordinates are in
 the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortran.
 </p>
 
-<table id="org08d60e6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org8a81038" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -807,8 +807,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </table>
 </div>
 
-<div id="outline-container-orgef6c852" class="outline-4">
-<h4 id="orgef6c852"><span class="section-number-4">2.1.1</span> Requirements</h4>
+<div id="outline-container-org441217b" class="outline-4">
+<h4 id="org441217b"><span class="section-number-4">2.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -826,8 +826,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org682349e" class="outline-4">
-<h4 id="org682349e"><span class="section-number-4">2.1.2</span> C header</h4>
+<div id="outline-container-orge4e3e64" class="outline-4">
+<h4 id="orge4e3e64"><span class="section-number-4">2.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_distance</span> (
@@ -847,8 +847,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org3b575cf" class="outline-4">
-<h4 id="org3b575cf"><span class="section-number-4">2.1.3</span> Source</h4>
+<div id="outline-container-org09f7c20" class="outline-4">
+<h4 id="org09f7c20"><span class="section-number-4">2.1.3</span> Source</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
 <pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
@@ -919,16 +919,6 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDA &lt; 3) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_7
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 2 <span style="color: #a020f0;">.and.</span> LDA &lt; m) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_7
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
   ! <span style="color: #b22222;">check for LDB</span>
   <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,1) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_9
@@ -936,16 +926,6 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
   <span style="color: #a020f0;">endif</span>
 
   <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,1) == 1 <span style="color: #a020f0;">.and.</span> LDB &lt; n) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_9
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_9
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 2 <span style="color: #a020f0;">.and.</span> LDB &lt; n) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_9
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
@@ -1015,8 +995,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org2b5ae59" class="outline-4">
-<h4 id="org2b5ae59"><span class="section-number-4">2.1.4</span> Performance</h4>
+<div id="outline-container-org8b65667" class="outline-4">
+<h4 id="org8b65667"><span class="section-number-4">2.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 This function is more efficient when <code>A</code> and <code>B</code> are transposed.
@@ -1026,12 +1006,12 @@ This function is more efficient when <code>A</code> and <code>B</code> are trans
 </div>
 </div>
 
-<div id="outline-container-org54fb969" class="outline-2">
-<h2 id="org54fb969"><span class="section-number-2">3</span> Rescaled Distance</h2>
+<div id="outline-container-org7e01453" class="outline-2">
+<h2 id="org7e01453"><span class="section-number-2">3</span> Rescaled Distance</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgc3c956c" class="outline-3">
-<h3 id="orgc3c956c"><span class="section-number-3">3.1</span> <code>qmckl_distance_rescaled</code></h3>
+<div id="outline-container-org967c8db" class="outline-3">
+<h3 id="org967c8db"><span class="section-number-3">3.1</span> <code>qmckl_distance_rescaled</code></h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 <code>qmckl_distance_rescaled</code> computes the matrix of the rescaled distances between all
@@ -1049,7 +1029,7 @@ If the input array is normal (<code>'N'</code>), the xyz coordinates are in
 the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortran.
 </p>
 
-<table id="orgaa20a10" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org7194f1f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1157,8 +1137,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </table>
 </div>
 
-<div id="outline-container-orge66f814" class="outline-4">
-<h4 id="orge66f814"><span class="section-number-4">3.1.1</span> Requirements</h4>
+<div id="outline-container-org56a2a97" class="outline-4">
+<h4 id="org56a2a97"><span class="section-number-4">3.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -1176,8 +1156,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-orgf1bea40" class="outline-4">
-<h4 id="orgf1bea40"><span class="section-number-4">3.1.2</span> C header</h4>
+<div id="outline-container-orgc85d617" class="outline-4">
+<h4 id="orgc85d617"><span class="section-number-4">3.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_distance_rescaled</span> (
@@ -1198,8 +1178,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org5c6bade" class="outline-4">
-<h4 id="org5c6bade"><span class="section-number-4">3.1.3</span> Source</h4>
+<div id="outline-container-org418466b" class="outline-4">
+<h4 id="org418466b"><span class="section-number-4">3.1.3</span> Source</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <div class="org-src-container">
 <pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_rescaled_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
@@ -1273,27 +1253,7 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDA &lt; 3) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_7
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 2 <span style="color: #a020f0;">.and.</span> LDA &lt; m) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_7
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
   ! <span style="color: #b22222;">check for LDB</span>
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,1) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_9
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,1) == 1 <span style="color: #a020f0;">.and.</span> LDB &lt; n) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_9
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
   <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_9
      <span style="color: #a020f0;">return</span>
@@ -1369,8 +1329,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org04fce3a" class="outline-4">
-<h4 id="org04fce3a"><span class="section-number-4">3.1.4</span> Performance</h4>
+<div id="outline-container-org1e6fbb0" class="outline-4">
+<h4 id="org1e6fbb0"><span class="section-number-4">3.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 This function is more efficient when <code>A</code> and <code>B</code> are transposed.
@@ -1379,24 +1339,24 @@ This function is more efficient when <code>A</code> and <code>B</code> are trans
 </div>
 </div>
 </div>
-<div id="outline-container-orgfec1185" class="outline-2">
-<h2 id="orgfec1185"><span class="section-number-2">4</span> Rescaled Distance Derivatives</h2>
+<div id="outline-container-orga0091f0" class="outline-2">
+<h2 id="orga0091f0"><span class="section-number-2">4</span> Rescaled Distance Derivatives</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org94c7050" class="outline-3">
-<h3 id="org94c7050"><span class="section-number-3">4.1</span> <code>qmckl_distance_rescaled_deriv_e</code></h3>
+<div id="outline-container-orgc065664" class="outline-3">
+<h3 id="orgc065664"><span class="section-number-3">4.1</span> <code>qmckl_distance_rescaled_gl</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
-<code>qmckl_distance_rescaled_deriv_e</code> computes the matrix of the gradient and laplacian of the
+<code>qmckl_distance_rescaled_gl</code> computes the matrix of the gradient and Laplacian of the
 rescaled distance with respect to the electron coordinates. The derivative is a rank 3 tensor.
 The first dimension has a dimension of 4 of which the first three coordinates
-contains the gradient vector and the last index is the laplacian.
+contains the gradient vector and the last index is the Laplacian.
 </p>
 
 
 <p>
 \[
-   C_{ij} = \left( 1 - \exp{-\kappa C_{ij}}\right)/\kappa
+   C(r_{ij}) = \left( 1 - \exp(-\kappa\, r_{ij})\right)/\kappa
    \]
 </p>
 
@@ -1406,43 +1366,31 @@ Here the gradient is defined as follows:
 
 <p>
 \[
-   \nabla (C_{ij}(\mathbf{r}_{ee})) = \left(\frac{\delta C_{ij}(\mathbf{r}_{ee})}{\delta x},\frac{\delta C_{ij}(\mathbf{r}_{ee})}{\delta y},\frac{\delta C_{ij}(\mathbf{r}_{ee})}{\delta z} \right)
+   \nabla_i C(r_{ij}) = \left(\frac{\partial C(r_{ij})}{\partial x_i},\frac{\partial C(r_{ij})}{\partial y_i},\frac{\partial C(r_{ij})}{\partial z_i} \right)
    \]
-and the laplacian is defined as follows:
+and the Laplacian is defined as follows:
 </p>
 
 <p>
 \[
-   \triangle (C_{ij}(r_{ee})) = \frac{\delta^2}{\delta x^2} + \frac{\delta^2}{\delta y^2} + \frac{\delta^2}{\delta z^2}
+   \Delta_i C(r_{ij}) = \frac{\partial^2}{\partial x_i^2} + \frac{\partial^2}{\partial y_i^2} + \frac{\partial^2}{\partial z_i^2}
    \]
 </p>
 
 <p>
-Using the above three formulae, the expression for the gradient and laplacian is
-as follows:
+Using the above three formulas, the expression for the gradient and Laplacian is:
 </p>
 
 <p>
 \[
-   \frac{\delta  C_{ij}(\mathbf{r}_{ee})}{\delta x} = \frac{|(x_i - x_j)|}{r_{ij}} (1 - \kappa R_{ij})
-   \]
-</p>
-
-<p>
-\[
-   \frac{\delta  C_{ij}(\mathbf{r}_{ee})}{\delta y} = \frac{|(y_i - y_j)|}{r_{ij}} (1 - \kappa R_{ij})
+   \frac{\partial  C(r_{ij})}{\partial x_i} = \frac{|(x_i -
+   x_j)|}{r_{ij}} \exp (- \kappa \, r_{ij})
    \]
 </p>
 
 <p>
 \[
-   \frac{\delta  C_{ij}(\mathbf{r}_{ee})}{\delta z} = \frac{|(z_i - z_j)|}{r_{ij}} (1 - \kappa R_{ij})
-   \]
-</p>
-
-<p>
-\[
-   \Delta(C_{ij}(r_{ee}) = \left[ \frac{2}{r_{ij}} - \kappa  \right] (1-\kappa R_{ij})
+   \Delta C_{ij}(r_{ij}) = \left[ \frac{2}{r_{ij}} - \kappa  \right] \exp (- \kappa \, r_{ij})
    \]
 </p>
 
@@ -1451,7 +1399,7 @@ If the input array is normal (<code>'N'</code>), the xyz coordinates are in
 the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortran.
 </p>
 
-<table id="org4b6225c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgcb9d6a3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1577,7 +1525,7 @@ Requirements:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_distance_rescaled_deriv_e</span> (
+<pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_distance_rescaled_gl</span> (
       <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>,
       <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">transa</span>,
       <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> <span style="color: #a0522d;">transb</span>,
@@ -1594,7 +1542,7 @@ Requirements:
 </div>
 
 <div class="org-src-container">
-<pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_rescaled_deriv_e_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
+<pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_rescaled_gl_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
      A, LDA, B, LDB, C, LDC, rescale_factor_kappa) <span style="color: #a020f0;">&amp;</span>
      <span style="color: #a020f0;">result</span>(info)
   <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
@@ -1612,10 +1560,8 @@ Requirements:
 
   <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> i,j</span>
   <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> x, y, z, dist, dist_inv</span>
-  <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> rescale_factor_kappa_inv, rij</span>
+  <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> rij</span>
   <span style="color: #228b22;">integer</span>   ::<span style="color: #a0522d;"> transab</span>
-
-  rescale_factor_kappa_inv = 1.0d0/rescale_factor_kappa;
 
   info = QMCKL_SUCCESS
 
@@ -1666,27 +1612,7 @@ Requirements:
      <span style="color: #a020f0;">return</span>
   <span style="color: #a020f0;">endif</span>
 
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDA &lt; 3) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_7
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 2 <span style="color: #a020f0;">.and.</span> LDA &lt; m) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_7
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
   ! <span style="color: #b22222;">check for LDB</span>
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,1) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_9
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
-  <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,1) == 1 <span style="color: #a020f0;">.and.</span> LDB &lt; n) <span style="color: #a020f0;">then</span>
-     info = QMCKL_INVALID_ARG_9
-     <span style="color: #a020f0;">return</span>
-  <span style="color: #a020f0;">endif</span>
-
   <span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">iand</span>(transab,2) == 0 <span style="color: #a020f0;">.and.</span> LDB &lt; 3) <span style="color: #a020f0;">then</span>
      info = QMCKL_INVALID_ARG_9
      <span style="color: #a020f0;">return</span>
@@ -1715,11 +1641,11 @@ Requirements:
            z = A(3,i) - B(3,j)
            dist = dsqrt(x*x + y*y + z*z)
            dist_inv = 1.0d0/dist
-           rij = (1.0d0 - dexp(-rescale_factor_kappa * dist)) * rescale_factor_kappa_inv
-           C(1,i,j) = x * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(2,i,j) = y * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(3,i,j) = z * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa_inv) * ( 1.0d0 - rescale_factor_kappa_inv * rij)
+           rij = dexp(-rescale_factor_kappa * dist)
+           C(1,i,j) = x * dist_inv * rij
+           C(2,i,j) = y * dist_inv * rij
+           C(3,i,j) = z * dist_inv * rij
+           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa) * rij
         <span style="color: #a020f0;">end do</span>
      <span style="color: #a020f0;">end do</span>
 
@@ -1732,11 +1658,11 @@ Requirements:
            z = A(i,3) - B(3,j)
            dist = dsqrt(x*x + y*y + z*z)
            dist_inv = 1.0d0/dist
-           rij = (1.0d0 - dexp(-rescale_factor_kappa * dist)) * rescale_factor_kappa_inv
-           C(1,i,j) = x * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(2,i,j) = y * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(3,i,j) = z * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa_inv) * ( 1.0d0 - rescale_factor_kappa_inv * rij)
+           rij = dexp(-rescale_factor_kappa * dist)
+           C(1,i,j) = x * dist_inv * rij
+           C(2,i,j) = y * dist_inv * rij
+           C(3,i,j) = z * dist_inv * rij
+           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa) * rij
         <span style="color: #a020f0;">end do</span>
      <span style="color: #a020f0;">end do</span>
 
@@ -1749,11 +1675,11 @@ Requirements:
            z = A(3,i) - B(j,3)
            dist = dsqrt(x*x + y*y + z*z)
            dist_inv = 1.0d0/dist
-           rij = (1.0d0 - dexp(-rescale_factor_kappa * dist)) * rescale_factor_kappa_inv
-           C(1,i,j) = x * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(2,i,j) = y * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(3,i,j) = z * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa_inv) * ( 1.0d0 - rescale_factor_kappa_inv * rij)
+           rij = dexp(-rescale_factor_kappa * dist)
+           C(1,i,j) = x * dist_inv * rij
+           C(2,i,j) = y * dist_inv * rij
+           C(3,i,j) = z * dist_inv * rij
+           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa) * rij
         <span style="color: #a020f0;">end do</span>
      <span style="color: #a020f0;">end do</span>
 
@@ -1766,17 +1692,17 @@ Requirements:
            z = A(i,3) - B(j,3)
            dist = dsqrt(x*x + y*y + z*z)
            dist_inv = 1.0d0/dist
-           rij = (1.0d0 - dexp(-rescale_factor_kappa * dist)) * rescale_factor_kappa_inv
-           C(1,i,j) = x * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(2,i,j) = y * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(3,i,j) = z * dist_inv * ( 1.0d0 - rescale_factor_kappa_inv * rij)
-           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa_inv) * ( 1.0d0 - rescale_factor_kappa_inv * rij)
+           rij = dexp(-rescale_factor_kappa * dist)
+           C(1,i,j) = x * dist_inv * rij
+           C(2,i,j) = y * dist_inv * rij
+           C(3,i,j) = z * dist_inv * rij
+           C(4,i,j) = (2.0d0 * dist_inv - rescale_factor_kappa) * rij
         <span style="color: #a020f0;">end do</span>
      <span style="color: #a020f0;">end do</span>
 
   <span style="color: #a020f0;">end select</span>
 
-<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_rescaled_deriv_e_f</span>
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_rescaled_gl_f</span>
 </pre>
 </div>
 
@@ -1789,7 +1715,7 @@ This function is more efficient when <code>A</code> and <code>B</code> are trans
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2023-04-04 Tue 08:38</p>
+<p class="date">Created: 2023-08-02 Wed 09:07</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
