@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-02 Wed 09:07 -->
+<!-- 2024-04-16 Tue 13:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Inter-particle distances</title>
@@ -346,54 +346,54 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5d3dae0">1. Squared distance</a>
+<li><a href="#org023497c">1. Squared distance</a>
 <ul>
-<li><a href="#org861e0df">1.1. <code>qmckl_distance_sq</code></a>
+<li><a href="#orgfc81baa">1.1. <code>qmckl_distance_sq</code></a>
 <ul>
-<li><a href="#orgaaaa2d1">1.1.1. Performance</a></li>
+<li><a href="#org0b7abda">1.1.1. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org2bb1ea0">2. Distance</a>
+<li><a href="#org70c638f">2. Distance</a>
 <ul>
-<li><a href="#orga2eb2f6">2.1. <code>qmckl_distance</code></a>
+<li><a href="#orgafb5c01">2.1. <code>qmckl_distance</code></a>
 <ul>
-<li><a href="#org20791ea">2.1.1. Requirements</a></li>
-<li><a href="#org77861fd">2.1.2. C header</a></li>
-<li><a href="#org05adb93">2.1.3. Source</a></li>
-<li><a href="#org750f9b0">2.1.4. Performance</a></li>
+<li><a href="#orgb1baf21">2.1.1. Requirements</a></li>
+<li><a href="#orgeb5b83c">2.1.2. C header</a></li>
+<li><a href="#orgd6b926b">2.1.3. Source</a></li>
+<li><a href="#org0a99805">2.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc9cbf02">3. Rescaled Distance</a>
+<li><a href="#orgce0d3ac">3. Rescaled Distance</a>
 <ul>
-<li><a href="#orgd6592aa">3.1. <code>qmckl_distance_rescaled</code></a>
+<li><a href="#orga4546ec">3.1. <code>qmckl_distance_rescaled</code></a>
 <ul>
-<li><a href="#orgb3b80a5">3.1.1. Requirements</a></li>
-<li><a href="#org6f7ed68">3.1.2. C header</a></li>
-<li><a href="#org1e2860e">3.1.3. Source</a></li>
-<li><a href="#org1ce2449">3.1.4. Performance</a></li>
+<li><a href="#org215fdb1">3.1.1. Requirements</a></li>
+<li><a href="#org721360e">3.1.2. C header</a></li>
+<li><a href="#orga9ab73d">3.1.3. Source</a></li>
+<li><a href="#org0a72731">3.1.4. Performance</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org4d8c141">4. Rescaled Distance Derivatives</a>
+<li><a href="#orgad27f15">4. Rescaled Distance Derivatives</a>
 <ul>
-<li><a href="#orgcc87c7a">4.1. <code>qmckl_distance_rescaled_gl</code></a></li>
+<li><a href="#org0a28cc8">4.1. <code>qmckl_distance_rescaled_gl</code></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5d3dae0" class="outline-2">
-<h2 id="org5d3dae0"><span class="section-number-2">1</span> Squared distance</h2>
+<div id="outline-container-org023497c" class="outline-2">
+<h2 id="org023497c"><span class="section-number-2">1</span> Squared distance</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org861e0df" class="outline-3">
-<h3 id="org861e0df"><span class="section-number-3">1.1</span> <code>qmckl_distance_sq</code></h3>
+<div id="outline-container-orgfc81baa" class="outline-3">
+<h3 id="orgfc81baa"><span class="section-number-3">1.1</span> <code>qmckl_distance_sq</code></h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 <code>qmckl_distance_sq</code> computes the matrix of the squared distances
@@ -406,7 +406,7 @@ between all pairs of points in two sets, one point within each set:
    \]
 </p>
 
-<table id="orge7e9733" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org45603a5" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -541,20 +541,26 @@ Requirements:
 </div>
 
 <div class="org-src-container">
-<pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_sq_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
+<pre class="src src-f90"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">qmckl_distance_sq</span>(context, transa, transb, m, n, <span style="color: #a020f0;">&amp;</span>
      A, LDA, B, LDB, C, LDC) <span style="color: #a020f0;">&amp;</span>
-     <span style="color: #a020f0;">result</span>(info)
-  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+     <span style="color: #a020f0;">bind</span>(C) <span style="color: #a020f0;">result</span>(info)
+
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl_constants</span>
   <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
-  <span style="color: #228b22;">integer</span>(qmckl_context)  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
-  <span style="color: #228b22;">character</span>  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> transa, transb</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> m, n</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> lda</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> A(lda,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldb</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> B(ldb,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldc</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> C(ldc,*)</span>
+
+  <span style="color: #228b22;">integer</span> (qmckl_context) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>)   , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transa</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>)   , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> m</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> lda</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldc</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> A(lda,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> B(ldb,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(out)         ::<span style="color: #a0522d;"> C(ldc,n)</span>
+
+  <span style="color: #228b22;">integer</span>(qmckl_exit_code) ::<span style="color: #a0522d;"> info</span>
 
   <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> i,j</span>
   <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> x, y, z</span>
@@ -667,13 +673,13 @@ Requirements:
 
   <span style="color: #a020f0;">end select</span>
 
-<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_sq_f</span>
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_sq</span>
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgaaaa2d1" class="outline-4">
-<h4 id="orgaaaa2d1"><span class="section-number-4">1.1.1</span> Performance</h4>
+<div id="outline-container-org0b7abda" class="outline-4">
+<h4 id="org0b7abda"><span class="section-number-4">1.1.1</span> Performance</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 This function is more efficient when <code>A</code> and <code>B</code> are
@@ -683,12 +689,12 @@ transposed.
 </div>
 </div>
 </div>
-<div id="outline-container-org2bb1ea0" class="outline-2">
-<h2 id="org2bb1ea0"><span class="section-number-2">2</span> Distance</h2>
+<div id="outline-container-org70c638f" class="outline-2">
+<h2 id="org70c638f"><span class="section-number-2">2</span> Distance</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orga2eb2f6" class="outline-3">
-<h3 id="orga2eb2f6"><span class="section-number-3">2.1</span> <code>qmckl_distance</code></h3>
+<div id="outline-container-orgafb5c01" class="outline-3">
+<h3 id="orgafb5c01"><span class="section-number-3">2.1</span> <code>qmckl_distance</code></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 <code>qmckl_distance</code> computes the matrix of the distances between all
@@ -706,7 +712,7 @@ If the input array is normal (<code>'N'</code>), the xyz coordinates are in
 the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortran.
 </p>
 
-<table id="org95cfcbd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgbafd1b4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -807,8 +813,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </table>
 </div>
 
-<div id="outline-container-org20791ea" class="outline-4">
-<h4 id="org20791ea"><span class="section-number-4">2.1.1</span> Requirements</h4>
+<div id="outline-container-orgb1baf21" class="outline-4">
+<h4 id="orgb1baf21"><span class="section-number-4">2.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -826,8 +832,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org77861fd" class="outline-4">
-<h4 id="org77861fd"><span class="section-number-4">2.1.2</span> C header</h4>
+<div id="outline-container-orgeb5b83c" class="outline-4">
+<h4 id="orgeb5b83c"><span class="section-number-4">2.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_distance</span> (
@@ -847,24 +853,27 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org05adb93" class="outline-4">
-<h4 id="org05adb93"><span class="section-number-4">2.1.3</span> Source</h4>
+<div id="outline-container-orgd6b926b" class="outline-4">
+<h4 id="orgd6b926b"><span class="section-number-4">2.1.3</span> Source</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
-<pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
+<pre class="src src-f90"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">qmckl_distance</span>(context, transa, transb, m, n, <span style="color: #a020f0;">&amp;</span>
      A, LDA, B, LDB, C, LDC) <span style="color: #a020f0;">&amp;</span>
-     <span style="color: #a020f0;">result</span>(info)
-  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+     <span style="color: #a020f0;">bind</span>(C) <span style="color: #a020f0;">result</span>(info)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl_constants</span>
   <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
-  <span style="color: #228b22;">integer</span>(qmckl_context)  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
-  <span style="color: #228b22;">character</span>  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> transa, transb</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> m, n</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> lda</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> A(lda,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldb</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> B(ldb,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldc</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> C(ldc,*)</span>
+  <span style="color: #228b22;">integer</span>(qmckl_context), <span style="color: #a020f0;">intent</span>(in), <span style="color: #a020f0;">value</span>  ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>)   , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transa</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>)   , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> m</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> lda</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldc</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> A(lda,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> B(ldb,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(out)         ::<span style="color: #a0522d;"> C(ldc,n)</span>
+  <span style="color: #228b22;">integer</span> (qmckl_exit_code) ::<span style="color: #a0522d;"> info</span>
 
   <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> i,j</span>
   <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> x, y, z</span>
@@ -989,14 +998,14 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 
   <span style="color: #a020f0;">end select</span>
 
-<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_f</span>
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org750f9b0" class="outline-4">
-<h4 id="org750f9b0"><span class="section-number-4">2.1.4</span> Performance</h4>
+<div id="outline-container-org0a99805" class="outline-4">
+<h4 id="org0a99805"><span class="section-number-4">2.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 This function is more efficient when <code>A</code> and <code>B</code> are transposed.
@@ -1006,12 +1015,12 @@ This function is more efficient when <code>A</code> and <code>B</code> are trans
 </div>
 </div>
 
-<div id="outline-container-orgc9cbf02" class="outline-2">
-<h2 id="orgc9cbf02"><span class="section-number-2">3</span> Rescaled Distance</h2>
+<div id="outline-container-orgce0d3ac" class="outline-2">
+<h2 id="orgce0d3ac"><span class="section-number-2">3</span> Rescaled Distance</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgd6592aa" class="outline-3">
-<h3 id="orgd6592aa"><span class="section-number-3">3.1</span> <code>qmckl_distance_rescaled</code></h3>
+<div id="outline-container-orga4546ec" class="outline-3">
+<h3 id="orga4546ec"><span class="section-number-3">3.1</span> <code>qmckl_distance_rescaled</code></h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 <code>qmckl_distance_rescaled</code> computes the matrix of the rescaled distances between all
@@ -1029,7 +1038,7 @@ If the input array is normal (<code>'N'</code>), the xyz coordinates are in
 the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortran.
 </p>
 
-<table id="org2c7a4bd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgef81742" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1137,8 +1146,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </table>
 </div>
 
-<div id="outline-container-orgb3b80a5" class="outline-4">
-<h4 id="orgb3b80a5"><span class="section-number-4">3.1.1</span> Requirements</h4>
+<div id="outline-container-org215fdb1" class="outline-4">
+<h4 id="org215fdb1"><span class="section-number-4">3.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <ul class="org-ul">
 <li><code>context</code> is not <code>QMCKL_NULL_CONTEXT</code></li>
@@ -1156,8 +1165,8 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org6f7ed68" class="outline-4">
-<h4 id="org6f7ed68"><span class="section-number-4">3.1.2</span> C header</h4>
+<div id="outline-container-org721360e" class="outline-4">
+<h4 id="org721360e"><span class="section-number-4">3.1.2</span> C header</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">qmckl_exit_code</span> <span style="color: #0000ff;">qmckl_distance_rescaled</span> (
@@ -1178,25 +1187,28 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 </div>
 </div>
 
-<div id="outline-container-org1e2860e" class="outline-4">
-<h4 id="org1e2860e"><span class="section-number-4">3.1.3</span> Source</h4>
+<div id="outline-container-orga9ab73d" class="outline-4">
+<h4 id="orga9ab73d"><span class="section-number-4">3.1.3</span> Source</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <div class="org-src-container">
-<pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_rescaled_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
+<pre class="src src-f90"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">qmckl_distance_rescaled</span>(context, transa, transb, m, n, <span style="color: #a020f0;">&amp;</span>
      A, LDA, B, LDB, C, LDC, rescale_factor_kappa) <span style="color: #a020f0;">&amp;</span>
-     <span style="color: #a020f0;">result</span>(info)
-  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+     <span style="color: #a020f0;">bind</span>(C) <span style="color: #a020f0;">result</span>(info)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl_constants</span>
   <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
-  <span style="color: #228b22;">integer</span>(qmckl_context)  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
-  <span style="color: #228b22;">character</span>  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> transa, transb</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> m, n</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> lda</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> A(lda,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldb</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> B(ldb,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldc</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> C(ldc,*)</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> rescale_factor_kappa</span>
+  <span style="color: #228b22;">integer</span> (qmckl_context), <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>  ) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transa</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>  ) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> m</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> lda</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldc</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> rescale_factor_kappa</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> A(lda,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> B(ldb,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(out)         ::<span style="color: #a0522d;"> C(ldc,n)</span>
+  <span style="color: #228b22;">integer</span>(qmckl_exit_code) ::<span style="color: #a0522d;"> info</span>
 
   <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> i,j</span>
   <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> x, y, z, dist, rescale_factor_kappa_inv</span>
@@ -1323,14 +1335,14 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 
   <span style="color: #a020f0;">end select</span>
 
-<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_rescaled_f</span>
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_rescaled</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1ce2449" class="outline-4">
-<h4 id="org1ce2449"><span class="section-number-4">3.1.4</span> Performance</h4>
+<div id="outline-container-org0a72731" class="outline-4">
+<h4 id="org0a72731"><span class="section-number-4">3.1.4</span> Performance</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 This function is more efficient when <code>A</code> and <code>B</code> are transposed.
@@ -1339,12 +1351,12 @@ This function is more efficient when <code>A</code> and <code>B</code> are trans
 </div>
 </div>
 </div>
-<div id="outline-container-org4d8c141" class="outline-2">
-<h2 id="org4d8c141"><span class="section-number-2">4</span> Rescaled Distance Derivatives</h2>
+<div id="outline-container-orgad27f15" class="outline-2">
+<h2 id="orgad27f15"><span class="section-number-2">4</span> Rescaled Distance Derivatives</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgcc87c7a" class="outline-3">
-<h3 id="orgcc87c7a"><span class="section-number-3">4.1</span> <code>qmckl_distance_rescaled_gl</code></h3>
+<div id="outline-container-org0a28cc8" class="outline-3">
+<h3 id="org0a28cc8"><span class="section-number-3">4.1</span> <code>qmckl_distance_rescaled_gl</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 <code>qmckl_distance_rescaled_gl</code> computes the matrix of the gradient and Laplacian of the
@@ -1399,7 +1411,7 @@ If the input array is normal (<code>'N'</code>), the xyz coordinates are in
 the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortran.
 </p>
 
-<table id="org913440f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org8a53833" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1485,7 +1497,7 @@ the leading dimension: <code>[n][3]</code> in C and <code>(3,n)</code> in Fortra
 
 <tr>
 <td class="org-left"><code>C</code></td>
-<td class="org-left"><code>double[4][n][ldc]</code></td>
+<td class="org-left"><code>double[n][ldc][4]</code></td>
 <td class="org-left">out</td>
 <td class="org-left">Array containing the \(4 \times m \times n\) matrix \(C\)</td>
 </tr>
@@ -1542,21 +1554,25 @@ Requirements:
 </div>
 
 <div class="org-src-container">
-<pre class="src src-f90"><span style="color: #228b22;">integer</span><span style="color: #a0522d;"> function qmckl_distance_rescaled_gl_f(context, transa, transb, m, n, </span><span style="color: #a020f0;">&amp;</span>
+<pre class="src src-f90"><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">qmckl_distance_rescaled_gl</span>(context, transa, transb, m, n, <span style="color: #a020f0;">&amp;</span>
      A, LDA, B, LDB, C, LDC, rescale_factor_kappa) <span style="color: #a020f0;">&amp;</span>
-     <span style="color: #a020f0;">result</span>(info)
-  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl</span>
+     <span style="color: #a020f0;">bind</span>(C) <span style="color: #a020f0;">result</span>(info)
+  <span style="color: #a020f0;">use</span> <span style="color: #0000ff;">qmckl_constants</span>
   <span style="color: #a020f0;">implicit</span> <span style="color: #228b22;">none</span>
-  <span style="color: #228b22;">integer</span>(qmckl_context)  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> context</span>
-  <span style="color: #228b22;">character</span>  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> transa, transb</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> m, n</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> lda</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> A(lda,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldb</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> B(ldb,*)</span>
-  <span style="color: #228b22;">integer</span>*8  , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> ldc</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(out) ::<span style="color: #a0522d;"> C(4,ldc,*)</span>
-  <span style="color: #228b22;">real</span>*8     , <span style="color: #a020f0;">intent</span>(in)  ::<span style="color: #a0522d;"> rescale_factor_kappa</span>
+
+  <span style="color: #228b22;">integer</span>(qmckl_exit_code) ::<span style="color: #a0522d;"> info</span>
+  <span style="color: #228b22;">integer</span> (qmckl_context), <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> context</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>  ) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transa</span>
+  <span style="color: #228b22;">character</span>(<span style="color: #008b8b;">c_char</span>  ) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> transb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> m</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> n</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> lda</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldb</span>
+  <span style="color: #228b22;">integer</span> (<span style="color: #008b8b;">c_int64_t</span>) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> ldc</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)  , <span style="color: #a020f0;">value</span> ::<span style="color: #a0522d;"> rescale_factor_kappa</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> A(lda,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(in)          ::<span style="color: #a0522d;"> B(ldb,*)</span>
+  <span style="color: #228b22;">real</span>    (<span style="color: #008b8b;">c_double</span> ) , <span style="color: #a020f0;">intent</span>(out)         ::<span style="color: #a0522d;"> C(4,ldc,n)</span>
 
   <span style="color: #228b22;">integer</span>*8 ::<span style="color: #a0522d;"> i,j</span>
   <span style="color: #228b22;">real</span>*8    ::<span style="color: #a0522d;"> x, y, z, dist, dist_inv</span>
@@ -1639,7 +1655,7 @@ Requirements:
            x = A(1,i) - B(1,j)
            y = A(2,i) - B(2,j)
            z = A(3,i) - B(3,j)
-           dist = dsqrt(x*x + y*y + z*z)
+           dist = <span style="color: #a020f0;">max</span>(1.d-20, dsqrt(x*x + y*y + z*z))
            dist_inv = 1.0d0/dist
            rij = dexp(-rescale_factor_kappa * dist)
            C(1,i,j) = x * dist_inv * rij
@@ -1656,7 +1672,7 @@ Requirements:
            x = A(i,1) - B(1,j)
            y = A(i,2) - B(2,j)
            z = A(i,3) - B(3,j)
-           dist = dsqrt(x*x + y*y + z*z)
+           dist = <span style="color: #a020f0;">max</span>(1.d-20, dsqrt(x*x + y*y + z*z))
            dist_inv = 1.0d0/dist
            rij = dexp(-rescale_factor_kappa * dist)
            C(1,i,j) = x * dist_inv * rij
@@ -1673,7 +1689,7 @@ Requirements:
            x = A(1,i) - B(j,1)
            y = A(2,i) - B(j,2)
            z = A(3,i) - B(j,3)
-           dist = dsqrt(x*x + y*y + z*z)
+           dist = <span style="color: #a020f0;">max</span>(1.d-20, dsqrt(x*x + y*y + z*z))
            dist_inv = 1.0d0/dist
            rij = dexp(-rescale_factor_kappa * dist)
            C(1,i,j) = x * dist_inv * rij
@@ -1690,7 +1706,7 @@ Requirements:
            x = A(i,1) - B(j,1)
            y = A(i,2) - B(j,2)
            z = A(i,3) - B(j,3)
-           dist = dsqrt(x*x + y*y + z*z)
+           dist = <span style="color: #a020f0;">max</span>(1.d-20, dsqrt(x*x + y*y + z*z))
            dist_inv = 1.0d0/dist
            rij = dexp(-rescale_factor_kappa * dist)
            C(1,i,j) = x * dist_inv * rij
@@ -1702,7 +1718,7 @@ Requirements:
 
   <span style="color: #a020f0;">end select</span>
 
-<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_rescaled_gl_f</span>
+<span style="color: #a020f0;">end function</span> <span style="color: #0000ff;">qmckl_distance_rescaled_gl</span>
 </pre>
 </div>
 
@@ -1715,7 +1731,7 @@ This function is more efficient when <code>A</code> and <code>B</code> are trans
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2023-08-02 Wed 09:07</p>
+<p class="date">Created: 2024-04-16 Tue 13:15</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

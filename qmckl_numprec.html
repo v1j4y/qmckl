@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-08-02 Wed 09:07 -->
+<!-- 2024-04-16 Tue 13:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Numerical precision</title>
+<title>&lrm;</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="TREX CoE" />
 <style type="text/css">
@@ -341,32 +341,44 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="index.html"> HOME </a>
 </div><div id="content">
-<h1 class="title">Numerical precision</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org66f2bc3">1. Control of the numerical precision</a></li>
-<li><a href="#org32f1edc">2. Precision</a></li>
-<li><a href="#orgef94a6a">3. Range</a></li>
-<li><a href="#org109517e">4. Helper functions</a></li>
+<li><a href="#org86d6ad1">1. Control of the numerical precision</a></li>
+<li><a href="#org996a2f0">2. Precision</a></li>
+<li><a href="#org48141c6">3. Range</a></li>
+<li><a href="#orgf64b080">4. Helper functions</a>
+<ul>
+<li><a href="#org32168d9">4.1. Epsilon</a></li>
+<li><a href="#org8b9069b">4.2. Testing the number of unchanged bits</a></li>
+</ul>
+</li>
+<li><a href="#org369d383">5. Approximate functions</a>
+<ul>
+<li><a href="#orgcf14ed3">5.1. Exponential</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
+<p>
+3+TITLE: Numerical precision
+</p>
 
-<div id="outline-container-org66f2bc3" class="outline-2">
-<h2 id="org66f2bc3"><span class="section-number-2">1</span> Control of the numerical precision</h2>
+<div id="outline-container-org86d6ad1" class="outline-2">
+<h2 id="org86d6ad1"><span class="section-number-2">1</span> Control of the numerical precision</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Controlling numerical precision enables optimizations. Here, the
 default parameters determining the target numerical precision and
 range are defined. Following the IEEE Standard for Floating-Point
 Arithmetic (IEEE 754),
-<i>precision</i> refers to the number of significand bits and <i>range</i>
-refers to the number of exponent bits.
+<i>precision</i> refers to the number of significand bits (including the
+sign bit) and <i>range</i> refers to the number of exponent bits.
 </p>
 
-<table id="org6ad263b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgcc6d993" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -410,8 +422,8 @@ integer. The update functions return <code>QMCKL_SUCCESS</code> or
 </div>
 </div>
 
-<div id="outline-container-org32f1edc" class="outline-2">
-<h2 id="org32f1edc"><span class="section-number-2">2</span> Precision</h2>
+<div id="outline-container-org996a2f0" class="outline-2">
+<h2 id="org996a2f0"><span class="section-number-2">2</span> Precision</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <code>qmckl_context_set_numprec_precision</code> modifies the parameter for the
@@ -498,8 +510,8 @@ numerical precision in the context.
 </div>
 </div>
 
-<div id="outline-container-orgef94a6a" class="outline-2">
-<h2 id="orgef94a6a"><span class="section-number-2">3</span> Range</h2>
+<div id="outline-container-org48141c6" class="outline-2">
+<h2 id="org48141c6"><span class="section-number-2">3</span> Range</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <code>qmckl_set_numprec_range</code> modifies the parameter for the numerical
@@ -574,9 +586,13 @@ range in a given context.
 </div>
 </div>
 </div>
-<div id="outline-container-org109517e" class="outline-2">
-<h2 id="org109517e"><span class="section-number-2">4</span> Helper functions</h2>
+<div id="outline-container-orgf64b080" class="outline-2">
+<h2 id="orgf64b080"><span class="section-number-2">4</span> Helper functions</h2>
 <div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org32168d9" class="outline-3">
+<h3 id="org32168d9"><span class="section-number-3">4.1</span> Epsilon</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 <code>qmckl_get_numprec_epsilon</code> returns \(\epsilon = 2^{1-n}\) where <code>n</code> is the precision.
 We need to remove the sign bit from the precision.
@@ -584,17 +600,148 @@ We need to remove the sign bit from the precision.
 
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #228b22;">double</span> <span style="color: #0000ff;">qmckl_get_numprec_epsilon</span>(<span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context</span> <span style="color: #a0522d;">context</span>) {
-  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">precision</span> = qmckl_get_numprec_precision(context);
-  <span style="color: #a020f0;">return</span> 1. /  (<span style="color: #228b22;">double</span>) (1L &lt;&lt; (precision-2));
+  <span style="color: #a020f0;">if</span> (qmckl_context_check(context) == QMCKL_NULL_CONTEXT)
+    <span style="color: #a020f0;">return</span> QMCKL_INVALID_CONTEXT;
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">qmckl_context_struct</span>* <span style="color: #a020f0;">const</span> <span style="color: #a0522d;">ctx</span> = (<span style="color: #228b22;">qmckl_context_struct</span>*) context;
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">int</span> <span style="color: #a0522d;">precision</span> = ctx-&gt;numprec.precision;
+  <span style="color: #a020f0;">return</span> 1. /  (<span style="color: #228b22;">double</span>) ( ((<span style="color: #228b22;">uint64_t</span>) 1) &lt;&lt; (precision-2));
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8b9069b" class="outline-3">
+<h3 id="org8b9069b"><span class="section-number-3">4.2</span> Testing the number of unchanged bits</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+To test that a given approximation keeps a given number of bits
+unchanged, we need a function that returns the number of unchanged
+bits in the range, and in the precision.
+</p>
+
+<p>
+For this, we first count by how many units in the last place (ulps) two
+numbers differ.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">int64_t</span> <span style="color: #0000ff;">countUlpDifference_64</span>(<span style="color: #228b22;">double</span> <span style="color: #a0522d;">a</span>, <span style="color: #228b22;">double</span> <span style="color: #a0522d;">b</span>) {
+
+  <span style="color: #a020f0;">union</span> <span style="color: #228b22;">int_or_float</span> {
+    <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">i</span>;
+    <span style="color: #228b22;">double</span> <span style="color: #a0522d;">f</span>;
+  } <span style="color: #a0522d;">x</span>, <span style="color: #a0522d;">y</span>;
+
+  x.f = a;
+  y.f = b;
+
+  // <span style="color: #b22222;">Handle sign bit discontinuity: if the signs are different and either value is not zero</span>
+  <span style="color: #a020f0;">if</span> ((x.i &lt; 0) != (y.i &lt; 0) &amp;&amp; (x.f != 0.0) &amp;&amp; (y.f != 0.0)) {
+    // <span style="color: #b22222;">Use the absolute values and add the distance to zero for both numbers</span>
+    <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">distanceToZeroForX</span> = x.i &lt; 0 ? INT64_MAX + x.i : INT64_MAX - x.i;
+    <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">distanceToZeroForY</span> = y.i &lt; 0 ? INT64_MAX + y.i : INT64_MAX - y.i;
+    <span style="color: #a020f0;">return</span> distanceToZeroForX + distanceToZeroForY;
+  }
+
+  // <span style="color: #b22222;">Calculate the difference in their binary representations</span>
+  <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">result</span> = x.i - y.i;
+  result = result &gt; 0 ? result : -result;
+  <span style="color: #a020f0;">return</span> result;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">int32_t</span> <span style="color: #0000ff;">qmckl_test_precision_64</span>(<span style="color: #228b22;">double</span> <span style="color: #a0522d;">a</span>, <span style="color: #228b22;">double</span> <span style="color: #a0522d;">b</span>) {
+
+  <span style="color: #228b22;">int64_t</span> <span style="color: #a0522d;">diff</span> = countUlpDifference_64(a,b);
+
+  <span style="color: #a020f0;">if</span> (diff == 0) <span style="color: #a020f0;">return</span> 53;
+
+  <span style="color: #228b22;">int32_t</span> <span style="color: #a0522d;">result</span> = 53;
+
+  <span style="color: #a020f0;">for</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">i</span>=0 ; i&lt;53 &amp;&amp; diff != 0 ; ++i) {
+    diff &gt;&gt;= 1;
+    result--;
+  }
+
+  <span style="color: #a020f0;">return</span> result;
+}
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">int32_t</span> <span style="color: #0000ff;">qmckl_test_precision_32</span>(<span style="color: #228b22;">float</span> <span style="color: #a0522d;">a</span>, <span style="color: #228b22;">float</span> <span style="color: #a0522d;">b</span>) {
+  <span style="color: #a020f0;">return</span> qmckl_test_precision_64( (<span style="color: #228b22;">double</span>) a, (<span style="color: #228b22;">double</span>) b );
 }
 </pre>
 </div>
 </div>
 </div>
 </div>
+
+<div id="outline-container-org369d383" class="outline-2">
+<h2 id="org369d383"><span class="section-number-2">5</span> Approximate functions</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgcf14ed3" class="outline-3">
+<h3 id="orgcf14ed3"><span class="section-number-3">5.1</span> Exponential</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Fast exponential function, adapted from Johan Rade's implementation
+(<a href="https://gist.github.com/jrade/293a73f89dfef51da6522428c857802d">https://gist.github.com/jrade/293a73f89dfef51da6522428c857802d</a>). It
+is based on Schraudolph's paper:
+</p>
+
+<p>
+N. Schraudolph, "A Fast, Compact Approximation of the Exponential Function",
+<i>Neural Computation</i> <b>11</b>, 853–862 (1999).
+(available at <a href="https://nic.schraudolph.org/pubs/Schraudolph99.pdf">https://nic.schraudolph.org/pubs/Schraudolph99.pdf</a>)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #228b22;">float</span> <span style="color: #0000ff;">fastExpf</span>(<span style="color: #228b22;">float</span> <span style="color: #a0522d;">x</span>)
+{
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">float</span> <span style="color: #a0522d;">a</span> = 12102203.0;
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">float</span> <span style="color: #a0522d;">b</span> = 1064986816.0;
+  x = a * x + b;
+
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">float</span> <span style="color: #a0522d;">c</span> = 8388608.0;
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">float</span> <span style="color: #a0522d;">d</span> = 2139095040.0;
+  <span style="color: #a020f0;">if</span> (x &lt; c || x &gt; d)
+    x = (x &lt; c) ? 0.0f : d;
+
+  <span style="color: #228b22;">uint32_t</span> <span style="color: #a0522d;">n</span> = (<span style="color: #228b22;">uint32_t</span>) x;
+  memcpy(&amp;x, &amp;n, 4);
+  <span style="color: #a020f0;">return</span> x;
+}
+
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">fastExp</span>(<span style="color: #228b22;">double</span> <span style="color: #a0522d;">x</span>)
+{
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> <span style="color: #a0522d;">a</span> = 6497320848556798.0;
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> <span style="color: #a0522d;">b</span> = 4606985713057410560.0;
+  x = a * x + b;
+
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> <span style="color: #a0522d;">c</span> = 4503599627370496.0;
+  <span style="color: #a020f0;">const</span> <span style="color: #228b22;">double</span> <span style="color: #a0522d;">d</span> = 9218868437227405312.0;
+  <span style="color: #a020f0;">if</span> (x &lt; c || x &gt; d)
+    x = (x &lt; c) ? 0.0 : d;
+
+  <span style="color: #228b22;">uint64_t</span> <span style="color: #a0522d;">n</span> = (<span style="color: #228b22;">uint64_t</span>) x;
+  memcpy(&amp;x, &amp;n, 8);
+  <span style="color: #a020f0;">return</span> x;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="postamble" class="status">
 <p class="author">Author: TREX CoE</p>
-<p class="date">Created: 2023-08-02 Wed 09:07</p>
+<p class="date">Created: 2024-04-16 Tue 13:15</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
